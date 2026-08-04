@@ -299,21 +299,65 @@ code {
 .footer-item img { display: block; }
 .footer-credit { text-align: center; color: #777777; font-size: .8rem; margin-top: 18px; }
 
-/* ---------- Portal (skills index) ---------- */
-.hero.portal { min-height: auto; padding: calc(108px + var(--nav-h)) 24px 96px; }
-.hero-brand {
-  font-size: clamp(2.6rem, 6vw, 4.2rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin: 0 0 14px;
-  color: var(--text);
+/* ---------- Home (minimal landing) ---------- */
+.home {
+  min-height: 100vh;
+  max-width: 660px;
+  margin: 0 auto;
+  padding: 72px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.skill-card { text-decoration: none; color: var(--text); }
-.skill-card:hover { text-decoration: none; }
-.skill-card h3 { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-.skill-open { margin-top: auto; padding-top: 12px; font-weight: 700; color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  display: block;
+}
+.home-name {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 20px 0 36px;
+}
+.skill-list { width: 100%; }
+.skill-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 16px 4px;
+  border-top: 1px solid var(--line);
+  color: var(--text);
+  text-decoration: none;
+}
+.skill-list .skill-row:last-child { border-bottom: 1px solid var(--line); }
+.skill-row:hover { text-decoration: none; }
+.skill-row:hover .skill-name { text-decoration: underline; text-underline-offset: 4px; }
+.skill-num { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--muted); font-size: .9rem; }
+.skill-name { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-weight: 700; flex-shrink: 0; }
+.skill-desc {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--muted);
+  font-size: .92rem;
+}
+.skill-arrow { color: var(--muted); flex-shrink: 0; }
+.home-links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 32px;
+}
+.home-icon { color: var(--text); display: inline-flex; }
+.home-icon:hover { color: var(--muted); }
+.home-sep { color: var(--muted); }
 
-/* ---------- Recipes explainer (home) ---------- */
+/* ---------- Recipes explainer ---------- */
 .howto { max-width: 720px; margin: 0 auto 42px; text-align: left; }
 .howto h3 { font-size: 1.12rem; margin: 0 0 8px; font-weight: 800; }
 .howto h3:not(:first-child) { margin-top: 24px; }

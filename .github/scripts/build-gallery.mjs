@@ -52,7 +52,7 @@ const skills = readdirSync(root, { withFileTypes: true })
     let fm = {};
     try { fm = parseFrontmatter(readFileSync(join(root, d.name, 'SKILL.md'), 'utf8')); } catch (e) { /* no SKILL.md */ }
     return fm.name
-      ? { slug: d.name, name: fm.name, description: fm.description || '', file: d.name + '.html' }
+      ? { slug: d.name, name: fm.name, description: fm.description || '', file: d.name + '/' }
       : null;
   })
   .filter(Boolean)

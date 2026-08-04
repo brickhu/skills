@@ -3,78 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fei's Skills — open-source AI agent skills</title>
-<meta name="description" content="Fei's Skills — open-source AI agent skills by Brickhu. Pick a skill, install it into any SKILL.md-capable agent in one line.">
+<title>Fei's skills</title>
+<meta name="description" content="Fei's skills — open-source AI agent skills by Brickhu.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body data-page="home">
 
-<header class="nav">
-  <div class="nav-inner">
-    <a class="logo" href="index.html">fei's<span> skills</span></a>
-    <nav class="links">
-      <a href="index.html" data-i18n="nav.home">Home</a>
-      <a href="db-ops.html" data-i18n="nav.dbops">db-ops</a>
-      <a href="recipes.html" data-i18n="nav.recipes">Recipes</a>
-      <a href="faqs.html" data-i18n="nav.faqs">FAQ</a>
-    </nav>
-    <button id="lang-toggle" class="lang-btn">中文</button>
-  </div>
-</header>
+<main class="home">
+  <img class="avatar" src="https://github.com/brickhu.png?size=200" alt="Fei" width="96" height="96">
+  <h1 class="home-name">Fei's skills</h1>
 
-<section class="hero portal">
-  <div class="hero-inner">
-    <p class="hero-brand" data-i18n="hero.site.brand">Fei's Skills</p>
-    <h1 data-i18n="hero.site.tagline">Open-source AI agent skills by Brickhu (@fei1919).</h1>
-    <p class="hero-sub" data-i18n="hero.site.sub">Pick a skill and install it into any SKILL.md-capable agent in one line.</p>
-    <div class="hero-cta">
-      <a class="btn primary" href="https://github.com/brickhu/skills" target="_blank" rel="noopener" data-i18n="hero.site.github">View the repo on GitHub</a>
-    </div>
-  </div>
-</section>
+  <div class="skill-list" id="skill-list"></div>
 
-<section class="section">
-  <div class="section-inner">
-    <h2 data-i18n="skills.title">Skills in this repo</h2>
-    <p class="section-sub" data-i18n="skills.sub">Each skill is a standard SKILL.md package — works with Claude Code, Cursor, Zed and more.</p>
-    <div class="grid" id="skills-grid"></div>
-  </div>
-</section>
-
-<section class="section alt">
-  <div class="section-inner">
-    <h2 data-i18n="recipes.title">Community recipes</h2>
-    <p class="section-sub" data-i18n="recipes.sub">Ready-to-use workflows contributed by the community — copied with one click, imported with one paste.</p>
-
-    <div class="howto">
-      <h3 data-i18n="recipes.whatTitle">What are recipes?</h3>
-      <p data-i18n-html="recipes.what">Recipes turn frequent multi-step operations — generating an invite code, running a weekly report — into a single trigger phrase. They live in <code>.dbops/recipes.json</code> (project-level) or <code>~/.dbops/recipes.json</code> (global).</p>
-      <h3 data-i18n="recipes.howTitle">How to configure</h3>
-      <ol class="howto-list">
-        <li data-i18n="recipes.how1">Copy the JSON of a recipe you like — from the cards below or the Gallery page.</li>
-        <li data-i18n="recipes.how2">Paste it into your agent chat and say "add this recipe" — preview it, confirm, done.</li>
-        <li data-i18n="recipes.how3">When asked, bind the recipe's connection to one of your whitelisted connections (shared recipes use the YOUR_DB placeholder).</li>
-      </ol>
-      <p class="howto-note" data-i18n-html="recipes.howNote">You can also edit <code>.dbops/recipes.json</code> by hand — each entry is plain JSON.</p>
-    </div>
-
-    <div class="grid" id="recipes-grid"></div>
-    <p class="more"><a href="recipes.html" data-i18n="recipes.more">View all →</a></p>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="footer-inner">
-    <a class="footer-item" href="https://github.com/brickhu/skills/blob/main/LICENSE" target="_blank" rel="noopener" data-i18n="footer.license">License: MIT</a>
-    <a class="footer-item" href="https://www.skills.sh/brickhu/skills" target="_blank" rel="noopener">
-      <span data-i18n="footer.skills">On skills.sh</span>
-      <img src="https://skills.sh/b/brickhu/skills" alt="skills.sh" height="20">
+  <div class="home-links">
+    <a class="home-icon" href="https://github.com/brickhu" target="_blank" rel="noopener" aria-label="GitHub">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
     </a>
-    <a class="footer-item" href="https://x.com/fei1919" target="_blank" rel="noopener" data-i18n="footer.x">X / @fei1919</a>
+    <span class="home-sep">｜</span>
+    <a class="home-icon" href="https://x.com/fei1919" target="_blank" rel="noopener" aria-label="X">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+    </a>
   </div>
-  <div class="footer-credit" data-i18n="footer.credit">fei's skills · open-source AI agent skills</div>
-</footer>
+</main>
 
 <script src="assets/app.js"></script>
 </body>

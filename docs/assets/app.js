@@ -87,18 +87,19 @@
     container.innerHTML = list.map(recipeCard).join('');
   }
 
-  function renderSkills() {
-    var grid = document.getElementById('skills-grid');
-    if (!grid) return;
+  function renderSkillList() {
+    var list = document.getElementById('skill-list');
+    if (!list) return;
     if (!skillsData.length) {
-      grid.innerHTML = '<p class="empty">' + esc(t('skills.empty')) + '</p>';
+      list.innerHTML = '<p class="empty">' + esc(t('skills.empty')) + '</p>';
       return;
     }
-    grid.innerHTML = skillsData.map(function (s) {
-      return '<a class="card skill-card" href="' + esc(s.file) + '">' +
-        '<h3>' + esc('/' + s.name) + '</h3>' +
-        '<p>' + esc(s.description) + '</p>' +
-        '<span class="skill-open">' + esc(t('skills.open')) + '</span>' +
+    list.innerHTML = skillsData.map(function (s, i) {
+      return '<a class="skill-row" href="' + esc(s.file) + '">' +
+        '<span class="skill-num">' + (i + 1) + '.</span>' +
+        '<span class="skill-name">' + esc(s.name) + '</span>' +
+        '<span class="skill-desc">' + esc(s.description) + '</span>' +
+        '<span class="skill-arrow">→</span>' +
         '</a>';
     }).join('');
   }
@@ -124,7 +125,7 @@
     renderFeatures();
     renderFaqs();
     renderRecipes();
-    renderSkills();
+    renderSkillList();
   }
 
   /* copy buttons: hero command + recipe JSON */
@@ -193,6 +194,6 @@
   fetch('data/skills.json').then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
     .then(function (data) {
       skillsData = data;
-      renderSkills();
+      renderSkillList();
     });
 })();

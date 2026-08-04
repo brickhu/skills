@@ -7,7 +7,6 @@
   },
   "nav": {
     "home": "Home",
-    "dbops": "/db-ops",
     "recipes": "Recipes",
     "faqs": "FAQ",
     "lang": "中文"
@@ -27,7 +26,7 @@
     "manualCmd": "mkdir -p ~/.claude/skills && cp -r db-ops ~/.claude/skills/db-ops",
     "copy": "Copy",
     "copied": "Copied ✓",
-    "ctaFeatures": "What it can do",
+    "ctaGitHub": "GitHub",
     "ctaRecipes": "Browse recipes"
   },
   "features": {
