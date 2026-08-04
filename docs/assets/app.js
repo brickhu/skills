@@ -58,14 +58,16 @@
     var triggers = (r.triggers || []).slice(0, 3).map(function (tr) {
       return '<span class="chip">' + esc(tr) + '</span>';
     }).join('');
+    var json = JSON.stringify(r, null, 2);
     var fileUrl = 'https://github.com/brickhu/skills/blob/main/recipes/' + esc(r.file || '');
     return '<article class="card recipe">' +
       '<div class="recipe-head"><h3>' + esc(r.name) + '</h3><span class="badge ' + danger + '">' + esc(badge) + '</span></div>' +
       '<p class="recipe-desc">' + esc(r.description || '-') + '</p>' +
+      '<div class="recipe-json"><pre>' + esc(json) + '</pre>' +
+      '<button class="copy-btn" data-idx="' + idx + '">' + esc(t('recipes.copy')) + '</button></div>' +
       (triggers ? '<div class="chips">' + triggers + '</div>' : '') +
       '<div class="recipe-meta">' + esc(dbs) + ' · ' + esc(meta.author || 'community') + '</div>' +
       '<div class="recipe-actions">' +
-      '<button class="copy-btn" data-idx="' + idx + '">' + esc(t('recipes.copy')) + '</button>' +
       '<a class="gh-link" href="' + fileUrl + '" target="_blank" rel="noopener">' + esc(t('recipes.source')) + '</a>' +
       '</div></article>';
   }
@@ -94,7 +96,7 @@
     }
     grid.innerHTML = skillsData.map(function (s) {
       return '<a class="card skill-card" href="' + esc(s.file) + '">' +
-        '<h3>' + esc(s.name) + '</h3>' +
+        '<h3>' + esc('/' + s.name) + '</h3>' +
         '<p>' + esc(s.description) + '</p>' +
         '<span class="skill-open">' + esc(t('skills.open')) + '</span>' +
         '</a>';
@@ -155,6 +157,14 @@
       done(ok);
     }
   });
+
+  /* sticky nav: solid background once scrolled (transparent over the hero) */
+  function onScroll() {
+    var nav = document.querySelector('.nav');
+    if (nav) nav.classList.toggle('scrolled', (window.scrollY || 0) > 8);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
   var toggle = document.getElementById('lang-toggle');
   if (toggle) {

@@ -7,7 +7,7 @@
   },
   "nav": {
     "home": "Home",
-    "dbops": "db-ops",
+    "dbops": "/db-ops",
     "recipes": "Recipes",
     "faqs": "FAQ",
     "lang": "中文"
@@ -47,6 +47,13 @@
   "recipes": {
     "title": "Community recipes",
     "sub": "Ready-to-use workflows contributed by the community — copied with one click, imported with one paste.",
+    "whatTitle": "What are recipes?",
+    "what": "Recipes turn frequent multi-step operations — generating an invite code, running a weekly report — into a single trigger phrase. Instead of repeating a 5-step manual workflow, you say one sentence and db-ops drafts, confirms and executes the whole flow. They live in <code>.dbops/recipes.json</code> (project-level) or <code>~/.dbops/recipes.json</code> (global).",
+    "howTitle": "How to configure",
+    "how1": "Copy the JSON of a recipe you like — from the cards below or the Gallery page.",
+    "how2": "Paste it into your agent chat and say \"add this recipe\" — preview it, confirm, done.",
+    "how3": "When asked, bind the recipe's connection to one of your whitelisted connections (shared recipes use the YOUR_DB placeholder).",
+    "howNote": "You can also edit <code>.dbops/recipes.json</code> by hand — each entry is plain JSON.",
     "more": "View all →",
     "count": "{n} recipes",
     "empty": "No recipes yet — be the first to share one!",

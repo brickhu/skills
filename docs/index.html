@@ -42,6 +42,28 @@
   </div>
 </section>
 
+<section class="section alt">
+  <div class="section-inner">
+    <h2 data-i18n="recipes.title">Community recipes</h2>
+    <p class="section-sub" data-i18n="recipes.sub">Ready-to-use workflows contributed by the community — copied with one click, imported with one paste.</p>
+
+    <div class="howto">
+      <h3 data-i18n="recipes.whatTitle">What are recipes?</h3>
+      <p data-i18n-html="recipes.what">Recipes turn frequent multi-step operations — generating an invite code, running a weekly report — into a single trigger phrase. They live in <code>.dbops/recipes.json</code> (project-level) or <code>~/.dbops/recipes.json</code> (global).</p>
+      <h3 data-i18n="recipes.howTitle">How to configure</h3>
+      <ol class="howto-list">
+        <li data-i18n="recipes.how1">Copy the JSON of a recipe you like — from the cards below or the Gallery page.</li>
+        <li data-i18n="recipes.how2">Paste it into your agent chat and say "add this recipe" — preview it, confirm, done.</li>
+        <li data-i18n="recipes.how3">When asked, bind the recipe's connection to one of your whitelisted connections (shared recipes use the YOUR_DB placeholder).</li>
+      </ol>
+      <p class="howto-note" data-i18n-html="recipes.howNote">You can also edit <code>.dbops/recipes.json</code> by hand — each entry is plain JSON.</p>
+    </div>
+
+    <div class="grid" id="recipes-grid"></div>
+    <p class="more"><a href="recipes.html" data-i18n="recipes.more">View all →</a></p>
+  </div>
+</section>
+
 <footer class="footer">
   <div class="footer-inner">
     <a class="footer-item" href="https://github.com/brickhu/skills/blob/main/LICENSE" target="_blank" rel="noopener" data-i18n="footer.license">License: MIT</a>

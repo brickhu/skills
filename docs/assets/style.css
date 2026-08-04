@@ -37,9 +37,14 @@ code {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(255, 255, 255, .85);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background .2s, border-color .2s;
+}
+.nav.scrolled {
+  background: rgba(15, 23, 42, .88);
+  border-bottom-color: #334155;
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
 }
 .nav-inner {
   max-width: 1080px;
@@ -53,34 +58,36 @@ code {
 .logo {
   font-weight: 800;
   font-size: 1.15rem;
-  color: var(--text);
+  color: #f1f5f9;
 }
-.logo span { color: var(--accent); }
+.logo span { color: #818cf8; }
 .logo:hover { text-decoration: none; }
-.nav .links { display: flex; gap: 6px; flex: 1; }
+.nav .links { display: flex; gap: 6px; margin-left: auto; }
 .nav .links a {
-  color: var(--muted);
+  color: #cbd5e1;
   font-weight: 600;
   padding: 6px 12px;
   border-radius: 8px;
 }
-.nav .links a:hover { color: var(--text); text-decoration: none; background: var(--bg); }
-.nav .links a.active { color: var(--accent); background: var(--accent-soft); }
+.nav .links a:hover { color: #fff; text-decoration: none; background: rgba(148, 163, 184, .15); }
+.nav .links a.active { color: #a5b4fc; background: rgba(99, 102, 241, .18); }
 .lang-btn {
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text);
+  border: 1px solid #475569;
+  background: transparent;
+  color: #e2e8f0;
   font-weight: 600;
   padding: 6px 14px;
   border-radius: 999px;
   cursor: pointer;
   transition: all .15s;
 }
-.lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+.lang-btn:hover { border-color: #a5b4fc; color: #a5b4fc; }
 
 /* ---------- Hero ---------- */
 .hero {
-  min-height: calc(100vh - var(--nav-h));
+  min-height: 100vh;
+  margin-top: calc(-1 * var(--nav-h));
+  padding: calc(72px + var(--nav-h)) 24px 72px;
   display: flex;
   align-items: center;
   background: radial-gradient(1200px 500px at 20% -10%, #312e81 0%, transparent 60%),
@@ -268,9 +275,10 @@ code {
 
 /* ---------- Page head ---------- */
 .page-head {
+  margin-top: calc(-1 * var(--nav-h));
+  padding: calc(64px + var(--nav-h)) 24px 56px;
   background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%);
   color: #f1f5f9;
-  padding: 64px 24px 56px;
   text-align: center;
 }
 .page-head h1 { margin: 0 0 12px; font-size: clamp(1.7rem, 3.6vw, 2.4rem); }
@@ -319,7 +327,7 @@ code {
 .footer-credit { text-align: center; color: #94a3b8; font-size: .8rem; margin-top: 18px; }
 
 /* ---------- Portal (skills index) ---------- */
-.hero.portal { min-height: auto; padding: 108px 24px 96px; }
+.hero.portal { min-height: auto; padding: calc(108px + var(--nav-h)) 24px 96px; }
 .hero-brand {
   font-size: clamp(2.6rem, 6vw, 4.2rem);
   font-weight: 800;
@@ -335,6 +343,41 @@ code {
 .skill-card:hover { text-decoration: none; }
 .skill-card h3 { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .skill-open { margin-top: auto; padding-top: 12px; font-weight: 700; color: var(--accent); font-size: .9rem; }
+
+/* ---------- Recipes explainer (home) ---------- */
+.howto { max-width: 720px; margin: 0 auto 42px; text-align: left; }
+.howto h3 { font-size: 1.12rem; margin: 0 0 8px; }
+.howto h3:not(:first-child) { margin-top: 24px; }
+.howto p { color: var(--muted); margin: 0; }
+.howto-list { margin: 8px 0 0; padding-left: 20px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+.howto-note { margin-top: 12px !important; font-size: .88rem; }
+
+/* ---------- Recipe JSON block ---------- */
+.recipe-json { position: relative; margin: 12px 0; }
+.recipe-json pre {
+  max-height: 220px;
+  overflow: auto;
+  margin: 0;
+  background: #0b1220;
+  color: #a5b4fc;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 34px 12px 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .76rem;
+  line-height: 1.55;
+}
+.recipe-json .copy-btn {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  transform: none;
+  border-color: #475569;
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 4px 10px;
+  font-size: .76rem;
+}
 
 /* ---------- Responsive ---------- */
 @media (max-width: 640px) {

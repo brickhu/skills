@@ -7,7 +7,7 @@
   },
   "nav": {
     "home": "首页",
-    "dbops": "db-ops",
+    "dbops": "/db-ops",
     "recipes": "Recipes",
     "faqs": "FAQ",
     "lang": "EN"
@@ -47,6 +47,13 @@
   "recipes": {
     "title": "社区 Recipes",
     "sub": "社区贡献的现成快捷指令——一键复制 JSON，粘贴到对话即可导入。",
+    "whatTitle": "Recipes 是什么？",
+    "what": "Recipes 把高频多步操作——生成邀请码、跑周报——封装成一句话触发。不用每次手动重复五步流程：你说一句话，db-ops 自动完成起草 → 确认 → 执行。它们存放在 <code>.dbops/recipes.json</code>（项目级）或 <code>~/.dbops/recipes.json</code>（全局）。",
+    "howTitle": "怎么配置",
+    "how1": "复制你喜欢的 recipe JSON——从下面卡片或共享区拿。",
+    "how2": "粘贴到 Agent 对话里说\"添加这个 recipe\"——预览、确认、完成。",
+    "how3": "按提示把 recipe 的连接绑定到你白名单里的连接（共享 recipe 用的是 YOUR_DB 占位）。",
+    "howNote": "也可以手动编辑 <code>.dbops/recipes.json</code>——每个条目就是一段普通 JSON。",
     "more": "查看全部 →",
     "count": "共 {n} 个 recipes",
     "empty": "暂无 recipe——欢迎第一个来分享！",
