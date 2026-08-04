@@ -20,6 +20,7 @@ in.
 - **Shortcut recipes**: turn frequent multi-step operations (e.g. "generate an invite code") into one trigger phrase via `recipes.json`
 - **Audit logging**: every operation is appended to `.dbops/logs/<date>.log`; connection strings and passwords are never logged
 - **Multi-database support**: PostgreSQL, MySQL, SQLite (type is inferred from the connection string scheme)
+- **Language-aware**: communicates in the same language you use in chat — English, Chinese, or any other language
 
 ## Local or remote — any database you can reach
 

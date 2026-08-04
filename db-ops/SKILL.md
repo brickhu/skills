@@ -1,11 +1,17 @@
 ---
 name: db-ops
-description: General-purpose database management skill. Use when the user needs to operate on a database directly — query/modify/delete data, inspect table structures, run arbitrary SQL, or mentions like "check the database", "look at the records in X", "delete a record", "run some SQL", "is there X in the database". Connections are loaded from a whitelist config (project dir first, global dir as fallback); no automatic environment sniffing. SELECT/INSERT execute directly; write operations (UPDATE/DELETE/DROP, etc.) show a plan first and wait for confirmation.
+description: General-purpose database management skill. Use when the user needs to operate on a database directly — query/modify/delete data, inspect table structures, run arbitrary SQL, or mentions like "check the database", "look at the records in X", "delete a record", "run some SQL", "is there X in the database". Also triggers on Chinese requests such as "查一下数据库", "看看 xx 的记录", "删掉某条数据", "跑个 SQL", "数据库里有没有". Connections are loaded from a whitelist config (project dir first, global dir as fallback); no automatic environment sniffing. SELECT/INSERT execute directly; write operations (UPDATE/DELETE/DROP, etc.) show a plan first and wait for confirmation. Communicate in the same language the user is chatting in.
 ---
 
 # db-ops: General-purpose database CRUD (whitelist config + quick recipes)
 
 No auto-discovery, no scanning of environment variables or ports — **only connects to connections explicitly registered in the config**, and wraps common multi-step project operations into quick recipes.
+
+## Language adaptation
+
+The skill follows the language of the conversation: if the user writes in Chinese, everything — questions, plan blocks, confirmation prompts, receipts, error messages — is communicated in Chinese; if the user writes in English, in English; any other language works the same way. Recipes (`prompt` fields) are treated as user instructions in whatever language they are written in.
+
+The typed confirmation string is **always the fixed format** `confirm-<operation>-<connection>-<rows>` (English words), regardless of the conversation language.
 
 ## 1. Config structure (.dbops directory)
 
