@@ -10,11 +10,12 @@ body:
       description: "Short, lowercase, hyphenated. Example: invite-code"
     validations:
       required: true
-  - type: textarea
+  - type: input
     id: description
     attributes:
       label: What does it do?
       description: One or two plain-language sentences about the workflow.
+      placeholder: Generate a coupon code and insert it into the coupons table
     validations:
       required: true
   - type: input
@@ -24,13 +25,12 @@ body:
       description: "Comma-separated, any language. Example: add invite code, generate invite code, 生成邀请码"
     validations:
       required: true
-  - type: textarea
+  - type: input
     id: prompt
     attributes:
       label: Workflow prompt
-      description: The natural-language workflow the agent executes. Template variables go in angle brackets, e.g. <code> — users fill them in from chat.
-      placeholder: |
-        Run pnpm invites:create <code> to generate an invite code (workdir services/api), then verify it was inserted with a SQL query
+      description: "The natural-language workflow the agent executes. Template variables go in angle brackets, e.g. <code> — users fill them in from chat. One line is enough."
+      placeholder: "Run pnpm invites:create <code> to generate an invite code (workdir services/api), then verify it with SQL"
     validations:
       required: true
   - type: dropdown
