@@ -19,6 +19,17 @@ in.
 - **Audit logging**: every operation is appended to `.dbops/logs/<date>.log`; connection strings and passwords are never logged
 - **Multi-database support**: PostgreSQL, MySQL, SQLite (type is inferred from the connection string scheme)
 
+## Local or remote — any database you can reach
+
+db-ops is **not limited to your local machine**. It connects to any database that is reachable from your machine — if you can write a connection string for it, the skill can operate on it:
+
+- **Local**: databases on `localhost` (PostgreSQL / MySQL / SQLite)
+- **Remote**: databases on your LAN or a VPS (any IP or domain), and **cloud-hosted databases** — AWS RDS, Railway, Neon, Supabase, PlanetScale, Tencent/Aliyun Cloud RDS, anything that exposes a connection string
+
+The skill infers the environment from the host: `localhost` → `local`, hosted domains → `remote` (dev/prod). Writes to remote databases are treated as **dangerous by default** and always go through the plan + typed-confirmation flow.
+
+The only inherently local type is SQLite — it's a file on disk.
+
 ## How it stays safe
 
 - **No auto-discovery**: the skill never scans environment variables or ports — it only connects to connections explicitly registered in the whitelist
@@ -50,6 +61,7 @@ After installation, restart your agent session — it will auto-discover the ski
 
    ```bash
    # .dbops/.env  (chmod 600, gitignored)
+   # localhost, a VPS, or any cloud database — any host works
    LOCAL=postgres://user:devpass@localhost:5432/dbname
    REMOTE=postgres://user:pass@altaria.proxy.rlwy.net:50930/railway
    ```

@@ -19,6 +19,17 @@
 - **审计日志**：每次操作都会追加写入 `.dbops/logs/<日期>.log`，连接串和密码永不落日志
 - **多种数据库**：PostgreSQL、MySQL、SQLite（根据连接串的 scheme 自动识别类型）
 
+## 本地还是远程——只要能连上，就能管
+
+db-ops **不限于本机数据库**。它连接的是任何你机器能访问到的数据库——只要你能写出它的连接串，技能就能操作它：
+
+- **本地**：`localhost` 上的数据库（PostgreSQL / MySQL / SQLite）
+- **远程**：局域网或 VPS 上的数据库（任意 IP / 域名），以及**云数据库**——AWS RDS、Railway、Neon、Supabase、PlanetScale、腾讯云 / 阿里云 RDS 等等，只要暴露了连接串就行
+
+技能会根据 host 推断环境：`localhost` → 本地，托管域名 → 远程（dev/prod）。**远程库的写操作默认按危险处理**，一律走"计划 + 确认串"流程。
+
+唯一的例外是 SQLite——它是本地文件，天生只能在本机用。
+
 ## 为什么安全
 
 - **不自动探测**：不扫描环境变量、不扫端口——只连配置里显式注册的连接（白名单）
@@ -50,6 +61,7 @@ cp -r db-ops ~/.claude/skills/db-ops
 
    ```bash
    # .dbops/.env  （chmod 600，记得 gitignore）
+   # localhost、VPS、任意云数据库——什么 host 都行
    LOCAL=postgres://user:devpass@localhost:5432/dbname
    REMOTE=postgres://user:pass@altaria.proxy.rlwy.net:50930/railway
    ```
