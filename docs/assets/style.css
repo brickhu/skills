@@ -214,37 +214,25 @@ code {
 .more { text-align: center; margin: 34px 0 0; font-weight: 700; }
 .more a { text-decoration: underline; text-underline-offset: 4px; }
 
-/* ---------- Recipe cards ---------- */
-.recipe-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-.recipe-head h3 {
-  margin: 0;
+/* ---------- Recipe blocks ---------- */
+#recipes-grid, #recipes-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.recipe-block {
+  padding: 20px 4px;
+  border-bottom: 1px solid var(--line);
+}
+.recipe-block:first-child { border-top: 1px solid var(--line); }
+.recipe-title {
+  margin: 0 0 6px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 1rem;
+  font-size: 1.05rem;
   word-break: break-all;
 }
-.badge {
-  flex-shrink: 0;
-  font-size: .7rem;
-  font-weight: 700;
-  padding: 3px 10px;
-  border: 1px solid var(--line);
-  text-transform: uppercase;
-  letter-spacing: .05em;
-}
-.badge.danger { background: var(--text); color: var(--bg); }
-.badge.safe { background: var(--surface); color: var(--text); }
-.recipe-desc { margin: 10px 0 12px !important; }
-.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
-.chip {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: .74rem;
-  border: 1px solid var(--line);
-  color: var(--text);
-  padding: 3px 9px;
-}
-.recipe-meta { font-size: .8rem; color: var(--muted); margin-bottom: 14px; }
-.recipe-actions { margin-top: auto; display: flex; gap: 10px; align-items: center; }
-.gh-link { font-size: .88rem; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.recipe-desc { margin: 0 0 12px; color: var(--muted); }
+.recipe-meta { font-size: .8rem; color: var(--muted); margin-top: 10px; }
 
 /* ---------- Page head ---------- */
 .page-head {
@@ -366,15 +354,15 @@ code {
 .howto-note { margin-top: 12px !important; font-size: .88rem; }
 
 /* ---------- Recipe JSON block ---------- */
-.recipe-json { position: relative; margin: 12px 0; }
+.recipe-json { position: relative; }
 .recipe-json pre {
-  max-height: 220px;
+  max-height: 240px;
   overflow: auto;
   margin: 0;
-  background: var(--surface);
+  background: #e8e8e8;
   color: var(--text);
-  border: 1px solid var(--line);
-  padding: 34px 12px 12px;
+  border: none;
+  padding: 12px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: .76rem;
   line-height: 1.55;
@@ -389,7 +377,11 @@ code {
   color: var(--bg);
   padding: 4px 10px;
   font-size: .76rem;
+  opacity: 0;
+  transition: opacity .15s;
 }
+.recipe-json:hover .copy-btn,
+.recipe-json .copy-btn:focus { opacity: 1; }
 .recipe-json .copy-btn:hover { background: var(--surface); color: var(--text); }
 
 /* ---------- Responsive ---------- */

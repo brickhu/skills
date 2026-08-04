@@ -53,23 +53,14 @@
   function recipeCard(r, idx) {
     var meta = r._meta || {};
     var dbs = (meta.databases || []).join(' / ') || 'any';
-    var danger = r.danger ? 'danger' : 'safe';
-    var badge = r.danger ? t('recipes.danger') : t('recipes.safe');
-    var triggers = (r.triggers || []).slice(0, 3).map(function (tr) {
-      return '<span class="chip">' + esc(tr) + '</span>';
-    }).join('');
     var json = JSON.stringify(r, null, 2);
-    var fileUrl = 'https://github.com/brickhu/skills/blob/main/recipes/' + esc(r.file || '');
-    return '<article class="card recipe">' +
-      '<div class="recipe-head"><h3>' + esc(r.name) + '</h3><span class="badge ' + danger + '">' + esc(badge) + '</span></div>' +
+    return '<div class="recipe-block">' +
+      '<h3 class="recipe-title">' + esc(r.name) + '</h3>' +
       '<p class="recipe-desc">' + esc(r.description || '-') + '</p>' +
       '<div class="recipe-json"><pre>' + esc(json) + '</pre>' +
       '<button class="copy-btn" data-idx="' + idx + '">' + esc(t('recipes.copy')) + '</button></div>' +
-      (triggers ? '<div class="chips">' + triggers + '</div>' : '') +
       '<div class="recipe-meta">' + esc(dbs) + ' · ' + esc(meta.author || 'community') + '</div>' +
-      '<div class="recipe-actions">' +
-      '<a class="gh-link" href="' + fileUrl + '" target="_blank" rel="noopener">' + esc(t('recipes.source')) + '</a>' +
-      '</div></article>';
+      '</div>';
   }
 
   function renderRecipes() {
@@ -106,10 +97,14 @@
 
   function apply() {
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
-      el.textContent = t(el.getAttribute('data-i18n'));
+      var key = el.getAttribute('data-i18n');
+      var val = t(key);
+      if (val !== key) el.textContent = val; // keep static fallback when the key is missing
     });
     document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
-      el.innerHTML = t(el.getAttribute('data-i18n-html'));
+      var key = el.getAttribute('data-i18n-html');
+      var val = t(key);
+      if (val !== key) el.innerHTML = val;
     });
     var page = pageName();
     var title = t('meta.' + page);
