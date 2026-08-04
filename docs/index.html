@@ -3,18 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>db-ops — Your AI data-ops assistant</title>
-<meta name="description" content="db-ops: an open-source AI skill that lets your coding agent safely operate your databases. Install in one line, skip the admin backend.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗄️</text></svg>">
+<title>Fei's Skills — open-source AI agent skills</title>
+<meta name="description" content="Fei's Skills — open-source AI agent skills by Brickhu. Pick a skill, install it into any SKILL.md-capable agent in one line.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body data-page="home">
 
 <header class="nav">
   <div class="nav-inner">
-    <a class="logo" href="index.html">db<span>-ops</span></a>
+    <a class="logo" href="index.html">fei's<span> skills</span></a>
     <nav class="links">
       <a href="index.html" data-i18n="nav.home">Home</a>
+      <a href="db-ops.html" data-i18n="nav.dbops">db-ops</a>
       <a href="recipes.html" data-i18n="nav.recipes">Recipes</a>
       <a href="faqs.html" data-i18n="nav.faqs">FAQ</a>
     </nav>
@@ -22,45 +23,22 @@
   </div>
 </header>
 
-<section class="hero">
+<section class="hero portal">
   <div class="hero-inner">
-    <h1 data-i18n="hero.slogan">Your AI data-ops assistant — build products, skip the admin backend.</h1>
-    <p class="hero-sub" data-i18n="hero.subtitle">db-ops is an open-source AI skill. Install it and your coding agent (Claude Code, Cursor, Zed…) can safely operate your databases directly: query data, update orders, issue invite codes, run reports — just say it.</p>
-
-    <div class="install">
-      <div class="install-head" data-i18n="hero.installTitle">Install in one line</div>
-      <div class="code-box">
-        <code>npx skills add brickhu/skills -s db-ops</code>
-        <button class="copy-btn" data-copy-command="npx skills add brickhu/skills -s db-ops" data-i18n="hero.copy">Copy</button>
-      </div>
-      <div class="install-note" data-i18n-html="hero.installNote">Installs <code>db-ops</code> — the only skill in this repo</div>
-      <details class="manual">
-        <summary data-i18n="hero.manualTitle">Manual install — works with any SKILL.md-capable agent</summary>
-        <code class="manual-cmd" data-i18n="hero.manualCmd">mkdir -p ~/.claude/skills &amp;&amp; cp -r db-ops ~/.claude/skills/db-ops</code>
-      </details>
-    </div>
-
+    <p class="hero-brand" data-i18n="hero.site.brand">Fei's Skills</p>
+    <h1 data-i18n="hero.site.tagline">Open-source AI agent skills by Brickhu (@fei1919).</h1>
+    <p class="hero-sub" data-i18n="hero.site.sub">Pick a skill and install it into any SKILL.md-capable agent in one line.</p>
     <div class="hero-cta">
-      <a class="btn primary" href="#features" data-i18n="hero.ctaFeatures">What it can do</a>
-      <a class="btn ghost" href="recipes.html" data-i18n="hero.ctaRecipes">Browse recipes</a>
+      <a class="btn primary" href="https://github.com/brickhu/skills" target="_blank" rel="noopener" data-i18n="hero.site.github">View the repo on GitHub</a>
     </div>
   </div>
 </section>
 
-<section class="section" id="features">
+<section class="section">
   <div class="section-inner">
-    <h2 data-i18n="features.title">What db-ops can do</h2>
-    <p class="section-sub" data-i18n="features.sub">Your agent becomes a data-ops assistant the moment it is installed.</p>
-    <div class="grid" id="features-grid"></div>
-  </div>
-</section>
-
-<section class="section alt">
-  <div class="section-inner">
-    <h2 data-i18n="recipes.title">Community recipes</h2>
-    <p class="section-sub" data-i18n="recipes.sub">Ready-to-use workflows contributed by the community — copied with one click, imported with one paste.</p>
-    <div class="grid" id="recipes-preview"></div>
-    <p class="more"><a href="recipes.html" data-i18n="recipes.more">View all →</a></p>
+    <h2 data-i18n="skills.title">Skills in this repo</h2>
+    <p class="section-sub" data-i18n="skills.sub">Each skill is a standard SKILL.md package — works with Claude Code, Cursor, Zed and more.</p>
+    <div class="grid" id="skills-grid"></div>
   </div>
 </section>
 
@@ -73,7 +51,7 @@
     </a>
     <a class="footer-item" href="https://x.com/fei1919" target="_blank" rel="noopener" data-i18n="footer.x">X / @fei1919</a>
   </div>
-  <div class="footer-credit" data-i18n="footer.credit">db-ops · open-source AI skill</div>
+  <div class="footer-credit" data-i18n="footer.credit">fei's skills · open-source AI agent skills</div>
 </footer>
 
 <script src="assets/app.js"></script>

@@ -1,16 +1,24 @@
 {
   "meta": {
-    "home": "db-ops — Your AI data-ops assistant",
+    "home": "Fei's Skills — open-source AI agent skills",
+    "dbops": "db-ops — Your AI data-ops assistant",
     "recipes": "Recipes · db-ops",
     "faqs": "FAQ · db-ops"
   },
   "nav": {
     "home": "Home",
+    "dbops": "db-ops",
     "recipes": "Recipes",
     "faqs": "FAQ",
     "lang": "中文"
   },
   "hero": {
+    "site": {
+      "brand": "Fei's Skills",
+      "tagline": "Open-source AI agent skills by Brickhu (@fei1919).",
+      "sub": "Pick a skill and install it into any SKILL.md-capable agent in one line.",
+      "github": "View the repo on GitHub"
+    },
     "slogan": "Your AI data-ops assistant — build products, skip the admin backend.",
     "subtitle": "db-ops is an open-source AI skill. Install it and your coding agent (Claude Code, Cursor, Zed…) can safely operate your databases directly: query data, update orders, issue invite codes, run reports — just say it.",
     "installTitle": "Install in one line",
@@ -47,6 +55,12 @@
     "copy": "Copy JSON",
     "copied": "Copied ✓",
     "source": "View file"
+  },
+  "skills": {
+    "title": "Skills in this repo",
+    "sub": "Each skill is a standard SKILL.md package — works with Claude Code, Cursor, Zed and more.",
+    "open": "Open skill →",
+    "empty": "No skills published yet."
   },
   "page": {
     "recipes": {
@@ -106,6 +120,6 @@
     "license": "License: MIT",
     "skills": "On skills.sh",
     "x": "X / @fei1919",
-    "credit": "db-ops · open-source AI skill"
+    "credit": "fei's skills · open-source AI agent skills"
   }
 }

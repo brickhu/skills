@@ -1,16 +1,24 @@
 {
   "meta": {
-    "home": "db-ops —— 你的 AI 数据运营助理",
+    "home": "Fei's Skills —— 开源 AI 技能集",
+    "dbops": "db-ops —— 你的 AI 数据运营助理",
     "recipes": "Recipes · db-ops",
     "faqs": "FAQ · db-ops"
   },
   "nav": {
     "home": "首页",
+    "dbops": "db-ops",
     "recipes": "Recipes",
     "faqs": "FAQ",
     "lang": "EN"
   },
   "hero": {
+    "site": {
+      "brand": "Fei's Skills",
+      "tagline": "由 Brickhu（@fei1919）打造的开源 AI 技能集。",
+      "sub": "选一个技能，一行命令装进你的 AI 助手（Claude Code、Cursor、Zed…）。",
+      "github": "GitHub 仓库"
+    },
     "slogan": "你的 AI 数据运营助理——做产品，不再为运营后台犯愁",
     "subtitle": "db-ops 是开源 AI 技能包。装上它，你的编程助手（Claude Code、Cursor、Zed…）就能安全地直接操作数据库：查数据、改订单、发邀请码、跑报表——说一句话的事。",
     "installTitle": "一行命令安装",
@@ -47,6 +55,12 @@
     "copy": "复制 JSON",
     "copied": "已复制 ✓",
     "source": "查看源文件"
+  },
+  "skills": {
+    "title": "本仓库技能",
+    "sub": "每个技能都是标准 SKILL.md 格式——Claude Code、Cursor、Zed 等均可用。",
+    "open": "打开技能 →",
+    "empty": "暂无已发布技能。"
   },
   "page": {
     "recipes": {
@@ -106,6 +120,6 @@
     "license": "使用授权：MIT",
     "skills": "发布在 skills.sh",
     "x": "X / @fei1919",
-    "credit": "db-ops · 开源 AI 技能"
+    "credit": "fei's skills · 开源 AI 技能集"
   }
 }

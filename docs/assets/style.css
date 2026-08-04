@@ -318,6 +318,24 @@ code {
 .footer-item img { display: block; }
 .footer-credit { text-align: center; color: #94a3b8; font-size: .8rem; margin-top: 18px; }
 
+/* ---------- Portal (skills index) ---------- */
+.hero.portal { min-height: auto; padding: 108px 24px 96px; }
+.hero-brand {
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 14px;
+  background: linear-gradient(90deg, #818cf8, #38bdf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.skill-card { text-decoration: none; color: var(--text); }
+.skill-card:hover { text-decoration: none; }
+.skill-card h3 { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.skill-open { margin-top: auto; padding-top: 12px; font-weight: 700; color: var(--accent); font-size: .9rem; }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 640px) {
   .nav-inner { gap: 10px; padding: 0 16px; }

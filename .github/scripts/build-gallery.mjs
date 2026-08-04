@@ -1,5 +1,5 @@
 // Rebuilds recipes/README.md (the gallery page) from recipes/*.json,
-// and emits docs/data/recipes.json for the GitHub Pages site.
+// and emits docs/data/recipes.json + docs/data/skills.json for the GitHub Pages site.
 // Run from the repo root: node .github/scripts/build-gallery.mjs
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -18,6 +18,48 @@ const siteDir = join(root, 'docs/data');
 mkdirSync(siteDir, { recursive: true });
 writeFileSync(join(siteDir, 'recipes.json'), JSON.stringify(recipes, null, 2) + '\n');
 console.log(`Site data updated: docs/data/recipes.json (${recipes.length} recipe(s))`);
+
+// Site data: docs/data/skills.json — published skills (git-tracked root dirs with SKILL.md)
+import { execSync } from 'node:child_process';
+
+function parseFrontmatter(text) {
+  const out = {};
+  const m = text.match(/^---\n([\s\S]*?)\n---/);
+  if (!m) return out;
+  const lines = m[1].split('\n');
+  for (let i = 0; i < lines.length; i++) {
+    const kv = lines[i].match(/^([a-zA-Z_]+):\s*(.*)$/);
+    if (!kv) continue;
+    let val = kv[2];
+    if (val === '>' || val === '|') { // folded / literal block scalar
+      const parts = [];
+      while (i + 1 < lines.length && /^\s+\S/.test(lines[i + 1])) parts.push(lines[++i].trim());
+      val = parts.join(' ');
+    }
+    out[kv[1]] = val.replace(/^"|"$/g, '');
+  }
+  return out;
+}
+
+const trackedSkills = new Set(
+  execSync('git ls-files', { encoding: 'utf8' })
+    .split('\n').filter((f) => f.endsWith('/SKILL.md')).map((f) => f.split('/')[0])
+);
+
+const skills = readdirSync(root, { withFileTypes: true })
+  .filter((d) => d.isDirectory() && trackedSkills.has(d.name))
+  .map((d) => {
+    let fm = {};
+    try { fm = parseFrontmatter(readFileSync(join(root, d.name, 'SKILL.md'), 'utf8')); } catch (e) { /* no SKILL.md */ }
+    return fm.name
+      ? { slug: d.name, name: fm.name, description: fm.description || '', file: d.name + '.html' }
+      : null;
+  })
+  .filter(Boolean)
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+writeFileSync(join(siteDir, 'skills.json'), JSON.stringify(skills, null, 2) + '\n');
+console.log(`Site data updated: docs/data/skills.json (${skills.length} skill(s))`);
 
 const rows = files.map((f) => {
   const data = JSON.parse(readFileSync(join(recipesDir, f), 'utf8'));

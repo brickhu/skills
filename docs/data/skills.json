@@ -1,0 +1,8 @@
+[
+  {
+    "slug": "db-ops",
+    "name": "db-ops",
+    "description": "General-purpose database management skill. Use when the user needs to operate on a database directly — query/modify/delete data, inspect table structures, run arbitrary SQL, or mentions like \"check the database\", \"look at the records in X\", \"delete a record\", \"run some SQL\", \"is there X in the database\". Also triggers on Chinese requests such as \"查一下数据库\", \"看看 xx 的记录\", \"删掉某条数据\", \"跑个 SQL\", \"数据库里有没有\". Connections are loaded from a whitelist config (project dir first, global dir as fallback); no automatic environment sniffing. SELECT/INSERT execute directly; write operations (UPDATE/DELETE/DROP, etc.) show a plan first and wait for confirmation. Communicate in the same language the user is chatting in.",
+    "file": "db-ops.html"
+  }
+]

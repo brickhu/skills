@@ -10,6 +10,7 @@
   }
 
   var recipesData = [];
+  var skillsData = [];
 
   function t(key) {
     var v = dicts[lang];
@@ -84,6 +85,22 @@
     container.innerHTML = list.map(recipeCard).join('');
   }
 
+  function renderSkills() {
+    var grid = document.getElementById('skills-grid');
+    if (!grid) return;
+    if (!skillsData.length) {
+      grid.innerHTML = '<p class="empty">' + esc(t('skills.empty')) + '</p>';
+      return;
+    }
+    grid.innerHTML = skillsData.map(function (s) {
+      return '<a class="card skill-card" href="' + esc(s.file) + '">' +
+        '<h3>' + esc(s.name) + '</h3>' +
+        '<p>' + esc(s.description) + '</p>' +
+        '<span class="skill-open">' + esc(t('skills.open')) + '</span>' +
+        '</a>';
+    }).join('');
+  }
+
   function apply() {
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
       el.textContent = t(el.getAttribute('data-i18n'));
@@ -99,11 +116,13 @@
     if (toggle) toggle.textContent = t('nav.lang');
     document.querySelectorAll('.nav .links a').forEach(function (a) {
       var href = (a.getAttribute('href') || '').replace('.html', '');
-      a.classList.toggle('active', href === page);
+      if (href === 'index') href = 'home';
+      a.classList.toggle('active', href.replace(/[^a-z0-9]/g, '') === page.replace(/[^a-z0-9]/g, ''));
     });
     renderFeatures();
     renderFaqs();
     renderRecipes();
+    renderSkills();
   }
 
   /* copy buttons: hero command + recipe JSON */
@@ -159,5 +178,11 @@
     .then(function (data) {
       recipesData = data;
       renderRecipes();
+    });
+
+  fetch('data/skills.json').then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
+    .then(function (data) {
+      skillsData = data;
+      renderSkills();
     });
 })();
