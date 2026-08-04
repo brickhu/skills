@@ -1,0 +1,18 @@
+{
+  "_comment": "recipes 模板。复制为 <项目根>/.dbops/recipes.json（项目级，优先）或 ~/.dbops/recipes.json（全局）。prompt 为完整自然语言流程——模型自行拆解执行；模板变量 <参数> 从用户指令提取；danger: true 强制危险确认。",
+  "recipes": [
+    {
+      "name": "查用户",
+      "triggers": ["查用户", "用户状态"],
+      "connection": "LOCAL",
+      "prompt": "查 user 表中邮箱为 <email> 的用户：id、邮箱、邮箱验证状态，按创建时间倒序展示"
+    },
+    {
+      "name": "清理测试数据",
+      "triggers": ["清理测试"],
+      "connection": "LOCAL",
+      "danger": true,
+      "prompt": "删除 user 表中 email 以 @test.local 结尾的测试用户，执行前先统计数量再删"
+    }
+  ]
+}

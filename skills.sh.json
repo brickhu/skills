@@ -1,0 +1,11 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Database",
+      "description": "Safe, whitelist-based database operations for AI agents: query, modify, and manage data with typed confirmations and audit logs.",
+      "skills": ["db-ops"]
+    }
+  ]
+}

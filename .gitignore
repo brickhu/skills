@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+
+# Local-only skills (kept out of the public repo)
+ui-maker/
+spec2code/
+snapurl/
+chacha/
+addressinsight/
+
+# Personal agent config
+.claude/
+
+# Database credentials — never commit
+.env
+.env.*
+*.env
+.dbops/logs/
