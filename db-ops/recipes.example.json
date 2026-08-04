@@ -1,18 +1,18 @@
 {
-  "_comment": "recipes 模板。复制为 <项目根>/.dbops/recipes.json（项目级，优先）或 ~/.dbops/recipes.json（全局）。prompt 为完整自然语言流程——模型自行拆解执行；模板变量 <参数> 从用户指令提取；danger: true 强制危险确认。",
+  "_comment": "Recipe template. Copy to <project root>/.dbops/recipes.json (project-level, takes priority) or ~/.dbops/recipes.json (global). prompt is a full natural-language workflow the model breaks down and executes; template variables <param> are extracted from the user's instruction; danger: true forces the dangerous-operation confirmation.",
   "recipes": [
     {
-      "name": "查用户",
-      "triggers": ["查用户", "用户状态"],
+      "name": "Look up user",
+      "triggers": ["look up user", "user status"],
       "connection": "LOCAL",
-      "prompt": "查 user 表中邮箱为 <email> 的用户：id、邮箱、邮箱验证状态，按创建时间倒序展示"
+      "prompt": "Look up the user with email <email> in the user table: id, email, email verification status, shown in reverse creation order"
     },
     {
-      "name": "清理测试数据",
-      "triggers": ["清理测试"],
+      "name": "Clean up test data",
+      "triggers": ["clean up test", "delete test data"],
       "connection": "LOCAL",
       "danger": true,
-      "prompt": "删除 user 表中 email 以 @test.local 结尾的测试用户，执行前先统计数量再删"
+      "prompt": "Delete test users in the user table whose email ends with @test.local; count them first, then delete"
     }
   ]
 }

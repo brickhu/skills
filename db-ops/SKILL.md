@@ -1,93 +1,93 @@
 ---
 name: db-ops
-description: 通用数据库管理技能。当用户需要直接操作数据库时使用——查询/修改/删除数据、查看表结构、跑任意 SQL，或提到"查一下数据库""看看 xx 的记录""删掉某条数据""跑个 SQL""数据库里有没有"等表述。连接走白名单配置（项目目录优先，全局目录兜底），不自动嗅探环境；SELECT/INSERT 直接执行，UPDATE/DELETE/DROP 等写操作先展示计划等确认。
+description: General-purpose database management skill. Use when the user needs to operate on a database directly — query/modify/delete data, inspect table structures, run arbitrary SQL, or mentions like "check the database", "look at the records in X", "delete a record", "run some SQL", "is there X in the database". Connections are loaded from a whitelist config (project dir first, global dir as fallback); no automatic environment sniffing. SELECT/INSERT execute directly; write operations (UPDATE/DELETE/DROP, etc.) show a plan first and wait for confirmation.
 ---
 
-# db-ops：通用数据库增删改查（白名单配置 + 快捷指令）
+# db-ops: General-purpose database CRUD (whitelist config + quick recipes)
 
-不自动发现、不扫描环境变量/端口——**只连接配置里显式注册的连接**，并把项目常用多步操作封装为快捷指令（recipes）。
+No auto-discovery, no scanning of environment variables or ports — **only connects to connections explicitly registered in the config**, and wraps common multi-step project operations into quick recipes.
 
-## 1. 配置结构（.dbops 目录）
+## 1. Config structure (.dbops directory)
 
-**位置与优先级（整体覆盖，不合并）**：
-- 全局：`~/.dbops/`（兜底）
-- 项目：`<项目根>/.dbops/`（优先）
-- **覆盖规则：项目目录存在 `.dbops/` 时，全局 `~/.dbops/` 在该项目下完全失效**——连接与 recipes 都只看项目配置，不合并
+**Location & precedence (whole-override, no merging)**:
+- Global: `~/.dbops/` (fallback)
+- Project: `<project root>/.dbops/` (priority)
+- **Override rule: when a project `.dbops/` exists, the global `~/.dbops/` is fully disabled for that project** — both connections and recipes come only from the project config, never merged
 
 ```
 .dbops/
-├── .env           # 连接串（gitignore + chmod 600）
-├── recipes.json   # 快捷指令（零密钥，可进 git）
-└── logs/          # 操作审计日志（gitignore）
+├── .env           # connection strings (gitignored + chmod 600)
+├── recipes.json   # quick recipes (no secrets, safe to commit)
+└── logs/          # operation audit logs (gitignored)
 ```
 
-**连接串（.env）**：一行一个连接，`<连接名>=<完整连接串>`——连接的"身份"就是连接串本身（地址+账户+密码）：
+**Connection strings (.env)**: one per line, `<name>=<full connection string>` — a connection's "identity" is the connection string itself (address + account + password):
 ```bash
 LOCAL=postgres://user:devpass@localhost:5432/dbname
 REMOTE=postgres://user:pass@altaria.proxy.rlwy.net:50930/railway
 ```
-推断规则（无需额外字段）：`TYPE` 从 scheme（`postgres://`→pg、`mysql://`→mysql、`sqlite:`→sqlite）；`ENV` 从 host（`localhost`→local、托管域名→remote，dev/prod 以语境为准）；描述 = 连接名。
+Inference rules (no extra fields needed): `TYPE` from the scheme (`postgres://`→pg, `mysql://`→mysql, `sqlite:`→sqlite); `ENV` from the host (`localhost`→local, hosted domain→remote, dev/prod decided by context); description = connection name.
 
-**快捷指令（recipes.json）**：触发词 → 一段自然语言流程（模型自行拆解执行）。模板变量 `<参数>` 从用户指令提取，缺的问：
+**Quick recipes (recipes.json)**: trigger phrase → a natural-language workflow (the model breaks it down and executes it). Template variables `<param>` are extracted from the user's instruction; ask if missing:
 ```json
 {
   "recipes": [
     {
-      "name": "添加邀请码",
-      "triggers": ["添加邀请码", "生成邀请码"],
+      "name": "Add invite code",
+      "triggers": ["add invite code", "generate invite code"],
       "connection": "LOCAL",
-      "prompt": "用 pnpm invites:create <code> 生成邀请码（工作目录 services/api），支持可选参数 [--expires <days>]；生成后用 SQL 查回确认已入库",
+      "prompt": "Run pnpm invites:create <code> to generate an invite code (workdir services/api), with optional [--expires <days>]; after generating, verify it was inserted with a SQL query",
       "danger": false
     }
   ]
 }
 ```
-- `prompt`：完整自然语言指令——当作额外用户话术理解执行（模型判断是 shell / SQL / 组合），模板变量直接替换；**仍受本技能全部规则约束**：只在 `connection` 白名单连接上执行、翻译结果是危险操作时照常先确认
-- `danger: true`：执行前强制走危险操作确认（即使 prompt 翻译出来只是 SELECT）
-- recipes 由用户编辑维护；技能不代写（可提示如何加）
+- `prompt`: a full natural-language instruction — treat it as extra user speech to understand and execute (the model decides shell / SQL / a combination); template variables are substituted directly; **still bound by all the rules of this skill**: only run on the whitelisted `connection`, and confirm first if the translated result is a dangerous operation
+- `danger: true`: force the dangerous-operation confirmation before execution (even if the prompt translates to a plain SELECT)
+- Recipes are edited and maintained by the user; the skill does not write them (it may suggest how to add one)
 
-**连接选择（每条操作默认必确认）**：
-- 用户指令已明确连接名（如"查 REMOTE 库的 xx"）→ 直接使用，不再询问
-- 指令未明确 → **执行前必须询问**目标连接：列出白名单全部连接（名称 + host + 环境推断），等用户明确选择后再执行——即使只有一个连接也确认一次，杜绝"以为在连本地、实际连了远程"的错连
-- 白名单外的连接一律拒绝，并提示如何加入配置（由用户手动编辑，技能不代写）
+**Connection selection (every operation confirms by default)**:
+- User explicitly names a connection (e.g. "check the xx in the REMOTE database") → use it directly, no further prompt
+- Connection not specified → **must ask before executing**: list all whitelisted connections (name + host + inferred env) and wait for the user to pick — even if there is only one connection, confirm once, to prevent "thought I was on local, actually operated remote" mistakes
+- Connections outside the whitelist are always rejected, with a hint on how to add them to the config (the user edits manually; the skill does not write it)
 
-## 2. 执行规则
+## 2. Execution rules
 
-- 先看结构再查数据：PG `\dt` / MySQL `SHOW TABLES` / SQLite `.tables`；字段用 PG `\d <表>` / MySQL `DESCRIBE <表>`。表名含大写驼峰（如 `"user"`）时必须加双引号。
-- **SELECT**：直接执行，结果回执为表格/列表。
-- **INSERT**：直接执行（新增数据风险低），回执插入行。
-- **UPDATE / DELETE / DROP / TRUNCATE / ALTER / 迁移**：危险操作——先展示计划块（操作 + 表 + WHERE + 预估行数，**先跑 `SELECT count(*)` 验证范围**），然后**要求用户输入动态确认串**（typed confirmation）：
-  - 确认串格式：`confirm-<操作>-<连接名>-<预估行数>`，每次操作动态生成（如 `confirm-DELETE-LOCAL-4`）
-  - 用户必须**逐字输入该确认串**才能执行；"是 / Y / 确认"等一律拒绝并重新提示
-  - 确认串含连接名与行数——用户必须看过计划块才能答对，防误触、防模型代答
-  - 确认后执行时 SQL 必须与计划块**完全一致**（不得中途修改），回执受影响行数
-  - 远程库（host 非 localhost）的写操作默认危险，同样走确认串流程
-- 多行 SQL 用 heredoc。
+- Inspect structure before querying data: PG `\dt` / MySQL `SHOW TABLES` / SQLite `.tables`; columns via PG `\d <table>` / MySQL `DESCRIBE <table>`. Table names with PascalCase (e.g. `"user"`) must be double-quoted.
+- **SELECT**: run directly, report results as tables/lists.
+- **INSERT**: run directly (low risk), report the inserted rows.
+- **UPDATE / DELETE / DROP / TRUNCATE / ALTER / migrations**: dangerous operations — first show a plan block (operation + table + WHERE + estimated row count, **run `SELECT count(*)` first to verify the scope**), then **require the user to type a dynamic confirmation string** (typed confirmation):
+  - Format: `confirm-<operation>-<connection>-<estimated rows>`, generated per operation (e.g. `confirm-DELETE-LOCAL-4`)
+  - The user must **type the exact string** to execute; "yes / Y / confirm" are all rejected with a re-prompt
+  - The string contains the connection name and row count — the user must have read the plan block to answer correctly; prevents accidental triggers and model self-confirmation
+  - After confirmation, the executed SQL must match the plan block **exactly** (no mid-flight changes); report the affected row count
+  - Writes to remote databases (host not localhost) default to dangerous — same confirmation flow
+- Multi-line SQL via heredoc.
 
-**审计日志（.dbops/logs/，每条操作必写）**：追加到 `logs/<日期>.log`（项目级；无项目配置时写 `~/.dbops/logs/`），一行一条：
+**Audit log (.dbops/logs/, every operation must be logged)**: append to `logs/<date>.log` (project-level; `~/.dbops/logs/` when there is no project config), one line per entry:
 ```
-[时间] [连接: 名 host env] [类型: SELECT|INSERT|UPDATE|DELETE|shell|recipe] [来源: 用户指令|recipe名] SQL/命令摘要 → 结果（影响行数/关键信息）
+[time] [conn: name host env] [type: SELECT|INSERT|UPDATE|DELETE|shell|recipe] [source: user instruction|recipe name] SQL/command summary → result (rows affected / key info)
 ```
-- 日志中**绝不记录连接串/密码**（host 可记）；SQL 原文可记（运营审计场景可接受），涉及密钥的语句值用 `***` 占位
-- 危险操作（DELETE/UPDATE/DROP 等）与 recipe 执行必须落日志，含确认结果（`confirmed with confirm-...` / `declined`）
+- **Never log connection strings/passwords** (host may be logged); SQL text may be logged (acceptable for ops auditing) but statement values involving secrets use `***` placeholders
+- Dangerous operations (DELETE/UPDATE/DROP etc.) and recipe runs must be logged, including the confirmation outcome (`confirmed with confirm-...` / `declined`)
 
-**工具链**：本机有 psql 直接用；没有则临时 docker 容器（用完即焚、连接串不落盘）：
+**Toolchain**: use local psql when available; otherwise a temporary docker container (used once and discarded, connection string never written to disk):
 ```bash
-# 注意：容器内 localhost 是容器自己——连宿主机库需替换为 host.docker.internal
+# Note: inside the container, localhost is the container itself — to reach a host database, replace localhost with host.docker.internal
 docker run --rm -i postgres:16 psql "$(echo "$CONN" | sed 's/localhost/host.docker.internal/')" -c '<SQL>'
 ```
 
-## 3. 安全
+## 3. Security
 
-- 连接串、密码、密钥**永不打印**（展示为 `postgres://user:***@host`）；命令里不回显连接串（用变量引用）。
-- `.env.dbops` 权限设为 `chmod 600`（仅本用户可读），并确保在项目 `.gitignore` 覆盖范围（`.env.*` 模式）。
-- 输出脱敏：密码、token、密钥列用 `***`。
-- **环境识别**：回执与确认前标注连接 env（local/dev/prod）。`prod` 与远程 `dev` 的写操作默认危险，需明确提醒并等显式确认。
-- 删数据前永远先 count 确认范围；`WHERE` 缺失的 DELETE/UPDATE 一律视为误操作，需用户明确确认。
+- Connection strings, passwords, keys are **never printed** (shown as `postgres://user:***@host`); never echo a connection string in a command (reference it via a variable).
+- `.env.dbops` permissions set to `chmod 600` (owner-readable only), and covered by the project `.gitignore` (`.env.*` pattern).
+- Output redaction: password/token/secret columns shown as `***`.
+- **Environment identification**: annotate the connection env (local/dev/prod) in receipts and confirmations. Writes to `prod` and remote `dev` default to dangerous — call it out explicitly and wait for explicit confirmation.
+- Always count before deleting to verify scope; DELETE/UPDATE without a WHERE clause is treated as an accidental operation and requires explicit user confirmation.
 
-## 4. 回执格式
+## 4. Receipt format
 
 ```
-✓ 操作 + 结果（行数/关键字段）[连接: <名> <host> <env>]
-✗ 失败 + 原因（错误信息含密钥则脱敏）[连接: <名> <host> <env>]
+✓ operation + result (rows/key fields) [conn: <name> <host> <env>]
+✗ failure + reason (redact secrets from error messages) [conn: <name> <host> <env>]
 ```

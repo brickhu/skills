@@ -2,7 +2,7 @@
 
 > Let your AI agent query and manage databases directly — safely.
 
-[中文指南 / Chinese Guide](./README_cn.md)
+[Chinese Guide](./README_cn.md)
 
 `db-ops` is an agent skill (a `SKILL.md` package) that gives AI coding agents
 (Claude Code, Cursor, Zed, and any agent that supports the SKILL.md format) the
@@ -99,10 +99,10 @@ After installation, restart your agent session — it will auto-discover the ski
 
 3. **Talk to your agent** — for example:
 
-   - "帮我查一下 REMOTE 库的 users 表结构" (inspect schema)
-   - "看看 LOCAL 库最近 10 条订单记录" (query rows)
-   - "把 id=5 的订单状态改成 shipped，先给我看计划" (dangerous write — you'll be asked to type a confirmation)
-   - "添加邀请码 abc123" (recipe trigger)
+   - "Show me the structure of the users table in the REMOTE database" (inspect schema)
+   - "Show me the 10 most recent orders in the LOCAL database" (query rows)
+   - "Change order id=5 to shipped — show me the plan first" (dangerous write — you'll be asked to type a confirmation)
+   - "Add invite code abc123" (recipe trigger)
 
 ## Project layout
 
@@ -112,7 +112,7 @@ db-ops/
 ├── env.example         # example connection-string file
 ├── recipes.example.json# example recipe shortcuts
 ├── README.md           # this file (English)
-└── README_cn.md        # 中文指南
+└── README_cn.md        # Chinese guide
 ```
 
 ## License
