@@ -78,6 +78,8 @@ LOCAL=postgres://user:devpass@localhost:5432/dbname
 REMOTE=postgres://user:pass@xxx.proxy.rlwy.net:50930/railway
 ```
 
+**我的库在云端，能连吗？能。** db-ops 不挑地方——只要能写出连接串，它就能连：本地的库、VPS 上的库、**云数据库**（Railway、Neon、Supabase、AWS RDS、腾讯云/阿里云 RDS）都行。独立开发者的生产库基本都是云端托管的，直接把连接串登记进 `.env`，AI 就能帮你操作。而且云端库管得更严：**远程库的写操作默认按危险处理**，必须走"计划 + 确认串"流程，AI 想悄悄改远程数据是不可能的。
+
 支持 PostgreSQL、MySQL、SQLite。常用的多步操作还能打包成快捷指令（recipes），比如"生成邀请码"，一句话触发整套流程。
 
 ## 最后
