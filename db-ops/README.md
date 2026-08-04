@@ -38,6 +38,21 @@ The only inherently local type is SQLite — it's a file on disk.
 - **Secrets never leak**: connection strings print as `postgres://user:***@host`, outputs are redacted, `.env` files are `chmod 600` and gitignored
 - **Env labeling**: every result is tagged with the connection environment (local / dev / prod); writes to remote or prod databases are treated as dangerous by default
 
+## Audit logging
+
+Every operation — a `SELECT`, an `INSERT`, a dangerous write, a shell command, or a recipe run — is appended to a **daily log file** at `.dbops/logs/<date>.log` (project-level; falls back to `~/.dbops/logs/` when there is no project config). Each entry looks like:
+
+```
+[2026-08-04 16:30:12] [conn: LOCAL localhost local] [type: DELETE] [source: user] DELETE FROM orders WHERE id = 5 → 1 row affected (confirmed with confirm-DELETE-LOCAL-1)
+```
+
+- **Who**: connection (name / host / env), operation type, source (user instruction or recipe)
+- **What**: a summary of the SQL or command, plus the result (rows affected / key info)
+- **Dangerous operations are always logged**, including the confirmation outcome (`confirmed with confirm-...` / `declined`)
+- **Never logged**: connection strings, passwords, or secret values — anything key-like is masked as `***`
+
+It's the operation history your admin backend never had: if something unexpected happened to your data, you can trace exactly when, on which database, and by which operation.
+
 ## Requirements
 
 - A `psql` / `mysql` client on your machine — or **Docker** (the skill falls back to a disposable `postgres:16` container, used once and discarded; connection strings are never written to disk)

@@ -54,6 +54,14 @@
 - **密钥永不露脸**：密码永远显示为 `postgres://user:***@host`，想泄露都难
 - **生产库特殊照顾**：远程库和生产库的写操作，默认按最危险处理
 
+每次操作还会自动记入**审计日志**——就像运营后台的操作记录，一条一条，白纸黑字：
+
+```
+[2026-08-04 16:30:12] [连接: LOCAL localhost 本地] [类型: DELETE] [来源: 用户指令] DELETE FROM orders WHERE id = 5 → 1 行受影响（已确认 confirm-DELETE-LOCAL-1）
+```
+
+**什么时候、连的哪个库、干了什么、影响几行，全都能查**；危险操作的确认结果也一并记录（"确认了"还是"被拒绝了"）。连接串和密码永远不会出现在日志里——出了任何意外，都能精确追溯到是哪一次操作引起的。
+
 一句话：**AI 负责干活，安全闸门全在你手里。**
 
 ## 怎么装？怎么配？
@@ -62,7 +70,7 @@
 
 ```sh
 # 方式一：skills.sh 一键安装（仓库里目前只有 db-ops 一个技能，装上就是它）
-npx skills add brickhu/skills
+npx skills add brickhu/skills -s db-ops
 
 # 方式二：手动复制（任何支持 SKILL.md 的 AI 助手）
 mkdir -p ~/.claude/skills
@@ -74,8 +82,8 @@ cp -r db-ops ~/.claude/skills/db-ops
 ```bash
 # 项目里建 .dbops/ 目录，写 .env，一行一个数据库连接
 # .dbops/.env
-LOCAL=postgres://user:devpass@localhost:5432/dbname
-REMOTE=postgres://user:pass@xxx.proxy.rlwy.net:50930/railway
+LOCAL=postgres://user:devpass@localhost:5432/dbname #本地数据库
+REMOTE=postgres://user:pass@xxx.proxy.rlwy.net:50930/railway #远程数据库
 ```
 
 **我的库在云端，能连吗？能。** db-ops 不挑地方——只要能写出连接串，它就能连：本地的库、VPS 上的库、**云数据库**（Railway、Neon、Supabase、AWS RDS、腾讯云/阿里云 RDS）都行。独立开发者的生产库基本都是云端托管的，直接把连接串登记进 `.env`，AI 就能帮你操作。而且云端库管得更严：**远程库的写操作默认按危险处理**，必须走"计划 + 确认串"流程，AI 想悄悄改远程数据是不可能的。
