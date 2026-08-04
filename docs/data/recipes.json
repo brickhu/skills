@@ -79,6 +79,33 @@
     "file": "lookup-user.json"
   },
   {
+    "name": "user-audit-trigger",
+    "description": "Create an audit trigger: after a user INSERT, log it into the activities table automatically",
+    "tags": [
+      "automation",
+      "audit",
+      "trigger"
+    ],
+    "connection": "YOUR_DB",
+    "triggers": [
+      "create user audit trigger",
+      "user insert trigger",
+      "用户审计触发器",
+      "加用户自动记日志"
+    ],
+    "prompt": "Create a database trigger on the users table: AFTER INSERT, insert a log row into the activities table (user_id = NEW.id, action = 'user.created', created_at = now()). Adapt the syntax to the connection's database type (PostgreSQL CREATE TRIGGER / MySQL CREATE TRIGGER) and adjust column names to the actual schema. Show the full SQL as a plan block first, then require the typed confirmation before executing",
+    "danger": true,
+    "_meta": {
+      "author": "brickhu",
+      "date": "2026-08-04",
+      "databases": [
+        "postgres",
+        "mysql"
+      ]
+    },
+    "file": "user-audit-trigger.json"
+  },
+  {
     "name": "weekly-stats-report",
     "description": "Count this week's new users grouped by channel, sorted descending",
     "tags": [

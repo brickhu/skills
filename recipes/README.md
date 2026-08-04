@@ -1,6 +1,6 @@
 # db-ops Recipe Gallery · Recipe 共享区
 
-Community-shared quick recipes for [db-ops](../db-ops/). 社区共享的 db-ops 快捷指令，共 4 个。
+Community-shared quick recipes for [db-ops](../db-ops/). 社区共享的 db-ops 快捷指令，共 5 个。
 
 ## Submit a recipe · 提交 recipe
 
@@ -19,6 +19,7 @@ Copy a JSON file below, paste it into your agent chat, and say "add this recipe"
 | [cleanup-test-data](./cleanup-test-data.json) | Count and delete test users whose email ends with @test.local | high | postgres / mysql / sqlite | brickhu |
 | [invite-code](./invite-code.json) | Generate an invite code, insert it, and verify it landed in the database | low | postgres / mysql | brickhu |
 | [lookup-user](./lookup-user.json) | Look up a user by email: id, email, verification status, created_at | low | postgres / mysql / sqlite | brickhu |
+| [user-audit-trigger](./user-audit-trigger.json) | Create an audit trigger: after a user INSERT, log it into the activities table automatically | high | postgres / mysql | brickhu |
 | [weekly-stats-report](./weekly-stats-report.json) | Count this week's new users grouped by channel, sorted descending | low | postgres / mysql | brickhu |
 
 ---
