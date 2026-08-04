@@ -50,7 +50,7 @@ Inference rules (no extra fields needed): `TYPE` from the scheme (`postgres://`�
 ```
 - `prompt`: a full natural-language instruction — treat it as extra user speech to understand and execute (the model decides shell / SQL / a combination); template variables are substituted directly; **still bound by all the rules of this skill**: only run on the whitelisted `connection`, and confirm first if the translated result is a dangerous operation
 - `danger: true`: force the dangerous-operation confirmation before execution (even if the prompt translates to a plain SELECT)
-- Recipes are edited and maintained by the user; the skill does not write them (it may suggest how to add one)
+- **Managing recipes in chat**: users can add, update, or remove recipes directly in the conversation ("add a recipe that generates a coupon", "把这个 recipe 的触发词改一下"). Process: draft the recipe JSON, show it as a preview block, get explicit user approval, then write it to `<project root>/.dbops/recipes.json` (project takes priority; else `~/.dbops/recipes.json`) and verify the file still parses as valid JSON afterwards. `danger: true` always requires explicit approval. Warn if the recipe's `connection` is not in the whitelist. Manual editing remains available at all times.
 
 **Connection selection (every operation confirms by default)**:
 - User explicitly names a connection (e.g. "check the xx in the REMOTE database") → use it directly, no further prompt
@@ -76,6 +76,7 @@ Inference rules (no extra fields needed): `TYPE` from the scheme (`postgres://`�
 ```
 - **Never log connection strings/passwords** (host may be logged); SQL text may be logged (acceptable for ops auditing) but statement values involving secrets use `***` placeholders
 - Dangerous operations (DELETE/UPDATE/DROP etc.) and recipe runs must be logged, including the confirmation outcome (`confirmed with confirm-...` / `declined`)
+- **Querying logs in chat**: users can ask to view or search the logs ("show today's audit log", "查看今天的日志", "which dangerous operations happened", filter by connection/type/source/date). Read from `<project root>/.dbops/logs/<date>.log`, or `~/.dbops/logs/` as fallback, and summarize or filter as requested. Logs are **read-only** for the skill — never edit, truncate, or delete them. Re-mask anything that looks like a secret when displaying (defense in depth).
 
 **Toolchain**: use local psql when available; otherwise a temporary docker container (used once and discarded, connection string never written to disk):
 ```bash

@@ -19,6 +19,8 @@ in.
 - **Dangerous writes with guardrails**: `UPDATE / DELETE / DROP / TRUNCATE / ALTER / migrations` first show a plan block (operation + table + WHERE + estimated row count via `SELECT count(*)`), then require a **typed confirmation string** (e.g. `confirm-DELETE-LOCAL-4`) before executing — "yes / Y / confirm" are rejected
 - **Shortcut recipes**: turn frequent multi-step operations (e.g. "generate an invite code") into one trigger phrase via `recipes.json`
 - **Audit logging**: every operation is appended to `.dbops/logs/<date>.log`; connection strings and passwords are never logged
+- **Manage recipes in chat**: add, tweak, or remove shortcuts by just asking — the skill drafts the recipe, you approve, it's saved and verified
+- **Query audit logs in chat**: ask "what happened today?" and filter by connection, type, or source, right in the conversation
 - **Multi-database support**: PostgreSQL, MySQL, SQLite (type is inferred from the connection string scheme)
 - **Language-aware**: communicates in the same language you use in chat — English, Chinese, or any other language
 
