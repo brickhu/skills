@@ -72,8 +72,8 @@
   "submit": {
     "title": "Submit a recipe",
     "sub": "Share your workflow with the community — once approved, it appears here automatically.",
-    "step1": "Open the recipe issue form — it has a fixed template and auto-applies the recipe label.",
-    "step2": "Fill in the fields and paste your recipe JSON in a json code block (use YOUR_DB as the connection placeholder).",
+    "step1": "Open the recipe issue form — a fixed, fully form-based template with the recipe label auto-applied.",
+    "step2": "Fill in the fields — name, description, triggers, workflow prompt, databases — no JSON to write.",
     "step3": "Wait for review — once a maintainer adds the approved label, the recipe is validated and published to this page automatically.",
     "button": "Submit a recipe"
   },

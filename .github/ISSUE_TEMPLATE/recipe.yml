@@ -1,5 +1,5 @@
 name: Recipe submission
-description: Share a db-ops recipe with the community
+description: Share a db-ops recipe with the community — fully form-based, no JSON to write
 title: "New recipe: {{ name }}"
 labels: ["recipe"]
 body:
@@ -14,14 +14,30 @@ body:
     id: description
     attributes:
       label: What does it do?
-      description: One or two plain-language sentences about the workflow this recipe automates.
+      description: One or two plain-language sentences about the workflow.
+    validations:
+      required: true
+  - type: input
+    id: triggers
+    attributes:
+      label: Trigger phrases
+      description: "Comma-separated, any language. Example: add invite code, generate invite code, 生成邀请码"
+    validations:
+      required: true
+  - type: textarea
+    id: prompt
+    attributes:
+      label: Workflow prompt
+      description: The natural-language workflow the agent executes. Template variables go in angle brackets, e.g. <code> — users fill them in from chat.
+      placeholder: |
+        Run pnpm invites:create <code> to generate an invite code (workdir services/api), then verify it was inserted with a SQL query
     validations:
       required: true
   - type: dropdown
     id: databases
     attributes:
       label: Target databases
-      description: Which database types does this recipe target?
+      description: Select all that apply.
       multiple: true
       options:
         - postgres
@@ -36,32 +52,18 @@ body:
       options:
         - "false (safe)"
         - "true (dangerous)"
-  - type: textarea
-    id: recipe
+  - type: input
+    id: tags
     attributes:
-      label: Recipe JSON
-      description: |
-        Paste the full recipe JSON wrapped in a ```json code block.
-
-        Use YOUR_DB as the `connection` placeholder — users will bind it to their own whitelisted connection when importing.
-        Optional metadata: "description" (one line) and "_meta": {"tags": ["..."], "databases": ["postgres"]}.
-
-        ```json
-        {
-          "name": "my-recipe",
-          "triggers": ["trigger phrase"],
-          "connection": "YOUR_DB",
-          "prompt": "natural-language workflow ...",
-          "danger": false
-        }
-        ```
-      placeholder: |
-        {
-          "name": "my-recipe",
-          "triggers": ["trigger phrase"],
-          "connection": "YOUR_DB",
-          "prompt": "Describe the workflow ...",
-          "danger": false
-        }
-    validations:
-      required: true
+      label: Tags
+      description: "Comma-separated, optional. Example: invite, growth"
+  - type: input
+    id: author
+    attributes:
+      label: Author
+      description: Your GitHub username or nickname, optional.
+  - type: input
+    id: connection
+    attributes:
+      label: Connection placeholder
+      description: "Optional, defaults to YOUR_DB. Users bind it to their own connection when importing."

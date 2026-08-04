@@ -123,7 +123,7 @@ db-ops/
 
 浏览和导入现成 recipe：[Recipe 共享区](../recipes/README.md)。
 
-**提交你自己的 recipe** —— 打开 [recipe issue 表单](https://github.com/brickhu/skills/issues/new?template=recipe.yml)，按固定模板填写（名称、说明、数据库、危险度，以及用 ```json 代码块包裹的 recipe JSON），提交 issue。维护者打上 `approved` 标签后，recipe 会被自动校验并收录进共享区。
+**提交你自己的 recipe** —— 打开 [recipe issue 表单](https://github.com/brickhu/skills/issues/new?template=recipe.yml)，填写全表单化模板（名称、说明、触发词、工作流 prompt、数据库、危险度——不用写 JSON），提交 issue。维护者打上 `approved` 标签后，recipe 会被自动校验并收录进共享区。
 
 ## License
 

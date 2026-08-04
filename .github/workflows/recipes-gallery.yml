@@ -47,6 +47,40 @@ jobs:
             const { owner, repo } = context.repo;
             const galleryUrl = `https://github.com/${owner}/${repo}/tree/main/recipes`;
 
+            function escapeRegExp(s) {
+              return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+            // issue-form answers render as "### <label>\n\n<answer>" sections
+            function section(body, label) {
+              const re = new RegExp('###\\s*' + escapeRegExp(label) + '\\s*\\n([\\s\\S]*?)(?=\\n###\\s|$)', 'i');
+              const m = body.match(re);
+              return m ? m[1].trim() : '';
+            }
+            function csv(text) {
+              return String(text || '').split(/[,，\n]/).map((s) => s.trim()).filter(Boolean);
+            }
+            function checkboxes(body, label) {
+              const s = section(body, label);
+              return (s.match(/^\s*- \[x\]\s*(.+)$/gim) || []).map((l) => l.replace(/^\s*- \[x\]\s*/, '').trim());
+            }
+            function parseForm(body) {
+              const name = section(body, 'Recipe name');
+              if (!name) return null;
+              return {
+                name,
+                description: section(body, 'What does it do?'),
+                tags: csv(section(body, 'Tags')),
+                connection: section(body, 'Connection placeholder') || 'YOUR_DB',
+                triggers: csv(section(body, 'Trigger phrases')),
+                prompt: section(body, 'Workflow prompt'),
+                danger: section(body, 'Danger level') === 'true (dangerous)',
+                _meta: {
+                  author: section(body, 'Author') || 'community',
+                  databases: checkboxes(body, 'Target databases')
+                }
+              };
+            }
+
             const issues = await github.paginate(github.rest.issues.listForRepo, {
               owner, repo, state: 'open', labels: 'recipe,approved'
             });
@@ -54,31 +88,28 @@ jobs:
             let processed = 0;
             for (const issue of issues) {
               const body = issue.body || '';
+              let data = null;
+
+              // legacy: a JSON code block pasted in the body
               const match = body.match(/```(?:json)?\s*([\s\S]*?)```/);
-              if (!match) {
+              if (match) {
+                try {
+                  const parsed = JSON.parse(match[1]);
+                  if (parsed && parsed.name && parsed.prompt) data = parsed;
+                } catch (e) { /* fall through to form parsing */ }
+              }
+
+              // form-based: assemble the recipe from the form fields
+              if (!data) data = parseForm(body);
+
+              if (!data || !data.name || !data.prompt || !Array.isArray(data.triggers) || data.triggers.length === 0) {
                 await github.rest.issues.createComment({
                   owner, repo, issue_number: issue.number,
-                  body: '⚠️ 没有找到 JSON 代码块 / No JSON code block found. 请用 ```json ... ``` 包裹 recipe 内容后重新打开该 issue。'
+                  body: '❌ 缺少必填字段 / Missing required fields: name, triggers, prompt. 请补全表单后重新打开该 issue。'
                 });
                 continue;
               }
-              let data;
-              try {
-                data = JSON.parse(match[1]);
-              } catch (e) {
-                await github.rest.issues.createComment({
-                  owner, repo, issue_number: issue.number,
-                  body: `❌ JSON 解析失败 / JSON parse error: ${e.message}`
-                });
-                continue;
-              }
-              if (!data.name || !Array.isArray(data.triggers) || data.triggers.length === 0 || !data.prompt) {
-                await github.rest.issues.createComment({
-                  owner, repo, issue_number: issue.number,
-                  body: '❌ 缺少必填字段 / Missing required fields: name (string), triggers (non-empty array), prompt (string).'
-                });
-                continue;
-              }
+
               const slug = String(data.name).toLowerCase().replace(/[^a-z0-9-]+/g, '-').replace(/^-+|-+$/g, '') || 'recipe';
               data._meta = { ...(data._meta || {}), source_issue: issue.number, added: new Date().toISOString().slice(0, 10) };
               fs.writeFileSync(`recipes/${slug}.json`, JSON.stringify(data, null, 2) + '\n');
