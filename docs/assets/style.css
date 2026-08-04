@@ -250,26 +250,21 @@ code {
 /* ---------- FAQ ---------- */
 .section.narrow .section-inner { max-width: 760px; }
 .faq-list { display: flex; flex-direction: column; }
-.faq {
-  background: transparent;
-  border: none;
+.faq-row {
+  padding: 20px 4px;
   border-bottom: 1px solid var(--line);
-  padding: 0 4px;
 }
-.faq summary {
-  cursor: pointer;
+.faq-row:first-child { border-top: 1px solid var(--line); }
+.faq-q {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
   font-weight: 700;
-  padding: 16px 0;
-  list-style: none;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  align-items: baseline;
+  gap: 10px;
 }
-.faq summary::after { content: "+"; font-size: 1.2rem; font-weight: 400; transition: transform .15s; }
-.faq[open] summary::after { transform: rotate(45deg); }
-.faq summary::-webkit-details-marker { display: none; }
-.faq p { margin: 0 0 18px; color: var(--muted); }
+.faq-num { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--muted); font-size: .9rem; flex-shrink: 0; }
+.faq-a { margin: 0; color: var(--muted); }
 
 /* ---------- Footer ---------- */
 .footer { border-top: 1px solid var(--line); background: var(--bg); padding: 34px 24px; }

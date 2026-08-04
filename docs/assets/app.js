@@ -45,8 +45,11 @@
     if (!list) return;
     var items = (dicts[lang].faqs || {}).items;
     if (!items) return;
-    list.innerHTML = items.map(function (f) {
-      return '<details class="faq"><summary>' + esc(f.q) + '</summary><p>' + esc(f.a) + '</p></details>';
+    list.innerHTML = items.map(function (f, i) {
+      return '<div class="faq-row">' +
+        '<h3 class="faq-q"><span class="faq-num">' + (i + 1) + '.</span>' + esc(f.q) + '</h3>' +
+        '<p class="faq-a">' + esc(f.a) + '</p>' +
+        '</div>';
     }).join('');
   }
 
