@@ -34,8 +34,8 @@ in.
 ## Installation
 
 ```sh
-# Option A: via the skills.sh CLI
-npx skills add brickhu/skills
+# Option A: via the skills.sh CLI (-s selects the db-ops skill specifically)
+npx skills add brickhu/skills -s db-ops
 
 # Option B: manual install (works with any SKILL.md-capable agent)
 mkdir -p ~/.claude/skills

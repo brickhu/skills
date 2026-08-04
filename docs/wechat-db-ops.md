@@ -61,7 +61,7 @@
 **安装（二选一）：**
 
 ```sh
-# 方式一：skills.sh 一键安装
+# 方式一：skills.sh 一键安装（仓库里目前只有 db-ops 一个技能，装上就是它）
 npx skills add brickhu/skills
 
 # 方式二：手动复制（任何支持 SKILL.md 的 AI 助手）

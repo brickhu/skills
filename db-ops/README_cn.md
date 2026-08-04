@@ -34,8 +34,8 @@
 ## 安装方法
 
 ```sh
-# 方式一：通过 skills.sh 命令行安装
-npx skills add brickhu/skills
+# 方式一：通过 skills.sh 命令行安装（-s 指定只安装 db-ops 这一个技能）
+npx skills add brickhu/skills -s db-ops
 
 # 方式二：手动安装（适用于任何支持 SKILL.md 的智能体）
 mkdir -p ~/.claude/skills
