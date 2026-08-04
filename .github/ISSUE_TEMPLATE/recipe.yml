@@ -7,7 +7,7 @@ body:
     id: name
     attributes:
       label: Recipe name
-      description: Short, lowercase, hyphenated. Example: invite-code
+      description: "Short, lowercase, hyphenated. Example: invite-code"
     validations:
       required: true
   - type: textarea
