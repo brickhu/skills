@@ -1,5 +1,7 @@
 # db-ops — General-purpose Database Operations Skill
 
+[![skills.sh](https://skills.sh/b/brickhu/skills)](https://www.skills.sh/brickhu/skills)
+
 > Let your AI agent query and manage databases directly — safely.
 
 [Chinese Guide](./README_cn.md)
