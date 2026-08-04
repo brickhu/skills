@@ -23,6 +23,7 @@ in.
 - **Query audit logs in chat**: ask "what happened today?" and filter by connection, type, or source, right in the conversation
 - **Multi-database support**: PostgreSQL, MySQL, SQLite (type is inferred from the connection string scheme)
 - **Language-aware**: communicates in the same language you use in chat — English, Chinese, or any other language
+- **Community recipes**: browse and submit shared recipes in the [Recipe Gallery](../recipes/README.md)
 
 ## Local or remote — any database you can reach
 

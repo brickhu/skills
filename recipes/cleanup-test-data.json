@@ -1,0 +1,14 @@
+{
+  "name": "cleanup-test-data",
+  "description": "Count and delete test users whose email ends with @test.local",
+  "tags": ["maintenance", "test"],
+  "connection": "YOUR_DB",
+  "triggers": ["clean up test", "delete test data", "清理测试数据"],
+  "prompt": "Delete test users in the user table whose email ends with @test.local; count them first, then delete",
+  "danger": true,
+  "_meta": {
+    "author": "brickhu",
+    "date": "2026-08-04",
+    "databases": ["postgres", "mysql", "sqlite"]
+  }
+}

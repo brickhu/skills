@@ -1,0 +1,67 @@
+name: Recipe submission
+description: Share a db-ops recipe with the community
+title: "New recipe: {{ name }}"
+labels: ["recipe"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Recipe name
+      description: Short, lowercase, hyphenated. Example: invite-code
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What does it do?
+      description: One or two plain-language sentences about the workflow this recipe automates.
+    validations:
+      required: true
+  - type: dropdown
+    id: databases
+    attributes:
+      label: Target databases
+      description: Which database types does this recipe target?
+      multiple: true
+      options:
+        - postgres
+        - mysql
+        - sqlite
+        - any
+  - type: dropdown
+    id: danger
+    attributes:
+      label: Danger level
+      description: Does this recipe perform dangerous operations (DELETE / UPDATE / DROP ...)?
+      options:
+        - "false (safe)"
+        - "true (dangerous)"
+  - type: textarea
+    id: recipe
+    attributes:
+      label: Recipe JSON
+      description: |
+        Paste the full recipe JSON wrapped in a ```json code block.
+
+        Use YOUR_DB as the `connection` placeholder — users will bind it to their own whitelisted connection when importing.
+        Optional metadata: "description" (one line) and "_meta": {"tags": ["..."], "databases": ["postgres"]}.
+
+        ```json
+        {
+          "name": "my-recipe",
+          "triggers": ["trigger phrase"],
+          "connection": "YOUR_DB",
+          "prompt": "natural-language workflow ...",
+          "danger": false
+        }
+        ```
+      placeholder: |
+        {
+          "name": "my-recipe",
+          "triggers": ["trigger phrase"],
+          "connection": "YOUR_DB",
+          "prompt": "Describe the workflow ...",
+          "danger": false
+        }
+    validations:
+      required: true

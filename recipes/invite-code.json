@@ -1,0 +1,14 @@
+{
+  "name": "invite-code",
+  "description": "Generate an invite code, insert it, and verify it landed in the database",
+  "tags": ["invite", "user growth"],
+  "connection": "YOUR_DB",
+  "triggers": ["add invite code", "generate invite code", "生成邀请码", "添加邀请码"],
+  "prompt": "Run pnpm invites:create <code> to generate an invite code (workdir services/api), with optional [--expires <days>]; after generating, verify it was inserted with a SQL query",
+  "danger": false,
+  "_meta": {
+    "author": "brickhu",
+    "date": "2026-08-04",
+    "databases": ["postgres", "mysql"]
+  }
+}
