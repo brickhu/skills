@@ -1,0 +1,163 @@
+/* db-ops site — i18n + dynamic rendering. No dependencies. */
+(function () {
+  'use strict';
+
+  var LANG_KEY = 'dbops-lang';
+  var dicts = { en: {}, zh: {} };
+  var lang = localStorage.getItem(LANG_KEY);
+  if (lang !== 'zh' && lang !== 'en') {
+    lang = (navigator.language || '').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en';
+  }
+
+  var recipesData = [];
+
+  function t(key) {
+    var v = dicts[lang];
+    var parts = String(key).split('.');
+    for (var i = 0; i < parts.length && v != null; i++) v = v[parts[i]];
+    return (v == null || typeof v === 'object') ? key : v;
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function pageName() {
+    var p = (location.pathname.split('/').pop() || 'index.html').replace('.html', '');
+    return p === 'index' ? 'home' : p;
+  }
+
+  function renderFeatures() {
+    var grid = document.getElementById('features-grid');
+    if (!grid) return;
+    var items = (dicts[lang].features || {}).items;
+    if (!items) return;
+    grid.innerHTML = items.map(function (f) {
+      return '<div class="card"><h3>' + esc(f.t) + '</h3><p>' + esc(f.d) + '</p></div>';
+    }).join('');
+  }
+
+  function renderFaqs() {
+    var list = document.getElementById('faq-list');
+    if (!list) return;
+    var items = (dicts[lang].faqs || {}).items;
+    if (!items) return;
+    list.innerHTML = items.map(function (f) {
+      return '<details class="faq"><summary>' + esc(f.q) + '</summary><p>' + esc(f.a) + '</p></details>';
+    }).join('');
+  }
+
+  function recipeCard(r, idx) {
+    var meta = r._meta || {};
+    var dbs = (meta.databases || []).join(' / ') || 'any';
+    var danger = r.danger ? 'danger' : 'safe';
+    var badge = r.danger ? t('recipes.danger') : t('recipes.safe');
+    var triggers = (r.triggers || []).slice(0, 3).map(function (tr) {
+      return '<span class="chip">' + esc(tr) + '</span>';
+    }).join('');
+    var fileUrl = 'https://github.com/brickhu/skills/blob/main/recipes/' + esc(r.file || '');
+    return '<article class="card recipe">' +
+      '<div class="recipe-head"><h3>' + esc(r.name) + '</h3><span class="badge ' + danger + '">' + esc(badge) + '</span></div>' +
+      '<p class="recipe-desc">' + esc(r.description || '-') + '</p>' +
+      (triggers ? '<div class="chips">' + triggers + '</div>' : '') +
+      '<div class="recipe-meta">' + esc(dbs) + ' · ' + esc(meta.author || 'community') + '</div>' +
+      '<div class="recipe-actions">' +
+      '<button class="copy-btn" data-idx="' + idx + '">' + esc(t('recipes.copy')) + '</button>' +
+      '<a class="gh-link" href="' + fileUrl + '" target="_blank" rel="noopener">' + esc(t('recipes.source')) + '</a>' +
+      '</div></article>';
+  }
+
+  function renderRecipes() {
+    var grid = document.getElementById('recipes-grid');
+    var preview = document.getElementById('recipes-preview');
+    var count = document.getElementById('recipes-count');
+    var container = grid || preview;
+    if (!container) return;
+    if (count && grid) count.textContent = t('recipes.count').replace('{n}', recipesData.length);
+    var list = grid ? recipesData : recipesData.slice(0, 4);
+    if (!list.length) {
+      container.innerHTML = '<p class="empty">' + esc(t('recipes.empty')) + '</p>';
+      return;
+    }
+    container.innerHTML = list.map(recipeCard).join('');
+  }
+
+  function apply() {
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      el.textContent = t(el.getAttribute('data-i18n'));
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+      el.innerHTML = t(el.getAttribute('data-i18n-html'));
+    });
+    var page = pageName();
+    var title = t('meta.' + page);
+    if (title !== 'meta.' + page) document.title = title;
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    var toggle = document.getElementById('lang-toggle');
+    if (toggle) toggle.textContent = t('nav.lang');
+    document.querySelectorAll('.nav .links a').forEach(function (a) {
+      var href = (a.getAttribute('href') || '').replace('.html', '');
+      a.classList.toggle('active', href === page);
+    });
+    renderFeatures();
+    renderFaqs();
+    renderRecipes();
+  }
+
+  /* copy buttons: hero command + recipe JSON */
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest ? e.target.closest('.copy-btn') : null;
+    if (!btn) return;
+    var text = btn.getAttribute('data-copy-command');
+    if (!text) {
+      var idx = Number(btn.getAttribute('data-idx'));
+      var r = recipesData[idx];
+      if (!r) return;
+      text = JSON.stringify(r, null, 2);
+    }
+    var label = btn;
+    var old = label.textContent;
+    function done(ok) {
+      label.textContent = ok ? t('recipes.copied') : t('hero.copy');
+      setTimeout(function () { label.textContent = old; }, 1600);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+      document.body.removeChild(ta);
+      done(ok);
+    }
+  });
+
+  var toggle = document.getElementById('lang-toggle');
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      lang = lang === 'zh' ? 'en' : 'zh';
+      try { localStorage.setItem(LANG_KEY, lang); } catch (e) { /* private mode */ }
+      apply();
+    });
+  }
+
+  Promise.all([
+    fetch('i18n/en.json').then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; }),
+    fetch('i18n/zh.json').then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; })
+  ]).then(function (res) {
+    dicts.en = res[0];
+    dicts.zh = res[1];
+    apply();
+  });
+
+  fetch('data/recipes.json').then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
+    .then(function (data) {
+      recipesData = data;
+      renderRecipes();
+    });
+})();

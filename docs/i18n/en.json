@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "home": "db-ops — Your AI data-ops assistant",
+    "recipes": "Recipes · db-ops",
+    "faqs": "FAQ · db-ops"
+  },
+  "nav": {
+    "home": "Home",
+    "recipes": "Recipes",
+    "faqs": "FAQ",
+    "lang": "中文"
+  },
+  "hero": {
+    "slogan": "Your AI data-ops assistant — build products, skip the admin backend.",
+    "subtitle": "db-ops is an open-source AI skill. Install it and your coding agent (Claude Code, Cursor, Zed…) can safely operate your databases directly: query data, update orders, issue invite codes, run reports — just say it.",
+    "installTitle": "Install in one line",
+    "installNote": "Installs <code>db-ops</code> — the only skill in this repo",
+    "manualTitle": "Manual install — works with any SKILL.md-capable agent",
+    "manualCmd": "mkdir -p ~/.claude/skills && cp -r db-ops ~/.claude/skills/db-ops",
+    "copy": "Copy",
+    "copied": "Copied ✓",
+    "ctaFeatures": "What it can do",
+    "ctaRecipes": "Browse recipes"
+  },
+  "features": {
+    "title": "What db-ops can do",
+    "sub": "Your agent becomes a data-ops assistant the moment it is installed.",
+    "items": [
+      { "t": "Query anything", "d": "SELECT queries and schema inspection out of the box — PostgreSQL, MySQL, SQLite." },
+      { "t": "Safe writes", "d": "UPDATE / DELETE / DROP show a plan block first, then require a typed confirmation like confirm-DELETE-LOCAL-4. No accidental deletions." },
+      { "t": "Recipes", "d": "Wrap multi-step workflows (invite codes, weekly reports…) into one trigger phrase." },
+      { "t": "Local, VPS or cloud", "d": "Any database you can reach: localhost, a VPS, or cloud DBs — RDS, Railway, Neon, Supabase and more." },
+      { "t": "Audit logs", "d": "Every operation is logged with connection, type and row counts. Ask \"what happened today?\" anytime." },
+      { "t": "Manage it in chat", "d": "Add recipes, query logs, confirm dangerous operations — all inside the conversation." },
+      { "t": "Speaks your language", "d": "Chat in Chinese and it replies in Chinese; chat in English and it replies in English." },
+      { "t": "No secrets leak", "d": "Connections are whitelist-only, chmod 600, gitignored, and never shown in full." }
+    ]
+  },
+  "recipes": {
+    "title": "Community recipes",
+    "sub": "Ready-to-use workflows contributed by the community — copied with one click, imported with one paste.",
+    "more": "View all →",
+    "count": "{n} recipes",
+    "empty": "No recipes yet — be the first to share one!",
+    "danger": "dangerous",
+    "safe": "safe",
+    "copy": "Copy JSON",
+    "copied": "Copied ✓",
+    "source": "View file"
+  },
+  "page": {
+    "recipes": {
+      "title": "Recipe Gallery",
+      "sub": "All community recipes that passed review (approved) — copy the JSON, paste it into your agent chat and say \"add this recipe\"."
+    },
+    "faqs": {
+      "title": "FAQ",
+      "sub": "Common questions about using db-ops in real scenarios."
+    }
+  },
+  "faqs": {
+    "items": [
+      {
+        "q": "How do I get started?",
+        "a": "Install the skill (one line above), restart your agent session, then create a .dbops/.env file in your project with one connection string per line. That's it — just tell the agent what you need, e.g. \"show me the users table structure\"."
+      },
+      {
+        "q": "Where are my connection strings stored? Is it safe?",
+        "a": "In .dbops/.env (project) or ~/.dbops/.env (global). The file is chmod 600 and gitignored; the skill only connects to connections listed there (whitelist) and never prints passwords — you always see postgres://user:***@host."
+      },
+      {
+        "q": "Can the AI accidentally delete my data?",
+        "a": "Dangerous operations (UPDATE / DELETE / DROP / TRUNCATE / ALTER) show a plan block with a row count first, then require a typed confirmation string like confirm-DELETE-LOCAL-4 that you must type exactly — \"yes / Y\" are never accepted. DELETE/UPDATE without WHERE is treated as a mistake and needs your explicit confirmation."
+      },
+      {
+        "q": "Which databases are supported?",
+        "a": "PostgreSQL, MySQL and SQLite — locally, on a VPS, or in the cloud (AWS RDS, Railway, Neon, Supabase, Tencent/Aliyun RDS…). The type is auto-detected from the connection string."
+      },
+      {
+        "q": "I don't have psql installed.",
+        "a": "No problem — the skill falls back to a temporary postgres:16 Docker container that is discarded after use. Connection strings are never written to disk."
+      },
+      {
+        "q": "What are recipes and how do I add them?",
+        "a": "Recipes turn multi-step workflows into one trigger phrase. Add one right in the chat: \"add a recipe that generates invite codes\" — the agent drafts it, you approve, it is saved and validated. Manual editing of recipes.json works too."
+      },
+      {
+        "q": "How do I check the audit logs?",
+        "a": "Just ask: \"show me today's log\" or \"which dangerous operations happened\". Logs live in .dbops/logs/<date>.log and are read-only for the skill. Passwords never appear in them."
+      },
+      {
+        "q": "Do you support Chinese?",
+        "a": "Yes — db-ops adapts to the language of your conversation. Chat in Chinese and everything (plans, confirmations, receipts) comes back in Chinese; chat in English and it replies in English."
+      },
+      {
+        "q": "Can I use it with Cursor / Zed / other tools?",
+        "a": "Yes — anything that supports SKILL.md. Copy the db-ops folder into the tool's skills directory (e.g. ~/.claude/skills/) and restart your session."
+      },
+      {
+        "q": "How can I share a recipe with the community?",
+        "a": "Open a recipe issue via the issue form — once approved, it is automatically added to the gallery. You can also paste recipe JSON into any chat and say \"add this recipe\"."
+      }
+    ]
+  },
+  "footer": {
+    "license": "License: MIT",
+    "skills": "On skills.sh",
+    "x": "X / @fei1919",
+    "credit": "db-ops · open-source AI skill"
+  }
+}

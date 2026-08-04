@@ -1,10 +1,23 @@
-// Rebuilds recipes/README.md (the gallery page) from recipes/*.json.
+// Rebuilds recipes/README.md (the gallery page) from recipes/*.json,
+// and emits docs/data/recipes.json for the GitHub Pages site.
 // Run from the repo root: node .github/scripts/build-gallery.mjs
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const recipesDir = join(process.cwd(), 'recipes');
+const root = process.cwd();
+const recipesDir = join(root, 'recipes');
 const files = readdirSync(recipesDir).filter((f) => f.endsWith('.json')).sort();
+
+const recipes = files.map((f) => {
+  const data = JSON.parse(readFileSync(join(recipesDir, f), 'utf8'));
+  return { ...data, file: f };
+});
+
+// Site data: docs/data/recipes.json (served by GitHub Pages from /docs)
+const siteDir = join(root, 'docs/data');
+mkdirSync(siteDir, { recursive: true });
+writeFileSync(join(siteDir, 'recipes.json'), JSON.stringify(recipes, null, 2) + '\n');
+console.log(`Site data updated: docs/data/recipes.json (${recipes.length} recipe(s))`);
 
 const rows = files.map((f) => {
   const data = JSON.parse(readFileSync(join(recipesDir, f), 'utf8'));

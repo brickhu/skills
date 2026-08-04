@@ -1,0 +1,107 @@
+[
+  {
+    "name": "cleanup-test-data",
+    "description": "Count and delete test users whose email ends with @test.local",
+    "tags": [
+      "maintenance",
+      "test"
+    ],
+    "connection": "YOUR_DB",
+    "triggers": [
+      "clean up test",
+      "delete test data",
+      "清理测试数据"
+    ],
+    "prompt": "Delete test users in the user table whose email ends with @test.local; count them first, then delete",
+    "danger": true,
+    "_meta": {
+      "author": "brickhu",
+      "date": "2026-08-04",
+      "databases": [
+        "postgres",
+        "mysql",
+        "sqlite"
+      ]
+    },
+    "file": "cleanup-test-data.json"
+  },
+  {
+    "name": "invite-code",
+    "description": "Generate an invite code, insert it, and verify it landed in the database",
+    "tags": [
+      "invite",
+      "user growth"
+    ],
+    "connection": "YOUR_DB",
+    "triggers": [
+      "add invite code",
+      "generate invite code",
+      "生成邀请码",
+      "添加邀请码"
+    ],
+    "prompt": "Run pnpm invites:create <code> to generate an invite code (workdir services/api), with optional [--expires <days>]; after generating, verify it was inserted with a SQL query",
+    "danger": false,
+    "_meta": {
+      "author": "brickhu",
+      "date": "2026-08-04",
+      "databases": [
+        "postgres",
+        "mysql"
+      ]
+    },
+    "file": "invite-code.json"
+  },
+  {
+    "name": "lookup-user",
+    "description": "Look up a user by email: id, email, verification status, created_at",
+    "tags": [
+      "user",
+      "support"
+    ],
+    "connection": "YOUR_DB",
+    "triggers": [
+      "look up user",
+      "user status",
+      "查用户",
+      "用户状态"
+    ],
+    "prompt": "Look up the user with email <email> in the user table: id, email, email verification status, created_at; if the table has a last_login_at column, include it too",
+    "danger": false,
+    "_meta": {
+      "author": "brickhu",
+      "date": "2026-08-04",
+      "databases": [
+        "postgres",
+        "mysql",
+        "sqlite"
+      ]
+    },
+    "file": "lookup-user.json"
+  },
+  {
+    "name": "weekly-stats-report",
+    "description": "Count this week's new users grouped by channel, sorted descending",
+    "tags": [
+      "stats",
+      "report"
+    ],
+    "connection": "YOUR_DB",
+    "triggers": [
+      "weekly report",
+      "new users this week",
+      "本周新用户",
+      "周报"
+    ],
+    "prompt": "Count users registered since Monday of this week, grouped by channel (adjust the column name to the actual schema), sorted descending, output as a table",
+    "danger": false,
+    "_meta": {
+      "author": "brickhu",
+      "date": "2026-08-04",
+      "databases": [
+        "postgres",
+        "mysql"
+      ]
+    },
+    "file": "weekly-stats-report.json"
+  }
+]

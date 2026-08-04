@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "home": "db-ops —— 你的 AI 数据运营助理",
+    "recipes": "Recipes · db-ops",
+    "faqs": "FAQ · db-ops"
+  },
+  "nav": {
+    "home": "首页",
+    "recipes": "Recipes",
+    "faqs": "FAQ",
+    "lang": "EN"
+  },
+  "hero": {
+    "slogan": "你的 AI 数据运营助理——做产品，不再为运营后台犯愁",
+    "subtitle": "db-ops 是开源 AI 技能包。装上它，你的编程助手（Claude Code、Cursor、Zed…）就能安全地直接操作数据库：查数据、改订单、发邀请码、跑报表——说一句话的事。",
+    "installTitle": "一行命令安装",
+    "installNote": "安装的是 <code>db-ops</code>——本仓库目前唯一的技能",
+    "manualTitle": "手动安装（任何支持 SKILL.md 的助手都行）",
+    "manualCmd": "mkdir -p ~/.claude/skills && cp -r db-ops ~/.claude/skills/db-ops",
+    "copy": "复制",
+    "copied": "已复制 ✓",
+    "ctaFeatures": "它能干什么",
+    "ctaRecipes": "浏览 Recipes"
+  },
+  "features": {
+    "title": "db-ops 能干什么",
+    "sub": "装上它，你的 AI 助手立刻变成数据运营助理。",
+    "items": [
+      { "t": "想查什么查什么", "d": "SELECT 查询、表结构查看开箱即用——PostgreSQL、MySQL、SQLite 都支持。" },
+      { "t": "写操作带刹车", "d": "UPDATE / DELETE / DROP 先展示计划块，再要求手打确认串（如 confirm-DELETE-LOCAL-4），杜绝误删。" },
+      { "t": "快捷指令 Recipes", "d": "把多步流程（发邀请码、周报统计…）封装成一句话触发。" },
+      { "t": "本地 / VPS / 云都行", "d": "只要能连上就能管：localhost、VPS，以及 RDS、Railway、Neon、Supabase 等云数据库。" },
+      { "t": "审计日志", "d": "每笔操作都记录连接、类型、影响行数。随时问一句\"今天发生了什么\"就能查。" },
+      { "t": "对话里完成一切", "d": "加 recipe、查日志、确认危险操作——全在对话里搞定。" },
+      { "t": "说中文回中文", "d": "语言自适应：你用中文聊就全程中文，用英文聊就全程英文。" },
+      { "t": "密钥永不泄露", "d": "连接走白名单、chmod 600、gitignore，密码永远不完整显示。" }
+    ]
+  },
+  "recipes": {
+    "title": "社区 Recipes",
+    "sub": "社区贡献的现成快捷指令——一键复制 JSON，粘贴到对话即可导入。",
+    "more": "查看全部 →",
+    "count": "共 {n} 个 recipes",
+    "empty": "暂无 recipe——欢迎第一个来分享！",
+    "danger": "危险",
+    "safe": "安全",
+    "copy": "复制 JSON",
+    "copied": "已复制 ✓",
+    "source": "查看源文件"
+  },
+  "page": {
+    "recipes": {
+      "title": "Recipe 共享区",
+      "sub": "所有已审核通过（approved）的社区 recipe——复制 JSON，粘贴到你的 Agent 对话里说\"添加这个 recipe\"即可导入。"
+    },
+    "faqs": {
+      "title": "常见问题",
+      "sub": "关于 db-ops 的场景使用问题。"
+    }
+  },
+  "faqs": {
+    "items": [
+      {
+        "q": "怎么开始用？",
+        "a": "安装技能（首屏一行命令）→ 重启 Agent 会话 → 在项目里建 .dbops/.env 文件，一行一个数据库连接串。然后直接跟 AI 说需求，比如\"看看 users 表结构\"。"
+      },
+      {
+        "q": "连接串放哪里？安全吗？",
+        "a": "放在 .dbops/.env（项目级）或 ~/.dbops/.env（全局）。文件 chmod 600 且被 gitignore；技能只连白名单里登记过的连接，密码永远显示为 postgres://user:***@host。"
+      },
+      {
+        "q": "AI 会不会误删我的数据？",
+        "a": "危险操作（UPDATE / DELETE / DROP / TRUNCATE / ALTER）先展示计划块和影响行数，再要求你手打动态确认串（如 confirm-DELETE-LOCAL-4）才能执行——回\"是 / Y\"一律无效。没有 WHERE 的 DELETE/UPDATE 会被当作误操作，需要你明确确认。"
+      },
+      {
+        "q": "支持哪些数据库？",
+        "a": "PostgreSQL、MySQL、SQLite——本地、VPS、云端（AWS RDS、Railway、Neon、Supabase、腾讯云/阿里云 RDS…）都行，类型从连接串自动识别。"
+      },
+      {
+        "q": "我没有安装 psql，能用吗？",
+        "a": "能。技能会自动回退到临时 postgres:16 Docker 容器，用完即焚，连接串不落盘。"
+      },
+      {
+        "q": "什么是 recipes？怎么添加？",
+        "a": "Recipes 把多步流程封装成一句话触发。直接在对话里说\"添加一个生成邀请码的 recipe\"——AI 起草、你确认、自动保存并校验。手动编辑 recipes.json 也随时可以。"
+      },
+      {
+        "q": "日志在哪里查？",
+        "a": "对话里直接问\"查看今天的日志\"\"有哪些危险操作\"即可。日志存在 .dbops/logs/<日期>.log，对技能只读，密码永不出现。"
+      },
+      {
+        "q": "支持中文吗？",
+        "a": "支持，而且自适应——你用中文聊就全程中文（计划块、确认提示、回执、报错），用英文聊就全程英文。"
+      },
+      {
+        "q": "可以用在 Cursor / Zed 等其他工具上吗？",
+        "a": "可以——任何支持 SKILL.md 的助手都行。把 db-ops 文件夹复制到对应 skills 目录（如 ~/.claude/skills/），重启会话即可。"
+      },
+      {
+        "q": "怎么把 recipe 分享给社区？",
+        "a": "通过 issue 表单提交，审核通过（approved 标签）后会自动收录进共享区。也可以直接把 recipe JSON 粘贴到任何对话里说\"添加这个 recipe\"。"
+      }
+    ]
+  },
+  "footer": {
+    "license": "使用授权：MIT",
+    "skills": "发布在 skills.sh",
+    "x": "X / @fei1919",
+    "credit": "db-ops · 开源 AI 技能"
+  }
+}
