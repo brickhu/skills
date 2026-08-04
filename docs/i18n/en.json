@@ -132,6 +132,10 @@
       {
         "q": "Can db-ops automate business flows, like logging when a user is added?",
         "a": "Yes for database-level automation: rules like \"when a user is inserted, write a log row into activities\" are exactly what database triggers do — ask the agent to create the trigger, it drafts the SQL as a plan block, you confirm with the typed confirmation string, done. What a chat skill does not do is unattended automation: scheduled jobs or event-driven flows that run without you asking — that is cron / queues / serverless / your app layer."
+      },
+      {
+        "q": "What database permissions does the account need?",
+        "a": "Whatever the account in your connection string can do, the skill can do — and nothing more. A read-only account is enough for daily queries (SELECT works; dangerous operations are blocked by the database itself). For automation like creating triggers, the account needs DDL privileges (PostgreSQL: table owner or CREATE privilege; MySQL: TRIGGER privilege). Recommended setup: register two whitelisted connections — a restricted account for routine work and a separate privileged account for DDL. Either way, dangerous operations always go through the plan + typed confirmation flow."
       }
     ]
   },
