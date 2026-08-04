@@ -121,6 +121,12 @@ db-ops/
 └── README_cn.md        # Chinese guide
 ```
 
+## Community recipes
+
+Browse and import ready-made recipes from the [Recipe Gallery](../recipes/README.md).
+
+**Submit your own** — open the [recipe issue form](https://github.com/brickhu/skills/issues/new?template=recipe.yml), fill in the fixed template (name, description, databases, danger level, and the recipe JSON in a ```json block), and create the issue. Once a maintainer adds the `approved` label, the recipe is validated and added to the gallery automatically.
+
 ## License
 
 MIT — use it, fork it, share it.

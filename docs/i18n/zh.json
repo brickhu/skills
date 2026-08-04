@@ -69,6 +69,14 @@
     "open": "打开技能 →",
     "empty": "暂无已发布技能。"
   },
+  "submit": {
+    "title": "提交 Recipe",
+    "sub": "把你的常用流程分享给社区——审核通过后会自动出现在本页。",
+    "step1": "打开 recipe issue 表单——模板固定，提交时自动带上 recipe 标签。",
+    "step2": "填写各字段，把 recipe JSON 用 json 代码块粘贴（连接用 YOUR_DB 占位）。",
+    "step3": "等待审核——维护者打上 approved 标签后，recipe 会被自动校验并收录到本页。",
+    "button": "提交 Recipe"
+  },
   "page": {
     "recipes": {
       "title": "Recipe 共享区",

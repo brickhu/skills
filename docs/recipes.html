@@ -30,6 +30,21 @@
 
 <section class="section">
   <div class="section-inner">
+    <h2 data-i18n="submit.title">Submit a recipe</h2>
+    <p class="section-sub" data-i18n="submit.sub">Share your workflow with the community — once approved, it appears here automatically.</p>
+    <ol class="howto-list submit-steps">
+      <li data-i18n="submit.step1">Open the recipe issue form — it has a fixed template and auto-applies the recipe label.</li>
+      <li data-i18n="submit.step2">Fill in the fields and paste your recipe JSON in a json code block (use YOUR_DB as the connection placeholder).</li>
+      <li data-i18n="submit.step3">Wait for review — once a maintainer adds the approved label, the recipe is validated and published to this page automatically.</li>
+    </ol>
+    <div class="submit-cta">
+      <a class="btn primary" href="https://github.com/brickhu/skills/issues/new?template=recipe.yml" target="_blank" rel="noopener" data-i18n="submit.button">Submit a recipe</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
     <div class="grid" id="recipes-grid"></div>
   </div>
 </section>

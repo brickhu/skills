@@ -119,6 +119,12 @@ db-ops/
 └── README_cn.md         # 本文件（中文指南）
 ```
 
+## 社区 recipes 与分享
+
+浏览和导入现成 recipe：[Recipe 共享区](../recipes/README.md)。
+
+**提交你自己的 recipe** —— 打开 [recipe issue 表单](https://github.com/brickhu/skills/issues/new?template=recipe.yml)，按固定模板填写（名称、说明、数据库、危险度，以及用 ```json 代码块包裹的 recipe JSON），提交 issue。维护者打上 `approved` 标签后，recipe 会被自动校验并收录进共享区。
+
 ## License
 
 MIT —— 随便用，随便改，随便分享。
