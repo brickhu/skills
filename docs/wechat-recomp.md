@@ -53,11 +53,18 @@
 
 ## 安装与使用：一个完整例子
 
-**安装（一行命令）：**
+**安装（二选一）：**
 
 ```sh
-# 路径里的 /recomp 就是技能名，无需再加 -s
+# 方式一：一行命令（推荐）——路径里的 /recomp 就是技能名，无需再加 -s
 npx skills add brickhu/skills/recomp
+```
+
+或手动复制到你的 AI 助手技能目录（Claude Code、Cursor、Zed 都行）：
+
+```sh
+git clone https://github.com/brickhu/skills.git
+cp -r skills/recomp ~/.agents/skills/recomp
 ```
 
 **以"给 Svelte 5 项目复刻 shadcn/ui 的 Dialog"为例，完整流程是这样：**
