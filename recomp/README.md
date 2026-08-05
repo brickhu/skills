@@ -73,13 +73,11 @@ Open your AI coding assistant (Claude Code, Codex, Cursor, Zed), start a new
 conversation and send:
 
 ```text
-# Conversation inside the project directory: path, framework and design
-# tokens are auto-probed — just say it
-Replicate https://ui.shadcn.com/docs/components/button
-
-# Conversation started elsewhere: add the project path
 Replicate https://ui.shadcn.com/docs/components/button, project at ~/my-app (SolidJS + StyleX)
 ```
+
+If the conversation is already inside the project directory, the project part
+can be omitted — path, framework and design tokens are auto-probed.
 
 It replies with the behavior contract summary:
 

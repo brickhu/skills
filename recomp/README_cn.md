@@ -52,12 +52,10 @@ cp -r skills/recomp ~/.agents/skills/recomp
 打开你的 AI 编程助手（Claude Code、Codex、Cursor、Zed 都行），新建对话，输入：
 
 ```text
-# 对话就在项目目录里：路径、框架、设计 token 自动探测，直接说
-复刻 https://ui.shadcn.com/docs/components/button
-
-# 从任意位置新建的对话：带上项目路径即可
 复刻 https://ui.shadcn.com/docs/components/button，项目在 ~/my-app（SolidJS + StyleX）
 ```
+
+如果对话就开在项目目录里，"项目在 ~/my-app（SolidJS + StyleX）"可以省略——路径、框架、设计 token 会自动探测。
 
 它先回你一份**行为契约摘要**：
 
