@@ -116,17 +116,26 @@ export function Button(props: Props) {
 
 以及**使用示范**：
 
-```svelte
-<script>
-  import Dialog from "$lib/components/Dialog.svelte";
-  let open = $state(false);
-</script>
+```tsx
+import { createSignal } from "solid-js";
+import { Button } from "./src/Button";
 
-<Dialog bind:open>
-  <button slot="trigger">打开对话框</button>
-  <h2 slot="title">确认删除？</h2>
-  <button slot="footer" onclick={() => (open = false)}>取消</button>
-</Dialog>
+function App() {
+  const [loading, setLoading] = createSignal(false);
+
+  return (
+    <Button
+      loading={loading()}
+      class="submit" // class 就是样式入口，接你的设计 token
+      onClick={() => {
+        setLoading(true);
+        submit();
+      }}
+    >
+      提交
+    </Button>
+  );
+}
 ```
 
 复制源码、接上你的样式，完事。不满意某处行为？直接在对话里说——"Escape 处理不对""这里用 bind 不要用 v-model"——它当场重出完整文件，不用打补丁。
