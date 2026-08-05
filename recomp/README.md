@@ -53,9 +53,8 @@ git clone https://github.com/brickhu/skills.git
 cp -r skills/recomp ~/.agents/skills/recomp
 ```
 
-No dependencies, no build step. After copying, the skill is picked up from
-your agent's skills directory (`~/.agents/skills/` or the equivalent for your
-agent) on the next conversation.
+No dependencies, no build step. **Restart your agent after installing** so
+the skill gets loaded.
 
 ## Usage
 

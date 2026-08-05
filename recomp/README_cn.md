@@ -35,7 +35,7 @@ git clone https://github.com/brickhu/skills.git
 cp -r skills/recomp ~/.agents/skills/recomp
 ```
 
-纯提示词驱动：无依赖、无构建步骤。复制到 agent 技能目录（如 `~/.agents/skills/`）后，新开对话即可被自动发现。
+纯提示词驱动：无依赖、无构建步骤。**安装后请重启你的 agent**，技能才会被加载。
 
 ## 使用
 
