@@ -22,6 +22,7 @@ user's stack. Probing never writes to the user's project.
 | Non-web styling system | Flutter ThemeData / ThemeExtension · Compose MaterialTheme / CompositionLocal · SwiftUI Asset Catalog / Color assets · Qt QSS / theme properties | Medium-high — replaces "CSS approach" for non-web stacks |
 | Mini-program framework | native: app.json / project.config.json / .wxml / .wxss · cross-end: Taro (taro deps + .jsx/.tsx), uni-app (manifest.json + .vue pages) | High — Taro/uni-app follow their web base (React/Vue), native follows Component()/WXML |
 | Mini-program styling | WXSS variables / theme.json / app.json window config · Taro follows CSS approach · uni-app: uni.scss variables | Medium-high |
+| Desktop shells (Electron / Tauri) | Electron: electron deps + a web frontend inside · Tauri: tauri.conf.json frontendDist, src-tauri/Cargo.toml | High — treat as web stack: components live in the renderer, ignore main process / Rust backend |
 | Existing conventions | read 1–2 representative existing components: className vs style prop passthrough, naming | Reference |
 
 ## Ask the user only in two cases
@@ -51,3 +52,7 @@ user's stack. Probing never writes to the user's project.
   WXSS / externalClasses / theme.json) from **cross-end frameworks**
   (Taro → React-like, uni-app → Vue-like; probe and deliver like their web
   base).
+- Electron / Tauri: the UI layer is web tech — probe the frontend framework
+  inside (package.json) and deliver like any web stack. For Tauri, ignore
+  the src-tauri / Rust signals so the frontend is not mistaken for a native
+  stack.
