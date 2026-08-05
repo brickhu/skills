@@ -16,6 +16,7 @@ user's stack. Probing never writes to the user's project.
 | Framework + version | package.json deps; vite/nuxt/svelte.config; file extensions (.vue / .svelte / .tsx) | High |
 | CSS approach | deps (stylex / tailwind / unocss / vanilla-extract / …); build plugins; source scan (`@theme`, `@apply`, `stylex.create`) | Medium-high |
 | Design tokens | DESIGN.md; `:root {}` CSS vars; Tailwind v4 `@theme`; stylex tokens; tokens.js / tokens.json | Medium-high |
+| Atomic CSS utilities | Tailwind theme / custom utilities; unocss shortcuts; class conventions in existing components | Medium-high — applied to generated reference styles |
 | Ecosystem headless libs | deps: kobalte / reka-ui / bits-ui / melt-ui | High — used as *behavior reference*, never as an install recommendation |
 | Existing conventions | read 1–2 representative existing components: className vs style prop passthrough, naming | Reference |
 
@@ -30,6 +31,10 @@ user's stack. Probing never writes to the user's project.
 ## Usage rules
 
 - Probe results are judgment input for this session only — not stored, not remembered.
+- Probe results are APPLIED, not just reported: generated reference styles
+  bind to the real token names and atomic utilities found in the project
+  (e.g. `var(--color-surface)`, Tailwind theme colors). The user can override
+  them freely — this step just saves them the wiring.
 - Framework **version precision matters**: Svelte 4 vs 5 (runes), Solid 1 vs 2,
   Vue 3.x — the wrong version can produce uncompilable code.
 - The style interface contract must match the CSS approach:

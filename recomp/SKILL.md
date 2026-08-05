@@ -33,11 +33,13 @@ owns styling, design tokens, and integration.
    → refuse with a reason. Unreachable page → propose npm / GitHub source.
    → `references/verification.md`
 2. **Probe project context (read-only)** — framework+version, CSS approach,
-   design tokens (DESIGN.md, `:root` vars, `@theme`, stylex tokens), existing
-   conventions, and whether an ecosystem headless library is present
-   (Kobalte / Reka UI / Bits UI — used as reference material). Ask the user
-   only on ambiguity or blind spots, with detected results pre-filled.
-   → `references/probing.md`
+   design tokens (DESIGN.md, `:root` vars, `@theme`, stylex tokens), atomic
+   CSS definitions (Tailwind theme/utilities, unocss shortcuts, project class
+   conventions), existing conventions, and whether an ecosystem headless
+   library is present (Kobalte / Reka UI / Bits UI — used as reference
+   material). Probe results are APPLIED to the generated source, not just
+   described. Ask the user only on ambiguity or blind spots, with detected
+   results pre-filled. → `references/probing.md`
 3. **Build the behavior contract** — extract interface (props/events/slots,
    controlled/uncontrolled) and behavior from docs. Anything the docs do NOT
    state explicitly becomes an **open question** with a proposed approach
@@ -54,8 +56,10 @@ owns styling, design tokens, and integration.
    → `references/deliverables.md`
 5. **Generate deliverables** — in conversation only; complete files, never
    patches; framework-native idioms (Vue `v-model`, Svelte 5 `bind:`/runes,
-   Solid signals). Open with "✅ 组件已复刻成功…".
-   → `references/deliverables.md`
+   Solid signals). Pre-wire the probed design tokens / atomic styles into the
+   generated code (reference styles bind to real token names, class strings
+   use the project's utilities) — the user can override afterwards. Open with
+   "✅ 组件已复刻成功…". → `references/deliverables.md`
 6. **Iterate** — user copies (accept) or requests changes; always re-emit full files.
 
 ## Deliverables (after the user confirms the contract)

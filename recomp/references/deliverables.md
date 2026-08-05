@@ -89,8 +89,10 @@ reviews semantics, not prop names.
 - Full props / events / slots / types
 - Style interface contract: DOM structure / class slot inventory; state hooks
   (data-attribute set + animation phases); CSS custom properties marked with
-  which global tokens they should reference; token-driven neutral reference
-  styles (defaults only, user owns final values)
+  which global tokens they should reference; reference styles PRE-WIRED to
+  the probed project tokens / atomic utilities (real token names and project
+  class strings, not generic placeholders — defaults only, user owns final
+  values)
 - Written for the probed CSS approach (className passthrough vs style props)
 
 ## Acceptance script (optional, last)
