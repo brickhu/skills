@@ -47,13 +47,60 @@ into your agent's skills directory, e.g. `~/.agents/skills/`.)
 
 ## Usage
 
-1. Send the docs URL: `recomp <url>`
+1. Copy a component library docs link and send it to recomp: `recomp <url>`
 2. (Optional) Point it at your project so it can probe your stack:
    `recomp <url> --project ~/my-app` — otherwise it falls back to the current
    working directory
-3. Review the behavior contract summary, then copy the source files
-4. Iterate in conversation: *"the escape handling is wrong"*, *"use `bind:`
+3. Confirm the open questions one by one (reply `yes` / 确认, or type your
+   own solution) — the component is generated right after the last one
+4. Copy the source files, wire your styles
+5. Iterate in conversation: *"the escape handling is wrong"*, *"use `bind:`
    instead of `v-model`"* — every revision is delivered as complete files
+
+### Full example
+
+Replicating shadcn/ui's Button for a SolidJS + StyleX project, end to end:
+
+Open your AI coding assistant (Claude Code, Codex, Cursor, Zed), start a new
+conversation and send:
+
+```text
+# Conversation inside the project directory: path, framework and design
+# tokens are auto-probed — just say it
+Replicate https://ui.shadcn.com/docs/components/button
+
+# Conversation started elsewhere: add the project path
+Replicate https://ui.shadcn.com/docs/components/button, project at ~/my-app (SolidJS + StyleX)
+```
+
+It replies with the behavior contract summary:
+
+```text
+✅ Validated: shadcn/ui Button docs page
+---
+Interface: variant / size / disabled / loading → SolidJS props
+Behavior: disabled blocks clicks · loading disables the button (from docs)
+Dependencies: zero, plain native implementation
+---
+The docs leave 1 behavior unspecified — let's confirm it:
+
+Item 1/1: keep the original size while loading, not in the docs.
+Suggestion: keep the size and expose data-state="loading" (no layout shift,
+the style layer gets a state hook)
+Reply yes / 确认 to accept, or type your own solution
+```
+
+Reply `yes` — the gate closes and it delivers the files directly:
+
+```text
+✅ 组件已复刻成功，复制以下组件代码到你的项目目录即可使用。
+```
+
+Then: complete source files (one code block per file), a usage example, and
+the interface standard — with reference styles pre-wired to your probed
+design tokens. Copy the code, wire the rest of your styles, done. Not happy
+with a behavior? Say so in the conversation — the full file is re-emitted,
+no patches.
 
 ## What it refuses
 

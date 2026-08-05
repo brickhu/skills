@@ -32,10 +32,98 @@ npx skills add brickhu/skills/recomp
 
 ## 使用
 
-1. 发送组件库文档 URL：`recomp <url>`
+1. 复制组件库文档链接，发给 recomp：`recomp <url>`
 2. （可选）指定项目根目录以便探测：`recomp <url> --project ~/my-app`——不指定则回退到当前工作目录
-3. 审阅行为契约摘要，复制源码
-4. 对话迭代：*"escape 处理不对"*、*"这里用 `bind:` 不要用 `v-model`"*——每次修订都输出完整文件
+3. 逐个确认开放问题（回复 `yes` / 确认，或直接输入你的方案）——最后一个确认完即开始生成
+4. 复制源码，接上你的样式
+5. 对话迭代：*"escape 处理不对"*、*"这里用 `bind:` 不要用 `v-model`"*——每次修订都输出完整文件
+
+### 完整例子
+
+以"给 SolidJS + StyleX 项目复刻 shadcn/ui 的 Button"为例，完整流程是这样：
+
+打开你的 AI 编程助手（Claude Code、Codex、Cursor、Zed 都行），新建对话，输入：
+
+```text
+# 对话就在项目目录里：路径、框架、设计 token 自动探测，直接说
+复刻 https://ui.shadcn.com/docs/components/button
+
+# 从任意位置新建的对话：带上项目路径即可
+复刻 https://ui.shadcn.com/docs/components/button，项目在 ~/my-app（SolidJS + StyleX）
+```
+
+它先回你一份**行为契约摘要**：
+
+```text
+✅ 验证通过：shadcn/ui 的 Button 文档页
+---
+接口：variant / size / disabled / loading → SolidJS props
+行为：disabled 拦截点击 · loading 禁用（来自文档）
+依赖：零依赖，纯原生实现
+---
+文档未明确的行为有 1 处，我们逐个确认：
+
+第 1/1 处：loading 时是否保留原有尺寸，文档未写。
+建议：保留尺寸并暴露 data-state="loading"（避免布局跳动，样式层有状态可接）
+回复 yes / 确认 采纳建议，或直接输入你的自定义方案
+```
+
+你回复 yes——开放问题确认完毕，它直接按文件输出**完整源码**（节选）：
+
+```tsx
+// src/Button.tsx（节选）
+import { splitProps, type JSX } from "solid-js";
+
+type Props = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
+  loading?: boolean;
+};
+
+export function Button(props: Props) {
+  const [local, rest] = splitProps(props, ["disabled", "loading", "onClick", "children"]);
+
+  return (
+    <button
+      {...rest}
+      disabled={local.disabled || local.loading}
+      data-state={local.loading ? "loading" : "idle"}
+      aria-busy={local.loading}
+      onClick={(e) => {
+        if (local.disabled || local.loading) return;
+        local.onClick?.(e);
+      }}
+    >
+      {local.loading && <span aria-hidden="true">…</span>}
+      {local.children}
+    </button>
+  );
+}
+```
+
+以及**使用示范**：
+
+```tsx
+import { createSignal } from "solid-js";
+import { Button } from "./src/Button";
+
+function App() {
+  const [loading, setLoading] = createSignal(false);
+
+  return (
+    <Button
+      loading={loading()}
+      class="submit" // class 就是样式入口，接你的设计 token
+      onClick={() => {
+        setLoading(true);
+        submit();
+      }}
+    >
+      提交
+    </Button>
+  );
+}
+```
+
+复制源码、接上你的样式，完事。不满意某处行为？直接在对话里说——它当场重出完整文件，不用打补丁。
 
 ## 它会拒绝什么
 
