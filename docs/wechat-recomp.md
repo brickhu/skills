@@ -80,7 +80,7 @@ npx skills add brickhu/skills/recomp
 决策：12 条来自文档 · 3 条按 WAI-ARIA APG 补全 · 0 条留空
 依赖：零依赖，纯原生实现
 ---
-回复【确认】复刻 SolidJS + StyleX 技术栈的组件源码和使用示范
+回复【确认】复刻成 SolidJS + StyleX 技术栈的组件源码和使用示范
 ```
 
 你确认没问题，它按文件输出**完整源码**（节选）：
