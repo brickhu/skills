@@ -22,13 +22,20 @@
 
 ## 安装
 
-一行命令（[skills CLI](https://skills.sh)）：
+**方式一：一行命令（推荐）**
 
 ```sh
 npx skills add brickhu/skills/recomp
 ```
 
-纯提示词驱动：无依赖、无构建步骤。（手动方式：把 `recomp/` 文件夹复制到 agent 技能目录，如 `~/.agents/skills/`。）
+**方式二：手动复制**（适用于任何能加载 SKILL.md 的 AI 助手）
+
+```sh
+git clone https://github.com/brickhu/skills.git
+cp -r skills/recomp ~/.agents/skills/recomp
+```
+
+纯提示词驱动：无依赖、无构建步骤。复制到 agent 技能目录（如 `~/.agents/skills/`）后，新开对话即可被自动发现。
 
 ## 使用
 

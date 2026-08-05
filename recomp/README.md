@@ -36,14 +36,22 @@ decision? Say so — the component is re-emitted in full.
 
 ## Install
 
-One-liner via the [skills CLI](https://skills.sh):
+**Option 1 — one-liner (recommended)**
 
 ```sh
 npx skills add brickhu/skills/recomp
 ```
 
-No dependencies, no build step. (Manual alternative: copy the `recomp/` folder
-into your agent's skills directory, e.g. `~/.agents/skills/`.)
+**Option 2 — manual copy** (works with any agent that loads SKILL.md)
+
+```sh
+git clone https://github.com/brickhu/skills.git
+cp -r skills/recomp ~/.agents/skills/recomp
+```
+
+No dependencies, no build step. After copying, the skill is picked up from
+your agent's skills directory (`~/.agents/skills/` or the equivalent for your
+agent) on the next conversation.
 
 ## Usage
 
