@@ -40,7 +40,7 @@ question ends the gate. **Never generate code before that.** Template:
 > 行为：<文档明确的行为清单>
 > 依赖：<依赖及版本>
 > ---
-> 复刻目标：<framework>（web 技术栈附带 CSS 方案；非 web 技术栈用平台样式系统）
+> 复刻目标：<framework>（web 技术栈附带 CSS 方案；非 web 用平台样式系统；小程序用 WXSS/主题）
 > 文档未明确的行为有 N 处，我们逐个确认：
 >
 > 第 1/N 处：<问题>
@@ -75,7 +75,10 @@ reviews semantics, not prop names.
 The mapping above covers web frameworks. For non-web stacks, map the
 interface to the platform's native patterns instead: Flutter
 StatefulWidget + callbacks, SwiftUI `@State` / `Binding`, Jetpack Compose
-`remember` / `mutableStateOf`, Qt QML properties / signals.
+`remember` / `mutableStateOf`, Qt QML properties / signals. Mini-program
+native: React controlled props → `properties` + `triggerEvent` (e.g.
+`onOpenChange` becomes an `open` property + a `bind:openchange` event),
+`externalClasses` for style injection.
 
 ## Source code (delivery, #1)
 
@@ -102,6 +105,10 @@ StatefulWidget + callbacks, SwiftUI `@State` / `Binding`, Jetpack Compose
   - Jetpack Compose: unstyled composable; Modifier parameters /
     CompositionLocal slots
   - Qt: unstyled QML item; property hooks / theme bindings
+  - Mini-program (native): Component() constructor — properties / data /
+    observers as the API; externalClasses as the class-slot mechanism;
+    WXSS variables / theme.json as token hooks. Cross-end (Taro / uni-app):
+    deliver like their web base (React / Vue) instead
 - Reference styles PRE-WIRED to the probed project tokens (real token names,
   not generic placeholders — defaults only, user owns final values)
 - Written for the probed styling system (web: className passthrough vs style

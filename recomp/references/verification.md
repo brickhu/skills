@@ -21,7 +21,8 @@ Goal: decide whether a fetched URL is a valid input for replication — a
   states, interaction props (`variant`, `size`, `disabled`, `open`,
   `onOpenChange`), and/or Accessibility / Keyboard Interaction sections
 
-Non-web libraries (Flutter / SwiftUI / Jetpack Compose / Qt packages) use the
+Non-web libraries (Flutter / SwiftUI / Jetpack Compose / Qt packages,
+mini-program component libraries such as Vant Weapp / TDesign) use the
 same structural signals — component name, API reference table, usage
 examples, installation snippet. The ARIA / Keyboard Interaction signal
 applies to web stacks only; for non-web stacks, look for the platform's

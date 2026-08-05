@@ -20,6 +20,8 @@ user's stack. Probing never writes to the user's project.
 | Ecosystem headless libs | deps: kobalte / reka-ui / bits-ui / melt-ui | High — used as *behavior reference*, never as an install recommendation |
 | Non-web framework + version | Flutter: pubspec.yaml / .dart · SwiftUI: Package.swift / .swift · Jetpack Compose: build.gradle.kts / .kt · Qt: CMakeLists.txt / .qml / .cpp | High |
 | Non-web styling system | Flutter ThemeData / ThemeExtension · Compose MaterialTheme / CompositionLocal · SwiftUI Asset Catalog / Color assets · Qt QSS / theme properties | Medium-high — replaces "CSS approach" for non-web stacks |
+| Mini-program framework | native: app.json / project.config.json / .wxml / .wxss · cross-end: Taro (taro deps + .jsx/.tsx), uni-app (manifest.json + .vue pages) | High — Taro/uni-app follow their web base (React/Vue), native follows Component()/WXML |
+| Mini-program styling | WXSS variables / theme.json / app.json window config · Taro follows CSS approach · uni-app: uni.scss variables | Medium-high |
 | Existing conventions | read 1–2 representative existing components: className vs style prop passthrough, naming | Reference |
 
 ## Ask the user only in two cases
@@ -45,3 +47,7 @@ user's stack. Probing never writes to the user's project.
 - Non-web projects: "CSS approach" maps to the platform's styling system;
   tokens are probed from ThemeData / MaterialTheme / Asset Catalog / QSS
   locations instead of `:root` / `@theme`.
+- Mini-programs: distinguish **native** (Component() + WXML, styling via
+  WXSS / externalClasses / theme.json) from **cross-end frameworks**
+  (Taro → React-like, uni-app → Vue-like; probe and deliver like their web
+  base).

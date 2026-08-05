@@ -3,7 +3,8 @@ name: recomp
 description: >
   Replicate a UI component from a component library documentation page into a
   headless (behavior-only, unstyled) component for the user's framework
-  (SolidJS / Vue / Svelte — also Flutter / SwiftUI / Jetpack Compose / Qt). Use when the user provides a component library docs
+  (SolidJS / Vue / Svelte — also Flutter / SwiftUI / Jetpack Compose / Qt /
+  mini-programs (WeChat native, Taro, uni-app)). Use when the user provides a component library docs
   URL (shadcn/ui, Radix, MUI, Ant Design, ...) and wants that component ported
   to their stack as paste-ready source code — e.g. "按照文档复刻组件",
   "照着文档生成 headless 组件", "把这个组件移植到我的框架",
@@ -35,10 +36,11 @@ owns styling, design tokens, and integration.
 2. **Probe project context (read-only)** — framework+version; styling system
    (web: CSS approach, design tokens, atomic CSS definitions; non-web:
    Flutter ThemeData, Compose MaterialTheme, SwiftUI Asset Catalog, Qt
-   themes); existing conventions; ecosystem headless libraries (used as
-   reference material). Probe results are APPLIED to the generated source, not
-   just described. Ask the user only on ambiguity or blind spots, with
-   detected results pre-filled. → `references/probing.md`
+   themes; mini-program: WXSS variables / theme.json); existing conventions;
+   ecosystem headless libraries (used as reference material). Probe results
+   are APPLIED to the generated source, not just described. Ask the user only
+   on ambiguity or blind spots, with detected results pre-filled.
+   → `references/probing.md`
 3. **Build the behavior contract** — extract interface (props/events/slots,
    controlled/uncontrolled) and behavior from docs. Anything the docs do NOT
    state explicitly becomes an **open question** with a proposed approach
@@ -84,9 +86,10 @@ BEFORE replication as the confirmation gate; do not repeat it in the delivery.
   project; probe results are session-only judgment input, not persisted
 - **Never guess accessibility semantics**: web uses ARIA / WAI-ARIA APG;
   non-web uses the platform's own API (Flutter Semantics, SwiftUI
-  accessibility modifiers, Compose semantics, Qt QAccessible). Uncertain
-  behavior becomes open questions with a proposed approach for the user to
-  confirm — never invented, never implemented silently
+  accessibility modifiers, Compose semantics, Qt QAccessible); mini-programs
+  use aria-* attributes / platform a11y docs. Uncertain behavior becomes open
+  questions with a proposed approach for the user to confirm — never
+  invented, never implemented silently
 - **Refuse** non-component-library pages (with a reason). If the user's
   ecosystem already has an equivalent headless implementation
   (Kobalte / Reka UI / Bits UI), **learn from it as a reference** (behavior +
