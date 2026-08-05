@@ -62,6 +62,12 @@ npx skills add brickhu/skills/recomp
 
 打开你的 AI 编程助手（Claude Code、Codex、Cursor、Zed 都行），新建对话，输入：
 
+**对话就在项目目录里**（比如 IDE 里打开项目后新建的对话）——路径、框架、设计 token 它都会自动探测，直接说：
+
+> 复刻 https://ui.shadcn.com/docs/components/dialog
+
+**从任意位置新建的对话**——带上项目路径即可：
+
 > 复刻 https://ui.shadcn.com/docs/components/dialog，项目在 ~/my-app（Svelte 5）
 
 它先回你一份**行为契约摘要**：
