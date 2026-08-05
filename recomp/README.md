@@ -59,9 +59,10 @@ into your agent's skills directory, e.g. `~/.agents/skills/`.)
   WAI-ARIA APG patterns or explicitly marked "not implemented"
 - **Writing into your project** — probing is read-only; everything is
   delivered in chat
-- **Replicating what already exists in your ecosystem** — Kobalte (Solid),
-  Reka UI / Melt UI (Vue), Bits UI / Melt UI (Svelte) — it will point you to
-  the existing library instead
+- **Pushing third-party libraries on you** — if your ecosystem already has an
+  equivalent headless library (Kobalte for Solid, Reka UI for Vue, Bits UI for
+  Svelte), it learns from it as a reference but still delivers your own
+  copy-paste code — the component library stays in your hands
 
 ## Files
 

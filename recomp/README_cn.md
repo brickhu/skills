@@ -41,7 +41,7 @@ npx skills add brickhu/skills/recomp
 - **非组件库页面**（博客、工具库、设计稿）——拒绝并说明原因
 - **猜测无障碍语义**（ARIA / 焦点 / 键盘行为）——按 WAI-ARIA APG 补全，或明确标注"未实现"
 - **写入你的工程**——探测只读，产出全在对话里
-- **复刻你生态里已有的组件**——Solid 用 Kobalte、Vue 用 Reka UI / Melt UI、Svelte 用 Bits UI / Melt UI——会推荐你直接用现成的
+- **让你去装第三方库**——你生态里已有等价实现（Solid 的 Kobalte、Vue 的 Reka UI、Svelte 的 Bits UI）时，它只把它们当参考来学习，**依然交付你自己可复制的代码和使用指南**——组件库始终握在你手里
 
 ## 文件结构
 

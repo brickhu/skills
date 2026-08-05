@@ -34,11 +34,15 @@ owns styling, design tokens, and integration.
    → `references/verification.md`
 2. **Probe project context (read-only)** — framework+version, CSS approach,
    design tokens (DESIGN.md, `:root` vars, `@theme`, stylex tokens), existing
-   conventions. Ask the user only on ambiguity or blind spots, with detected
-   results pre-filled. → `references/probing.md`
+   conventions, and whether an ecosystem headless library is present
+   (Kobalte / Reka UI / Bits UI — used as reference material). Ask the user
+   only on ambiguity or blind spots, with detected results pre-filled.
+   → `references/probing.md`
 3. **Build the behavior contract** — extract interface (props/events/slots,
    controlled/uncontrolled) and behavior from docs; fill gaps from WAI-ARIA
-   APG; classify every decision A (docs) / B (APG) / C (cannot infer → ask).
+   APG and, when available, the ecosystem headless library as a reference;
+   classify every decision A (docs) / B (APG or ecosystem reference) /
+   C (cannot infer → ask).
 4. **Generate deliverables** — in conversation only; complete files, never
    patches; framework-native idioms (Vue `v-model`, Svelte 5 `bind:`/runes,
    Solid signals). → `references/deliverables.md`
@@ -61,9 +65,11 @@ owns styling, design tokens, and integration.
   project; probe results are session-only judgment input, not persisted
 - **Never guess accessibility semantics** (ARIA roles, focus management,
   keyboard behavior): fill from WAI-ARIA APG or mark "not implemented"
-- **Refuse** non-component-library pages (with a reason); refuse to replicate
-  components that already exist in the user's ecosystem
-  (Kobalte / Reka UI / Bits UI) — recommend the existing one instead
+- **Refuse** non-component-library pages (with a reason). If the user's
+  ecosystem already has an equivalent headless implementation
+  (Kobalte / Reka UI / Bits UI), **learn from it as a reference** (behavior +
+  API), but still deliver the replicated code — never redirect the user to
+  install a third-party library
 - **License**: replicate interface + behavior only, never copy proprietary
   source or style values; record source URL + fetch date in the decision log
 - Complex components (DataGrid, virtualized tables, date pickers): state

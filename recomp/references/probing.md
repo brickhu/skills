@@ -16,6 +16,7 @@ user's stack. Probing never writes to the user's project.
 | Framework + version | package.json deps; vite/nuxt/svelte.config; file extensions (.vue / .svelte / .tsx) | High |
 | CSS approach | deps (stylex / tailwind / unocss / vanilla-extract / …); build plugins; source scan (`@theme`, `@apply`, `stylex.create`) | Medium-high |
 | Design tokens | DESIGN.md; `:root {}` CSS vars; Tailwind v4 `@theme`; stylex tokens; tokens.js / tokens.json | Medium-high |
+| Ecosystem headless libs | deps: kobalte / reka-ui / bits-ui / melt-ui | High — used as *behavior reference*, never as an install recommendation |
 | Existing conventions | read 1–2 representative existing components: className vs style prop passthrough, naming | Reference |
 
 ## Ask the user only in two cases

@@ -24,7 +24,12 @@ Per-component deliverables, presented in conversation in this order:
 |---|---|---|
 | A | explicit in docs | implement as documented (cite) |
 | B | missing in docs; WAI-ARIA APG has a standard pattern | implement per APG; annotate "filled from APG <pattern>" |
-| C | not in docs, not in APG, not inferable | **do not guess** — tell the user; offer: user defines behavior / find a reference implementation / skip |
+| B2 | missing in docs; an ecosystem headless library (Kobalte / Reka UI / Bits UI) implements the same component | learn from it as a reference; annotate "referenced from <library> <component>" — still deliver the code |
+| C | not in docs, not in APG, no ecosystem reference | **do not guess** — tell the user; offer: user defines behavior / find a reference implementation / skip |
+
+An ecosystem headless library is a *reference source*, never a replacement:
+even when one exists, deliver the replicated code and usage guide for the user
+to copy into their own component directory.
 
 Never guess ARIA roles, focus management, or keyboard semantics — those are
 B or C, never invented.
