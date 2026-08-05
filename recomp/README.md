@@ -38,6 +38,23 @@ You keep styling and design tokens entirely in your hands: paste the source
 into your component directory, wire up the styles, done. Don't like a
 decision? Say so — the component is re-emitted in full.
 
+## Supported stacks
+
+recomp replicates *into* any of these stacks — the docs URL you send decides
+what gets replicated:
+
+| Category | Stacks | Notes |
+|---|---|---|
+| Web | SolidJS / Vue / Svelte — any CSS approach (Tailwind, StyleX, CSS-in-JS, vanilla) | the sweet spot: behavior + interface adapted to framework idioms |
+| Native | Flutter / SwiftUI / Jetpack Compose / Qt | style interface contract translated per platform (ThemeExtension / Environment / Modifier / QML hooks) |
+| Mini-programs | native (WeChat etc., Component() + WXML) · Taro · uni-app | native: properties / externalClasses / triggerEvent; Taro & uni-app follow their web base |
+| Desktop shells | Electron / Tauri | the UI layer is web tech — treated as web stacks, components live in the renderer |
+
+Accessibility sources are platform-appropriate: ARIA / WAI-ARIA APG for web,
+platform APIs for native (Flutter Semantics, SwiftUI accessibility
+modifiers, Compose semantics, Qt QAccessible), aria-* attributes for
+mini-programs.
+
 ## Install
 
 **Option 1 — one-liner (recommended)**

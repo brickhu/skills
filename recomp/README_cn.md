@@ -20,6 +20,19 @@ recomp 是一个面向前端开发的组件复刻技能（支持 Claude、Codex 
 样式和设计 token 完全由你掌控：把源码复制进你的组件目录，接上样式即可。
 不满意某处行为？直接说，我重出整个文件。
 
+## 支持的技术栈
+
+recomp 可以把组件库文档复刻成以下任意技术栈的实现——发什么文档 URL，就复刻什么：
+
+| 类别 | 技术栈 | 说明 |
+|---|---|---|
+| Web | SolidJS / Vue / Svelte——任意 CSS 方案（Tailwind、StyleX、CSS-in-JS、原生） | 主场：行为 + 接口按框架惯用法适配 |
+| 原生 | Flutter / SwiftUI / Jetpack Compose / Qt | 样式接口契约按平台翻译（ThemeExtension / Environment / Modifier / QML 钩子） |
+| 小程序 | 原生（微信等，Component() + WXML）· Taro · uni-app | 原生走 properties / externalClasses / triggerEvent；Taro、uni-app 按其 Web 底座（React/Vue）处理 |
+| 桌面壳层 | Electron / Tauri | UI 层就是 Web 技术——按 Web 栈处理，组件在渲染层 |
+
+无障碍依据按平台取源：Web 用 ARIA / WAI-ARIA APG，原生用平台 API（Flutter Semantics、SwiftUI accessibility 修饰符、Compose semantics、Qt QAccessible），小程序用 aria-* 属性。
+
 ## 安装
 
 **方式一：一行命令（推荐）**
