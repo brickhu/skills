@@ -74,10 +74,13 @@ npx skills add brickhu/skills/recomp
 
 ```text
 ✅ 验证通过：shadcn/ui 的 Dialog 文档页
+---
 接口：open / onOpenChange → Svelte 5 写法 bind:open
 行为：Escape 关闭 · 点击遮罩关闭 · 焦点锁在弹窗内 · 关闭后焦点还原 · 滚动锁定 · aria-modal
 决策：12 条来自文档 · 3 条按 WAI-ARIA APG 补全 · 0 条留空
 依赖：零依赖，纯原生实现
+---
+回复【确认】开始按照你项目的框架和设计规范复刻组件
 ```
 
 你确认没问题，它按文件输出**完整源码**（节选）：
