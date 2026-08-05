@@ -48,16 +48,21 @@ owns styling, design tokens, and integration.
    Solid signals). → `references/deliverables.md`
 5. **Iterate** — user copies (accept) or requests changes; always re-emit full files.
 
-## Deliverables (per component)
+## Deliverables (after the user confirms the contract)
 
-1. Validation result — one line
-2. Behavior contract summary — interface, behavior, A/B/C decision table,
-   dependency list, framework idiom mapping
-3. Source files — one code block per file, filenames included, deps with versions
-4. Usage instructions — examples + API summary
-5. Style interface contract — data-attributes, class slots, CSS variables,
-   customized to the probed CSS approach
-6. Optional — Playwright acceptance script (keyboard, focus, ARIA snapshot)
+User-priority order — source first, keep the delivery lean:
+
+1. **Opening line**: "✅ 组件已复刻成功，复制以下组件代码到你的项目目录即可使用。"
+2. **Source code** (top priority) — complete files, one code block per file
+   with filenames, dependency list with versions
+3. **Usage** — minimal working example + API summary
+4. **Interface standard** — props/events/slots/types, plus the style interface
+   contract (data-attributes, class slots, CSS variables) for the probed CSS
+   approach
+5. Optional, at the very end — acceptance script (keyboard, focus, ARIA snapshot)
+
+The behavior contract summary (validation + A/B/C decisions) is presented
+BEFORE replication as the confirmation gate; do not repeat it in the delivery.
 
 ## Hard rules
 

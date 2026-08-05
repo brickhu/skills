@@ -1,15 +1,25 @@
 # Deliverables
 
-Per-component deliverables, presented in conversation in this order:
+## Two phases
 
-1. Validation result — one line
-2. Behavior contract summary
-3. Source files
-4. Usage instructions
-5. Style interface contract
-6. (optional) Acceptance script
+1. **Before replicating (confirmation gate)** — validation result + behavior
+   contract summary. The user replies 【确认】 before any code is generated.
+2. **After confirmation (delivery)** — present in user-priority order, lean:
 
-## Behavior contract summary template
+   1. Opening line + **source code** (top priority)
+   2. **Usage** — minimal working example + API summary
+   3. **Interface standard** — props/events/slots/types + style interface contract
+   4. (optional, last) acceptance script
+
+Open every delivery with:
+
+> ✅ 组件已复刻成功，复制以下组件代码到你的项目目录即可使用。
+
+Do not repeat the behavior contract summary in the delivery.
+
+## Confirmation gate (phase 1)
+
+Behavior contract summary template:
 
 - **Component**: name, source URL, fetch date
 - **Interface**: props / events / slots; controlled/uncontrolled pattern in the
@@ -17,6 +27,10 @@ Per-component deliverables, presented in conversation in this order:
 - **Behavior**: states, keyboard interaction, focus management, ARIA, edge cases
 - **Decisions**: A / B / C table (below)
 - **Dependencies**: name + version + known conflicts in the user's project
+
+End the summary with the confirmation prompt echoing the detected stack:
+
+> 回复【确认】复刻成 <framework> + <css approach> 技术栈的组件源码和使用示范
 
 ## Decision classification
 
@@ -42,10 +56,10 @@ Translating from React docs is a refactor of the *controlled pattern*, not a ren
 |---|---|---|---|
 | `open` + `onOpenChange` | `v-model:open` | `bind:open` (+ `onOpenChange` event) | signal prop + `onOpenChange` callback |
 
-Show this mapping explicitly in the summary so the user reviews semantics,
-not prop names.
+Show this mapping explicitly in the confirmation gate summary so the user
+reviews semantics, not prop names.
 
-## Source files
+## Source code (delivery, #1)
 
 - One code block per file with a filename header (`src/Dialog.tsx`, `src/index.ts`, …)
 - Always output **complete files**, never patches or diffs (unless the user
@@ -53,18 +67,21 @@ not prop names.
 - List npm dependencies with versions; check against the user's existing deps
   for conflicts (e.g. floating-ui, date-fns, TanStack Virtual)
 
-## Style interface contract
+## Usage (delivery, #2)
 
-- DOM structure / class slot inventory
-- State hooks: full data-attribute set + animation phases
-  (mounting / transitioning / closed)
-- CSS custom properties: component-level vars, marked with which global tokens
-  they should reference
-- Optional: token-driven neutral reference styles (defaults only; user owns
-  final values)
+- A minimal working example that compiles and demonstrates the main use case
+- API summary: the props/events/slots a user will actually touch
+
+## Interface standard (delivery, #3)
+
+- Full props / events / slots / types
+- Style interface contract: DOM structure / class slot inventory; state hooks
+  (data-attribute set + animation phases); CSS custom properties marked with
+  which global tokens they should reference; token-driven neutral reference
+  styles (defaults only, user owns final values)
 - Written for the probed CSS approach (className passthrough vs style props)
 
-## Acceptance script (optional)
+## Acceptance script (optional, last)
 
 Playwright spec covering: keyboard sequence, focus order / trap, ARIA snapshot
 (getByRole / axe checks). The user copies it into their project and runs it;
