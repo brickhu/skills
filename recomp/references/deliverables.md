@@ -40,10 +40,11 @@ question ends the gate. **Never generate code before that.** Template:
 > 行为：<文档明确的行为清单>
 > 依赖：<依赖及版本>
 > ---
+> 复刻目标：<framework>（web 技术栈附带 CSS 方案；非 web 技术栈用平台样式系统）
 > 文档未明确的行为有 N 处，我们逐个确认：
 >
 > 第 1/N 处：<问题>
-> 建议：<方案（如按 APG 规范 / 参考 Kobalte 实现）>
+> 建议：<方案（web：按 APG 规范；非 web：平台无障碍惯例 / 参考生态实现）>
 > 回复 yes / 确认 采纳建议，或直接输入你的自定义方案
 
 Single option → reply yes / 确认. Numbers are only used when multiple
@@ -71,6 +72,11 @@ Translating from React docs is a refactor of the *controlled pattern*, not a ren
 Show this mapping explicitly in the confirmation gate summary so the user
 reviews semantics, not prop names.
 
+The mapping above covers web frameworks. For non-web stacks, map the
+interface to the platform's native patterns instead: Flutter
+StatefulWidget + callbacks, SwiftUI `@State` / `Binding`, Jetpack Compose
+`remember` / `mutableStateOf`, Qt QML properties / signals.
+
 ## Source code (delivery, #1)
 
 - One code block per file with a filename header (`src/Dialog.tsx`, `src/index.ts`, …)
@@ -87,13 +93,19 @@ reviews semantics, not prop names.
 ## Interface standard (delivery, #3)
 
 - Full props / events / slots / types
-- Style interface contract: DOM structure / class slot inventory; state hooks
-  (data-attribute set + animation phases); CSS custom properties marked with
-  which global tokens they should reference; reference styles PRE-WIRED to
-  the probed project tokens / atomic utilities (real token names and project
-  class strings, not generic placeholders — defaults only, user owns final
-  values)
-- Written for the probed CSS approach (className passthrough vs style props)
+- Style interface contract — translated per platform:
+  - Web: DOM structure / class slot inventory; state hooks (data-attribute
+    set + animation phases); CSS custom properties marked with which global
+    tokens they reference
+  - Flutter: theme-agnostic widget; exposed parameters / ThemeExtension slots
+  - SwiftUI: bare View; Environment values / ViewModifier hooks
+  - Jetpack Compose: unstyled composable; Modifier parameters /
+    CompositionLocal slots
+  - Qt: unstyled QML item; property hooks / theme bindings
+- Reference styles PRE-WIRED to the probed project tokens (real token names,
+  not generic placeholders — defaults only, user owns final values)
+- Written for the probed styling system (web: className passthrough vs style
+  props; non-web: the platform's theming hooks above)
 
 ## Acceptance script (optional, last)
 

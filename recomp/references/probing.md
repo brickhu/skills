@@ -18,6 +18,8 @@ user's stack. Probing never writes to the user's project.
 | Design tokens | DESIGN.md; `:root {}` CSS vars; Tailwind v4 `@theme`; stylex tokens; tokens.js / tokens.json | Medium-high |
 | Atomic CSS utilities | Tailwind theme / custom utilities; unocss shortcuts; class conventions in existing components | Medium-high — applied to generated reference styles |
 | Ecosystem headless libs | deps: kobalte / reka-ui / bits-ui / melt-ui | High — used as *behavior reference*, never as an install recommendation |
+| Non-web framework + version | Flutter: pubspec.yaml / .dart · SwiftUI: Package.swift / .swift · Jetpack Compose: build.gradle.kts / .kt · Qt: CMakeLists.txt / .qml / .cpp | High |
+| Non-web styling system | Flutter ThemeData / ThemeExtension · Compose MaterialTheme / CompositionLocal · SwiftUI Asset Catalog / Color assets · Qt QSS / theme properties | Medium-high — replaces "CSS approach" for non-web stacks |
 | Existing conventions | read 1–2 representative existing components: className vs style prop passthrough, naming | Reference |
 
 ## Ask the user only in two cases
@@ -37,5 +39,9 @@ user's stack. Probing never writes to the user's project.
   them freely — this step just saves them the wiring.
 - Framework **version precision matters**: Svelte 4 vs 5 (runes), Solid 1 vs 2,
   Vue 3.x — the wrong version can produce uncompilable code.
-- The style interface contract must match the CSS approach:
-  Tailwind → className passthrough; StyleX → style props.
+- The style interface contract must match the styling system:
+  web → className passthrough vs style props; non-web → the platform's
+  theming hooks (ThemeExtension / Environment / Modifier / QML properties).
+- Non-web projects: "CSS approach" maps to the platform's styling system;
+  tokens are probed from ThemeData / MaterialTheme / Asset Catalog / QSS
+  locations instead of `:root` / `@theme`.
