@@ -88,13 +88,13 @@ It replies with the behavior contract summary:
 ```text
 ✅ Validated: shadcn/ui Button docs page
 ---
-Interface: variant / size / disabled / loading → SolidJS props
-Behavior: disabled blocks clicks · loading disables the button (from docs)
-Dependencies: zero, plain native implementation
+API: variant / size / disabled / loading → SolidJS props
+Documented behavior: disabled blocks clicks · loading disables the button
+Dependencies: none, plain native implementation
 ---
-The docs leave 1 behavior unspecified — let's confirm it:
+1 behavior is not specified in the docs — your call:
 
-Item 1/1: keep the original size while loading, not in the docs.
+Item 1/1: keep the button's size while loading?
 Suggestion: keep the size and expose data-state="loading" (no layout shift,
 the style layer gets a state hook)
 Reply yes / 确认 to accept, or type your own solution

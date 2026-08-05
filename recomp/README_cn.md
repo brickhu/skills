@@ -61,17 +61,17 @@ recomp https://ui.shadcn.com/docs/components/button
 它先回你一份**行为契约摘要**：
 
 ```text
-✅ 验证通过：shadcn/ui 的 Button 文档页
+✅ 验证通过：是 shadcn/ui 的 Button 组件文档
 ---
 接口：variant / size / disabled / loading → SolidJS props
-行为：disabled 拦截点击 · loading 禁用（来自文档）
-依赖：零依赖，纯原生实现
+文档明确的行为：disabled 拦截点击 · loading 时禁用
+依赖：无，纯原生实现
 ---
-文档未明确的行为有 1 处，我们逐个确认：
+文档没写清楚的 1 处行为，需要你拍板：
 
-第 1/1 处：loading 时是否保留原有尺寸，文档未写。
-建议：保留尺寸并暴露 data-state="loading"（避免布局跳动，样式层有状态可接）
-回复 yes / 确认 采纳建议，或直接输入你的自定义方案
+第 1/1 处：loading 时按钮尺寸是否保持不变？
+建议：保持尺寸并暴露 data-state="loading"（避免布局跳动，样式层有状态可接）
+回复 yes / 确认 同意，或直接输入你的方案
 ```
 
 你回复 yes——开放问题确认完毕，它直接按文件输出**完整源码**（节选）：

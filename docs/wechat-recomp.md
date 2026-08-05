@@ -69,7 +69,7 @@ cp -r skills/recomp ~/.agents/skills/recomp
 
 **以"给 Svelte 5 项目复刻 shadcn/ui 的 Dialog"为例，完整流程是这样：**
 
-打开你的 AI 编程助手（Claude Code、Codex、Cursor、Zed 都行），新建对话，输入：
+复制shadcn/ui 的 Dialog的文档地址，打开你的 AI 编程助手（Claude Code、Codex、Cursor、Zed 都行），新建对话，输入：
 
 ```text
 recomp https://ui.shadcn.com/docs/components/dialog，项目在 ~/my-app（Svelte 5）
@@ -81,17 +81,17 @@ recomp https://ui.shadcn.com/docs/components/dialog
 它先回你一份**行为契约摘要**：
 
 ```text
-✅ 验证通过：shadcn/ui 的 Dialog 文档页
+✅ 验证通过：是 shadcn/ui 的 Dialog 组件文档
 ---
-接口：open / onOpenChange → Svelte 5 写法 bind:open
-行为：Escape 关闭 · 点击遮罩关闭 · 滚动锁定（来自文档）
-依赖：零依赖，纯原生实现
+接口：open（是否打开）/ onOpenChange（状态变化通知）→ Svelte 5 写法 bind:open
+文档明确的行为：按 Esc 关闭 · 点击弹窗外层关闭 · 打开时锁定页面滚动
+依赖：无，纯原生实现
 ---
-文档未明确的行为有 2 处，我们逐个确认：
+文档没写清楚的 2 处行为，需要你拍板：
 
-第 1/2 处：关闭后焦点还原位置，文档未写。
-建议：还原到触发按钮（APG 规范）
-回复 yes / 确认 采纳建议，或直接输入你的自定义方案
+第 1/2 处：弹窗关闭后，键盘焦点回到哪里？
+建议：回到打开弹窗的那个按钮（无障碍规范的标准做法）
+回复 yes / 确认 同意，或直接输入你的方案
 ```
 
 你回复 yes，它继续问第 2 处（焦点是否限制在弹窗内），再回复 yes——开放问题全部确认完毕，它直接按文件输出**完整源码**（节选）：
