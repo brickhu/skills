@@ -60,7 +60,7 @@ npx skills add brickhu/skills/recomp
 
 **以"给 Svelte 5 项目复刻 shadcn/ui 的 Dialog"为例，完整流程是这样：**
 
-你发：
+打开你的 AI 编程助手（Claude Code、Codex、Cursor、Zed 都行），新建对话，输入：
 
 > 复刻 https://ui.shadcn.com/docs/components/dialog，项目在 ~/my-app（Svelte 5）
 
