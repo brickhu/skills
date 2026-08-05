@@ -85,12 +85,33 @@ npx skills add brickhu/skills/recomp
 
 你确认没问题，它按文件输出**完整源码**（节选）：
 
-```svelte
-<!-- src/Dialog.svelte（节选） -->
-<script lang="ts">
-  let { open = $bindable(false) }: Props = $props();
-  // Escape 关闭、焦点陷阱、滚动锁定、ARIA……行为全在这里
-</script>
+```tsx
+// src/Button.tsx（节选）
+import { splitProps, type JSX } from "solid-js";
+
+type Props = JSX.ButtonHTMLAttributes<HTMLButtonElement> & {
+  loading?: boolean;
+};
+
+export function Button(props: Props) {
+  const [local, rest] = splitProps(props, ["disabled", "loading", "onClick", "children"]);
+
+  return (
+    <button
+      {...rest}
+      disabled={local.disabled || local.loading}
+      data-state={local.loading ? "loading" : "idle"}
+      aria-busy={local.loading}
+      onClick={(e) => {
+        if (local.disabled || local.loading) return;
+        local.onClick?.(e);
+      }}
+    >
+      {local.loading && <span aria-hidden="true">…</span>}
+      {local.children}
+    </button>
+  );
+}
 ```
 
 以及**使用示范**：
