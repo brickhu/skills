@@ -2,8 +2,9 @@
 
 ## Two phases
 
-1. **Before replicating (confirmation gate)** — validation result + behavior
-   contract summary. The user replies 【确认】 before any code is generated.
+1. **Before replicating (confirmation gate — mandatory)** — validation
+   result + behavior contract summary presented as an option list. The user
+   picks 1/2/3/4; nothing is generated until they do.
 2. **After confirmation (delivery)** — present in user-priority order, lean:
 
    1. Opening line + **source code** (top priority)
@@ -28,9 +29,23 @@ Behavior contract summary template:
 - **Decisions**: A / B / C table (below)
 - **Dependencies**: name + version + known conflicts in the user's project
 
-End the summary with the confirmation prompt echoing the detected stack:
+Present the summary as an option list and **stop — generate nothing until the
+user replies**. Template:
 
-> 回复【确认】复刻成 <framework> + <css approach> 技术栈的组件源码和使用示范
+> 📋 行为契约摘要
+> - 接口：<props/events/slots 及目标框架惯用法>
+> - 行为：<关键行为清单>
+> - 决策：<A/B/C 摘要，如 12 条来自文档 · 3 条按 APG 补全 · 1 条留空>
+> - 依赖：<依赖及版本>
+>
+> 请选择（回复数字即可）：
+> 1. 确认，复刻成 <framework> + <css approach> 技术栈的组件源码和使用示范
+> 2. 接口或行为需要修改（直接说明哪里不对）
+> 3. 重新探测项目技术栈
+> 4. 取消本次复刻
+
+The contract summary and the decision table live ONLY in this gate — never in
+the final delivery.
 
 ## Decision classification
 

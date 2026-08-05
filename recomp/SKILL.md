@@ -43,10 +43,16 @@ owns styling, design tokens, and integration.
    APG and, when available, the ecosystem headless library as a reference;
    classify every decision A (docs) / B (APG or ecosystem reference) /
    C (cannot infer → ask).
-4. **Generate deliverables** — in conversation only; complete files, never
+4. **Confirm the contract (gate — mandatory)** — present the behavior
+   contract summary as an option list and **stop**: never generate code until
+   the user replies. Options: 1 确认复刻 / 2 修改接口或行为 / 3 重新探测 /
+   4 取消. The contract summary and the A/B/C decision table live ONLY in this
+   gate — never embed them in the final delivery. → `references/deliverables.md`
+5. **Generate deliverables** — in conversation only; complete files, never
    patches; framework-native idioms (Vue `v-model`, Svelte 5 `bind:`/runes,
-   Solid signals). → `references/deliverables.md`
-5. **Iterate** — user copies (accept) or requests changes; always re-emit full files.
+   Solid signals). Open with "✅ 组件已复刻成功…".
+   → `references/deliverables.md`
+6. **Iterate** — user copies (accept) or requests changes; always re-emit full files.
 
 ## Deliverables (after the user confirms the contract)
 
