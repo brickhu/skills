@@ -72,18 +72,11 @@ Replicating shadcn/ui's Button for a SolidJS + StyleX project, end to end:
 Open your AI coding assistant (Claude Code, Codex, Cursor, Zed), start a new
 conversation and send:
 
-**Conversation inside the project directory** — path, framework and design
-tokens are auto-probed, just say it:
-
-```text
-recomp https://ui.shadcn.com/docs/components/button
-```
-
-**Conversation started elsewhere** — add the project path (framework
-optional):
-
 ```text
 recomp https://ui.shadcn.com/docs/components/button, project at ~/my-app (SolidJS + StyleX)
+
+# If your conversation is inside the project directory, just send:
+recomp https://ui.shadcn.com/docs/components/button
 ```
 
 It replies with the behavior contract summary:
