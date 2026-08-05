@@ -8,19 +8,21 @@
 
 不是它们不好——shadcn/ui、Radix、MUI、Ant Design，一个比一个精致。问题出在"用得上"这三个字上。
 
-深夜 23:47，你在 shadcn/ui 翻到一个 Command Palette，完美契合需求。光标已经悬在复制键上——然后你想起上次的教训：
+深夜 23:47，你正在为自己的 App 打磨一个日期选择组件。你发现了 shadcn/ui 的 DatePicker，很惊艳，交互模式也基本符合你的要求。你花了大把时间研究它的安装使用流程，把使用文档翻了个遍——然而一个根本问题始终绕不过去：**框架不对**。它只支持 React，而你的项目用的是 SolidJS。
+
+其实，我们选用第三方设计组件库时，普遍都会面临这么几个问题：
+
+- **框架对不上**：JSX、hooks、受控组件，复制过来直接报错——最精致的组件库几乎全是 React 写的，而你用的是 SolidJS / Vue / Svelte
+- **样式对不上**：组件库用 Tailwind 写的，你的项目用的是 StyleX / CSS-in-JS，class 满天飞，接不进来
+- **设计对不上**：组件库自带一套 design token，跟你的设计系统打架，改起来比重写还累
+
+这些问题落到编辑器里，症状大概长这样：
 
 ```text
 ✗ SyntaxError: JSX expressions must have one parent element   ← 框架不对
 ✗ [plugin:vite:vue] Unexpected token '<'                       ← 还是框架不对
 ✗ Unknown utility class: group-hover/…                         ← 样式方案也不对
 ```
-
-三个报错，来自三个晚上的三个项目。用不上的原因，数来数去就三条：
-
-- **框架对不上**：JSX、hooks、受控组件，复制过来直接报错——最精致的组件库几乎全是 React 写的，而你用的是 SolidJS / Vue / Svelte
-- **样式对不上**：组件库用 Tailwind 写的，你的项目用的是 StyleX / CSS-in-JS，class 满天飞，接不进来
-- **设计对不上**：组件库自带一套 design token，跟你的设计系统打架，改起来比重写还累
 
 于是你合上页面，安慰自己"回头自己写一个"——然后就没有然后了。**看中 → 复制 → 报错 → 放弃 → 手搓轮子**，这就是很多非 React 前端开发者的循环。
 
