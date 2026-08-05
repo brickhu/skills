@@ -39,15 +39,16 @@ owns styling, design tokens, and integration.
    only on ambiguity or blind spots, with detected results pre-filled.
    → `references/probing.md`
 3. **Build the behavior contract** — extract interface (props/events/slots,
-   controlled/uncontrolled) and behavior from docs; fill gaps from WAI-ARIA
-   APG and, when available, the ecosystem headless library as a reference;
-   classify every decision A (docs) / B (APG or ecosystem reference) /
-   C (cannot infer → ask).
+   controlled/uncontrolled) and behavior from docs. Anything the docs do NOT
+   state explicitly becomes an **open question** with a proposed approach
+   (APG standard / ecosystem reference implementation) — never implemented
+   silently.
 4. **Confirm the contract (gate — mandatory)** — present the behavior
-   contract summary as an option list and **stop**: never generate code until
-   the user replies. Options: 1 确认复刻 / 2 修改接口或行为 / 3 重新探测 /
-   4 取消. The contract summary and the A/B/C decision table live ONLY in this
-   gate — never embed them in the final delivery. → `references/deliverables.md`
+   contract summary + the open questions as an option list and **stop**: never
+   generate code until the user replies. Options: 1 确认复刻（含建议）/
+   2 修改接口或行为 / 3 重新探测 / 4 取消. The contract summary and open
+   questions live ONLY in this gate — never embed them in the final delivery.
+   → `references/deliverables.md`
 5. **Generate deliverables** — in conversation only; complete files, never
    patches; framework-native idioms (Vue `v-model`, Svelte 5 `bind:`/runes,
    Solid signals). Open with "✅ 组件已复刻成功…".
@@ -67,7 +68,7 @@ User-priority order — source first, keep the delivery lean:
    approach
 5. Optional, at the very end — acceptance script (keyboard, focus, ARIA snapshot)
 
-The behavior contract summary (validation + A/B/C decisions) is presented
+The behavior contract summary (validation + open questions) is presented
 BEFORE replication as the confirmation gate; do not repeat it in the delivery.
 
 ## Hard rules
@@ -75,7 +76,9 @@ BEFORE replication as the confirmation gate; do not repeat it in the delivery.
 - **Read-only**: never create directories or modify files in the user's
   project; probe results are session-only judgment input, not persisted
 - **Never guess accessibility semantics** (ARIA roles, focus management,
-  keyboard behavior): fill from WAI-ARIA APG or mark "not implemented"
+  keyboard behavior): they become open questions with a proposed approach
+  (APG standard / ecosystem reference) for the user to confirm — never
+  invented, never implemented silently
 - **Refuse** non-component-library pages (with a reason). If the user's
   ecosystem already has an equivalent headless implementation
   (Kobalte / Reka UI / Bits UI), **learn from it as a reference** (behavior +

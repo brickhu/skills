@@ -25,43 +25,37 @@ Behavior contract summary template:
 - **Component**: name, source URL, fetch date
 - **Interface**: props / events / slots; controlled/uncontrolled pattern in the
   target framework (see idiom mapping below)
-- **Behavior**: states, keyboard interaction, focus management, ARIA, edge cases
-- **Decisions**: A / B / C table (below)
+- **Behavior**: states, keyboard interaction, focus management, ARIA, edge
+  cases — only what the docs state explicitly
 - **Dependencies**: name + version + known conflicts in the user's project
 
-Present the summary as an option list and **stop — generate nothing until the
-user replies**. Template:
+Anything the docs do NOT state explicitly is collected as **open questions**,
+each with a proposed approach (APG standard / ecosystem reference), and shown
+in the gate. Present the summary as an option list and **stop — generate
+nothing until the user replies**. Template:
 
-> 📋 行为契约摘要
-> - 接口：<props/events/slots 及目标框架惯用法>
-> - 行为：<关键行为清单>
-> - 决策：<A/B/C 摘要，如 12 条来自文档 · 3 条按 APG 补全 · 1 条留空>
-> - 依赖：<依赖及版本>
+> ✅ 验证通过：<library> 的 <component> 文档页
+> ---
+> 接口：<props/events/slots 及目标框架惯用法>
+> 行为：<文档明确的行为清单>
+> 依赖：<依赖及版本>
+> ---
+> 文档未明确、需要你确认的 N 处：
+> 1. <问题> → 建议：<方案（如按 APG 规范 / 参考 Kobalte 实现）>
 >
 > 请选择（回复数字即可）：
-> 1. 确认，复刻成 <framework> + <css approach> 技术栈的组件源码和使用示范
+> 1. 确认，按以上方案（含建议）复刻成 <framework> + <css approach> 技术栈的组件源码和使用示范
 > 2. 接口或行为需要修改（直接说明哪里不对）
 > 3. 重新探测项目技术栈
 > 4. 取消本次复刻
 
-The contract summary and the decision table live ONLY in this gate — never in
+The contract summary and the open questions live ONLY in this gate — never in
 the final delivery.
 
-## Decision classification
-
-| Class | Source | Handling |
-|---|---|---|
-| A | explicit in docs | implement as documented (cite) |
-| B | missing in docs; WAI-ARIA APG has a standard pattern | implement per APG; annotate "filled from APG <pattern>" |
-| B2 | missing in docs; an ecosystem headless library (Kobalte / Reka UI / Bits UI) implements the same component | learn from it as a reference; annotate "referenced from <library> <component>" — still deliver the code |
-| C | not in docs, not in APG, no ecosystem reference | **do not guess** — tell the user; offer: user defines behavior / find a reference implementation / skip |
-
-An ecosystem headless library is a *reference source*, never a replacement:
-even when one exists, deliver the replicated code and usage guide for the user
-to copy into their own component directory.
-
-Never guess ARIA roles, focus management, or keyboard semantics — those are
-B or C, never invented.
+Never guess ARIA roles, focus management, or keyboard semantics — they become
+open questions with proposed approaches, never invented answers. An ecosystem
+headless library (Kobalte / Reka UI / Bits UI) is a *reference source* for
+proposals, never a replacement: even when one exists, still deliver the code.
 
 ## Framework idiom mapping (interface layer)
 
