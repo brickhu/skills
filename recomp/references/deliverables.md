@@ -44,7 +44,9 @@ question ends the gate. **Never generate code before that.** Template:
 >
 > 第 1/N 处：<问题>
 > 建议：<方案（如按 APG 规范 / 参考 Kobalte 实现）>
-> 回复：1 采纳建议 / 2 自己定义（直接说明）
+> 回复：1 采纳建议 / 2 自定义（直接输入你的方案）/ 3 取消本次复刻
+
+Free-form replies are accepted at any step — treat them as custom input.
 
 Confirm each question in turn. After the last one is confirmed, go straight
 to delivery (phase 2) — no extra confirmation round.
