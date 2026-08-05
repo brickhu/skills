@@ -44,7 +44,10 @@ question ends the gate. **Never generate code before that.** Template:
 >
 > 第 1/N 处：<问题>
 > 建议：<方案（如按 APG 规范 / 参考 Kobalte 实现）>
-> 回复 1 采纳建议，或直接输入你的自定义方案（任何一步输入"取消"即可终止）
+> 回复 yes / 确认 采纳建议，或直接输入你的自定义方案（任何一步输入"取消"即可终止）
+
+Single option → reply yes / 确认. Numbers are only used when multiple
+choices exist.
 
 Confirm each question in turn. After the last one is confirmed, go straight
 to delivery (phase 2) — no extra confirmation round.
