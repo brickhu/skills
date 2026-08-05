@@ -21,12 +21,13 @@
 
 ## 安装
 
-`recomp` 是纯提示词驱动技能：无依赖、无构建步骤。把 `recomp/` 文件夹复制到你的 agent 技能目录（如 `~/.agents/skills/`），或克隆本仓库后引用路径：
+一行命令（[skills CLI](https://skills.sh)）：
 
 ```sh
-git clone https://github.com/brickhu/skills.git
-cp -r skills/recomp ~/.agents/skills/
+npx skills add brickhu/skills/recomp
 ```
+
+纯提示词驱动：无依赖、无构建步骤。（手动方式：把 `recomp/` 文件夹复制到 agent 技能目录，如 `~/.agents/skills/`。）
 
 ## 使用
 

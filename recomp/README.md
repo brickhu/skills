@@ -32,15 +32,14 @@ decision? Say so — the component is re-emitted in full.
 
 ## Install
 
-`recomp` is a prompt-driven skill: no dependencies, no build step. Copy the
-`recomp/` folder into your agent's skills directory (e.g. `~/.agents/skills/`),
-or clone this repository and point your agent at it.
+One-liner via the [skills CLI](https://skills.sh):
 
 ```sh
-git clone https://github.com/brickhu/skills.git
-# then copy the folder, or reference the repo path directly
-cp -r skills/recomp ~/.agents/skills/
+npx skills add brickhu/skills/recomp
 ```
+
+No dependencies, no build step. (Manual alternative: copy the `recomp/` folder
+into your agent's skills directory, e.g. `~/.agents/skills/`.)
 
 ## Usage
 
