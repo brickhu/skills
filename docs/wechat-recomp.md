@@ -16,15 +16,7 @@
 - **样式对不上**：组件库用 Tailwind 写的，你的项目用的是 StyleX / CSS-in-JS，class 满天飞，接不进来
 - **设计对不上**：组件库自带一套 design token，跟你的设计系统打架，改起来比重写还累
 
-这些问题落到编辑器里，症状大概长这样：
-
-```text
-✗ SyntaxError: JSX expressions must have one parent element   ← 框架不对
-✗ [plugin:vite:vue] Unexpected token '<'                       ← 还是框架不对
-✗ Unknown utility class: group-hover/…                         ← 样式方案也不对
-```
-
-于是你合上页面，安慰自己"回头自己写一个"——然后就没有然后了。**看中 → 复制 → 报错 → 放弃 → 手搓轮子**，这就是很多非 React 前端开发者的循环。
+这就是前端开发者的普遍困境：我们想用别人的轮子来解放生产力，但不是每一个轮子（组件）都适合你的底盘（框架）——于是你只能安慰自己"回头自己写一个"。
 
 ## 组件库是"成品菜"，你要的其实是"菜谱"
 
