@@ -44,11 +44,12 @@ owns styling, design tokens, and integration.
    (APG standard / ecosystem reference implementation) — never implemented
    silently.
 4. **Confirm the contract (gate — mandatory)** — present the behavior
-   contract summary + the open questions as an option list and **stop**: never
-   generate code until the user replies. Options: 1 确认复刻（含建议）/
-   2 修改接口或行为 / 3 重新探测 / 4 取消. The contract summary and open
-   questions live ONLY in this gate — never embed them in the final delivery.
-   → `references/deliverables.md`
+   contract summary, then walk through the open questions **one by one**
+   (each: proposed approach, reply 1 采纳建议 / 2 自己定义). After the last
+   question, present the final confirm list and **stop**: never generate code
+   until the user replies (1 确认复刻 / 2 还要修改 / 3 取消). The contract
+   summary and open questions live ONLY in this gate — never embed them in the
+   final delivery. → `references/deliverables.md`
 5. **Generate deliverables** — in conversation only; complete files, never
    patches; framework-native idioms (Vue `v-model`, Svelte 5 `bind:`/runes,
    Solid signals). Open with "✅ 组件已复刻成功…".

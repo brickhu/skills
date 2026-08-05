@@ -30,9 +30,10 @@ Behavior contract summary template:
 - **Dependencies**: name + version + known conflicts in the user's project
 
 Anything the docs do NOT state explicitly is collected as **open questions**,
-each with a proposed approach (APG standard / ecosystem reference), and shown
-in the gate. Present the summary as an option list and **stop — generate
-nothing until the user replies**. Template:
+each with a proposed approach (APG standard / ecosystem reference). Present
+them **one by one** and confirm each before moving on; after the last
+question, present the final confirm list. **Stop — generate nothing until the
+user replies.** Template:
 
 > ✅ 验证通过：<library> 的 <component> 文档页
 > ---
@@ -40,14 +41,23 @@ nothing until the user replies**. Template:
 > 行为：<文档明确的行为清单>
 > 依赖：<依赖及版本>
 > ---
-> 文档未明确、需要你确认的 N 处：
-> 1. <问题> → 建议：<方案（如按 APG 规范 / 参考 Kobalte 实现）>
+> 文档未明确的行为有 N 处，我们逐个确认：
+>
+> 第 1/N 处：<问题>
+> 建议：<方案（如按 APG 规范 / 参考 Kobalte 实现）>
+> 回复：1 采纳建议 / 2 自己定义（直接说明）
+
+Confirm each question in turn, then present the final confirm list:
+
+> ✅ 全部确认完毕。最终方案：
+> - 接口：<...>
+> - 行为：<文档明确的 + 已确认的>
+> - 依赖：<...>
 >
 > 请选择（回复数字即可）：
-> 1. 确认，按以上方案（含建议）复刻成 <framework> + <css approach> 技术栈的组件源码和使用示范
-> 2. 接口或行为需要修改（直接说明哪里不对）
-> 3. 重新探测项目技术栈
-> 4. 取消本次复刻
+> 1. 确认，复刻成 <framework> + <css approach> 技术栈的组件源码和使用示范
+> 2. 还要修改（直接说明哪里不对）
+> 3. 取消本次复刻
 
 The contract summary and the open questions live ONLY in this gate — never in
 the final delivery.
