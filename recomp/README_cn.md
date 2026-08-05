@@ -6,7 +6,7 @@
 
 ## 它能做什么
 
-你发一个组件库文档 URL（shadcn/ui、Radix、MUI、Ant Design 等），recomp 会：
+把组件库文档页的链接复制下来（shadcn/ui、Radix、MUI、Ant Design 等），发给 recomp，它会：
 
 1. **验证页面**确实是组件库文档页——博客、工具库、设计稿一律拒绝，并给出原因
 2. **只读探测你的工程**——框架+版本、CSS 方案、设计 token（DESIGN.md、`:root` CSS 变量、`@theme`、stylex tokens）——不建目录、不改文件

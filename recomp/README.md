@@ -8,8 +8,8 @@ conversation and ready to paste.
 
 ## What it does
 
-Give it a component library docs URL (shadcn/ui, Radix, MUI, Ant Design, …),
-and recomp will:
+Copy a component library docs link (shadcn/ui, Radix, MUI, Ant Design, …),
+send it to recomp, and it will:
 
 1. **Validate** the page is actually a component library docs page (refuses
    blogs, utility libs, design files — with a reason)
