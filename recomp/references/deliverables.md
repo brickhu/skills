@@ -31,9 +31,8 @@ Behavior contract summary template:
 
 Anything the docs do NOT state explicitly is collected as **open questions**,
 each with a proposed approach (APG standard / ecosystem reference). Present
-them **one by one** and confirm each before moving on; after the last
-question, present the final confirm list. **Stop — generate nothing until the
-user replies.** Template:
+them **one by one** and confirm each before moving on — confirming the last
+question ends the gate. **Never generate code before that.** Template:
 
 > ✅ 验证通过：<library> 的 <component> 文档页
 > ---
@@ -47,17 +46,8 @@ user replies.** Template:
 > 建议：<方案（如按 APG 规范 / 参考 Kobalte 实现）>
 > 回复：1 采纳建议 / 2 自己定义（直接说明）
 
-Confirm each question in turn, then present the final confirm list:
-
-> ✅ 全部确认完毕。最终方案：
-> - 接口：<...>
-> - 行为：<文档明确的 + 已确认的>
-> - 依赖：<...>
->
-> 请选择（回复数字即可）：
-> 1. 确认，复刻成 <framework> + <css approach> 技术栈的组件源码和使用示范
-> 2. 还要修改（直接说明哪里不对）
-> 3. 取消本次复刻
+Confirm each question in turn. After the last one is confirmed, go straight
+to delivery (phase 2) — no extra confirmation round.
 
 The contract summary and the open questions live ONLY in this gate — never in
 the final delivery.

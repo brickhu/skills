@@ -45,11 +45,11 @@ owns styling, design tokens, and integration.
    silently.
 4. **Confirm the contract (gate — mandatory)** — present the behavior
    contract summary, then walk through the open questions **one by one**
-   (each: proposed approach, reply 1 采纳建议 / 2 自己定义). After the last
-   question, present the final confirm list and **stop**: never generate code
-   until the user replies (1 确认复刻 / 2 还要修改 / 3 取消). The contract
-   summary and open questions live ONLY in this gate — never embed them in the
-   final delivery. → `references/deliverables.md`
+   (each: proposed approach, reply 1 采纳建议 / 2 自己定义). Confirming the
+   last question ends the gate — generate the deliverables directly
+   afterwards, with no extra confirmation round. The contract summary and open
+   questions live ONLY in this gate — never embed them in the final delivery.
+   → `references/deliverables.md`
 5. **Generate deliverables** — in conversation only; complete files, never
    patches; framework-native idioms (Vue `v-model`, Svelte 5 `bind:`/runes,
    Solid signals). Open with "✅ 组件已复刻成功…".
