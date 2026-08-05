@@ -25,6 +25,10 @@ and recomp will:
    - a **style interface contract** — data-attributes, class slots, CSS
      variables — matched to your CSS setup (className passthrough for
      Tailwind, style props for StyleX, …)
+   - **no installation** — the output is plain source files, not an npm
+     package: nothing lands in node_modules, no build config changes, no
+     dependency tree to maintain. The component becomes your own code, not a
+     dependency you track upstream
 
 You keep styling and design tokens entirely in your hands: paste the source
 into your component directory, wire up the styles, done. Don't like a

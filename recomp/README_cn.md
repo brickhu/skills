@@ -15,6 +15,7 @@
    - **headless 组件源码**（SolidJS / Vue / Svelte），完整文件 + 依赖清单
    - **使用说明**（示例 + API 摘要）
    - **样式接口契约**——data-attribute、class 插槽、CSS 变量，按你的 CSS 方案定制（Tailwind 走 className 透传、StyleX 走 style props）
+   - **免安装**——交付的是纯源码文件，不是 npm 包：不进 node_modules、不改构建配置、没有依赖树要维护。组件从此是你自己的代码，而不是一个需要跟进升级的依赖
 
 样式和设计 token 完全由你掌控：把源码复制进你的组件目录，接上样式即可。
 不满意某处行为？直接说，我重出整个文件。
