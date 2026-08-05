@@ -1,6 +1,6 @@
 # recomp
 
-把组件库文档复刻成**适配你框架的 headless 组件**——纯行为、零样式，所有产出直接展示在对话里，复制即用。
+recomp 是一个面向前端开发的组件复刻技能（支持 Claude、Codex 等主流 AI agents），它解决了组件库框架（例如 React）和你项目开发框架（例如 SolidJS）不一致的问题：指导 AI 阅读组件库文档，把组件的交互和行为模式复刻成适配你框架的 headless 组件源码和使用示范——所有产出直接展示在对话里，复制即用。
 
 > English version: [README.md](./README.md)
 

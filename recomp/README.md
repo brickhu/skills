@@ -1,8 +1,12 @@
 # recomp
 
-Replicate UI components from component library documentation into **headless
-components for your framework** — behavior only, zero styles, delivered in the
-conversation and ready to paste.
+recomp is a component-replication skill for frontend developers (works with
+Claude, Codex and other mainstream AI agents). It bridges the gap between a
+component library's framework (e.g. React) and your project's framework
+(e.g. SolidJS): the AI reads the library docs and replicates the component's
+interaction and behavior patterns into headless component source and usage
+examples adapted to your framework — all delivered in the conversation, copy
+and use.
 
 > 中文版见 [README_cn.md](./README_cn.md)
 
