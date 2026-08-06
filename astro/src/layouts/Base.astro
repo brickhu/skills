@@ -16,7 +16,7 @@ const t = useTranslations(lang);
 const base = import.meta.env.BASE_URL;
 const zhHref = Astro.props.zhHref ?? `${base}`;
 const enHref = Astro.props.enHref ?? `${base}en/`;
-const pageTitle = title === t('site.title') ? t('site.title') : `${title} · ${t('site.title')}`;
+const pageTitle = title === t('site.title') ? t('brand.tab') : `${title} · ${t('brand.tab')}`;
 ---
 
 <!doctype html>
