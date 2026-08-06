@@ -1,0 +1,37 @@
+---
+import { languages, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  zhHref: string | null;
+  enHref: string | null;
+}
+
+const { lang, zhHref, enHref } = Astro.props;
+const options: { lang: Lang; label: string; href: string | null }[] = [
+  { lang: 'zh', label: languages.zh, href: zhHref },
+  { lang: 'en', label: languages.en, href: enHref },
+];
+---
+
+<select
+  class="cursor-pointer bg-transparent text-sm text-zinc-400 transition hover:text-zinc-900 focus:outline-none"
+  aria-label="Language"
+  data-lang-select
+>
+  {options.map((opt) => (
+    <option value={opt.href ?? ''} selected={opt.lang === lang}>
+      {opt.label}
+    </option>
+  ))}
+</select>
+
+<script>
+  const selects = document.querySelectorAll<HTMLSelectElement>('[data-lang-select]');
+  selects.forEach((select) => {
+    select.addEventListener('change', () => {
+      const href = select.value;
+      if (href) window.location.href = href;
+    });
+  });
+</script>

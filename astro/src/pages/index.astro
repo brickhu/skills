@@ -10,12 +10,25 @@ const base = import.meta.env.BASE_URL;
 const articles = (await getCollection('zhArticles')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+// 根路径根据系统语言自动匹配：非中文环境 fallback 到英文
+const autoLangScript = `
+  var _base = ${JSON.stringify(base)};
+  var _lang = (navigator.language || navigator.languages?.[0] || '').toLowerCase();
+  var _path = window.location.pathname;
+  if (!_lang.startsWith('zh') && (_path === _base || _path === _base.replace(/\\/$/, ''))) {
+    window.location.replace(_base + 'en/');
+  }
+`;
 ---
 
 <Base lang="zh" title={t('site.title')} description={t('site.subtitle')}>
+  <Fragment slot="head">
+    <script is:inline set:html={autoLangScript} />
+  </Fragment>
   <section class="mb-8">
     <h1 class="font-display text-3xl font-extrabold tracking-tight">{t('site.title')}</h1>
-    <p class="mt-2 text-sm leading-relaxed text-zinc-500" set:html={t('site.subtitle')} />
+    <p class="my-8 text-sm leading-relaxed text-zinc-500" set:html={t('site.subtitle')} />
   </section>
 
   {articles.length === 0 ? (
@@ -41,7 +54,7 @@ const articles = (await getCollection('zhArticles')).sort(
   )}
 
   <section class="mt-16">
-    <h2 class="font-display text-lg font-bold">{t('about.title')}</h2>
+    <h2 class="text-lg font-bold">{t('about.title')}</h2>
     <p class="mt-3 text-sm leading-relaxed text-zinc-600" set:html={t('about.body')} />
   </section>
 </Base>
