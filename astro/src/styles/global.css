@@ -21,3 +21,12 @@ body {
 .prose :where(h1, h2, h3, h4, h5, h6) {
   font-family: var(--font-sans);
 }
+
+/* 移动端友好：表格和代码块可横向滚动，避免溢出 */
+.prose :where(table) {
+  display: block;
+  overflow-x: auto;
+}
+.prose :where(pre) {
+  overflow-x: auto;
+}
