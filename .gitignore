@@ -20,3 +20,4 @@ addressinsight/
 # Astro blog
 astro/node_modules/
 astro/dist/
+astro/.astro/
