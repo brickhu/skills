@@ -28,7 +28,7 @@ const enCounterpart = (await getCollection('enArticles')).find((e) => e.slug ===
   enHref={enCounterpart ? `${base}en/${slug}/` : null}
 >
   <article>
-    <nav class="flex items-center text-sm text-zinc-500">
+    <nav class="flex items-center px-[0.5em] text-sm text-zinc-500">
       <a href={`${base}`} class="inline-flex items-center transition hover:text-zinc-900" aria-label="Fei skills">
         <svg class="h-[1em] w-[1em] text-[#ff4d6d]" viewBox="0 0 8 7" aria-hidden="true">
           <g fill="currentColor">
@@ -44,15 +44,15 @@ const enCounterpart = (await getCollection('enArticles')).find((e) => e.slug ===
       <span class="mx-1.5 text-zinc-300">/</span>
       <span class="font-medium text-zinc-800">{slug}</span>
     </nav>
-    <h1 class="mt-4 text-2xl font-extrabold leading-tight sm:text-3xl">{post.data.title}</h1>
-    <div class="mt-3 flex flex-wrap items-center gap-3 text-sm text-zinc-500">
+    <h1 class="mt-4 px-[0.5em] text-2xl font-extrabold leading-tight sm:text-3xl">{post.data.title}</h1>
+    <div class="mt-3 flex flex-wrap items-center gap-3 px-[0.5em] text-sm text-zinc-500">
       <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate, 'zh')}</time>
       {post.data.tags.map((tag) => (
         <span class="rounded-full bg-zinc-100 px-2 py-0.5 text-xs text-zinc-600">{tag}</span>
       ))}
     </div>
     <InstallCard install={post.data.install} copiedText={t('install.copied')} />
-    <div class="prose prose-zinc max-w-none">
+    <div class="prose prose-zinc max-w-none px-[0.5em]">
       <Content />
     </div>
   </article>
