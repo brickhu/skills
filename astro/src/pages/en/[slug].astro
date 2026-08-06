@@ -44,7 +44,7 @@ const zhCounterpart = (await getCollection('zhArticles')).find((z) => z.slug ===
       <span class="mx-1.5 text-zinc-300">/</span>
       <span class="font-medium text-zinc-800">{slug}</span>
     </nav>
-    <h1 class="mt-4 px-6 text-3xl font-extrabold leading-tight">{post.data.title}</h1>
+    <h1 class="mt-4 px-6 text-2xl font-extrabold leading-tight sm:text-3xl">{post.data.title}</h1>
     <div class="mt-3 flex flex-wrap items-center gap-3 px-6 text-sm text-zinc-500">
       <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate, 'en')}</time>
       {post.data.tags.map((tag) => (
