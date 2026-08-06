@@ -11,13 +11,16 @@ const articles = (await getCollection('zhArticles')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
-// 根路径根据系统语言自动匹配：非中文环境 fallback 到英文
+// 根路径默认锁定英文版；用户切换语言后记住选择（localStorage）
 const autoLangScript = `
   var _base = ${JSON.stringify(base)};
-  var _lang = (navigator.language || navigator.languages?.[0] || '').toLowerCase();
   var _path = window.location.pathname;
-  if (!_lang.startsWith('zh') && (_path === _base || _path === _base.replace(/\\/$/, ''))) {
-    window.location.replace(_base + 'en/');
+  if (_path === _base || _path === _base.replace(/\\/$/, '')) {
+    var _saved = null;
+    try { _saved = localStorage.getItem('fei-skills-lang'); } catch (e) {}
+    if (_saved !== 'zh') {
+      window.location.replace(_base + 'en/');
+    }
   }
 `;
 ---

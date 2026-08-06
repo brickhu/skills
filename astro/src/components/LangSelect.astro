@@ -28,6 +28,12 @@ const { lang, zhHref, enHref } = Astro.props;
   const selects = document.querySelectorAll<HTMLSelectElement>('[data-lang-select]');
   selects.forEach((select) => {
     select.addEventListener('change', () => {
+      // 记住用户的语言选择：0 = CN(zh)，1 = EN(en)
+      try {
+        localStorage.setItem('fei-skills-lang', select.selectedIndex === 0 ? 'zh' : 'en');
+      } catch {
+        /* storage unavailable — ignore */
+      }
       const href = select.value;
       if (href) window.location.href = href;
     });
