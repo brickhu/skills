@@ -14,7 +14,7 @@ const articles = (await getCollection('zhArticles')).sort(
 
 <Base lang="zh" title={t('site.title')} description={t('site.subtitle')}>
   <section class="mb-8">
-    <h1 class="text-3xl font-extrabold tracking-tight">🧩 {t('site.title')}</h1>
+    <h1 class="font-display text-3xl font-extrabold tracking-tight">{t('site.title')}</h1>
     <p class="mt-1 text-zinc-500">{t('site.subtitle')}</p>
   </section>
 
@@ -41,7 +41,7 @@ const articles = (await getCollection('zhArticles')).sort(
   )}
 
   <section class="mt-16">
-    <h2 class="text-lg font-bold">{t('about.title')}</h2>
+    <h2 class="font-display text-lg font-bold">{t('about.title')}</h2>
     <p class="mt-3 text-sm leading-relaxed text-zinc-600">{t('about.body')}</p>
   </section>
 </Base>
