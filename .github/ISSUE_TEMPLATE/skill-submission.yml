@@ -1,0 +1,72 @@
+name: Skill submission
+description: Submit a Skill to FEI <3 SKILLS — share your useful, reusable AI skill with the community
+title: "New skill: {{ name }}"
+labels: ["skill-submission"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Skill name
+      description: "Short, lowercase, hyphenated. Example: recomp"
+    validations:
+      required: true
+  - type: input
+    id: description
+    attributes:
+      label: What does it do?
+      description: One or two plain-language sentences about what the skill does.
+      placeholder: Replicates any component library docs into a headless component for your framework
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Which area does it belong to?
+      options:
+        - Frontend
+        - Backend
+        - Database
+        - AI / Agents
+        - Web3
+        - Productivity
+        - Other
+  - type: input
+    id: repo
+    attributes:
+      label: Repo or docs link
+      description: Where can people find and install it? (GitHub repo, docs URL, skills.sh page...)
+      placeholder: https://github.com/brickhu/skills/tree/main/recomp
+  - type: input
+    id: install
+    attributes:
+      label: Install command
+      description: "One-line install command, if any. Example: npx skills add brickhu/recomp"
+      placeholder: npx skills add <owner>/<repo>
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why is it useful?
+      description: What problem does it solve? Who is it for?
+    validations:
+      required: true
+  - type: input
+    id: author
+    attributes:
+      label: Author
+      description: Your GitHub username or nickname.
+  - type: dropdown
+    id: license
+    attributes:
+      label: License
+      description: The skill must be open-source to be listed.
+      options:
+        - MIT
+        - Apache-2.0
+        - GPL-3.0
+        - BSD-3-Clause
+        - Other (state in the issue)
+    validations:
+      required: true

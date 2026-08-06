@@ -16,3 +16,8 @@ html {
 body {
   font-family: var(--font-sans);
 }
+
+/* 正文区域的标题保持常规字体，不使用像素化展示字体 */
+.prose :where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-sans);
+}

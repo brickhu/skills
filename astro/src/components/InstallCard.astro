@@ -8,13 +8,13 @@ const { install, copiedText } = Astro.props;
 ---
 
 <div
-  class="install-card group relative my-10 cursor-pointer select-none rounded-xl border border-zinc-200 bg-zinc-100 px-5 py-8 text-center transition hover:border-zinc-400 hover:bg-zinc-200/70"
+  class="install-card group relative my-10 cursor-pointer select-none rounded-xl bg-white px-5 py-16 text-center shadow-sm transition hover:shadow-md"
   data-install={install}
   role="button"
   tabindex="0"
   aria-label={`copy: ${install}`}
 >
-  <code class="break-all text-sm font-medium text-zinc-700">{install}</code>
+  <code class="font-display break-all text-sm font-bold text-zinc-800">{install}</code>
   <span class="copy-icon absolute right-4 top-1/2 -translate-y-1/2 text-lg opacity-0 transition group-hover:opacity-100" aria-hidden="true">📋</span>
   <span class="copied absolute right-4 top-1/2 hidden -translate-y-1/2 text-sm font-medium text-emerald-600">{copiedText}</span>
 </div>
