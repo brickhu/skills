@@ -14,7 +14,20 @@ const articles = (await getCollection('enArticles')).sort(
 
 <Base lang="en" title={t('site.title')} description={t('site.subtitle')}>
   <section class="mb-8">
-    <h1 class="font-display text-3xl font-extrabold tracking-tight">{t('site.title')}</h1>
+    <h1 class="font-display flex items-center gap-1.5 text-3xl font-extrabold tracking-tight">
+      FEI
+      <svg class="h-[0.75em] w-[0.75em]" viewBox="0 0 8 7" aria-hidden="true">
+        <g fill="#ff4d6d">
+          <rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/>
+          <rect x="0" y="1" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/>
+          <rect x="0" y="2" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/>
+          <rect x="1" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/>
+          <rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/>
+          <rect x="3" y="5" width="1" height="1"/>
+        </g>
+      </svg>
+      SKILLS
+    </h1>
     <p class="my-8 text-sm leading-relaxed text-zinc-500" set:html={t('site.subtitle')} />
   </section>
 
