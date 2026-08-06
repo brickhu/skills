@@ -1,5 +1,5 @@
 ---
-import { languages, type Lang } from '../i18n/ui';
+import { type Lang } from '../i18n/ui';
 
 interface Props {
   lang: Lang;
@@ -8,23 +8,21 @@ interface Props {
 }
 
 const { lang, zhHref, enHref } = Astro.props;
-const options: { lang: Lang; label: string; href: string | null }[] = [
-  { lang: 'zh', label: languages.zh, href: zhHref },
-  { lang: 'en', label: languages.en, href: enHref },
-];
 ---
 
-<select
-  class="cursor-pointer rounded-full border border-zinc-300 bg-transparent px-3 py-0.5 text-sm text-zinc-500 transition hover:border-zinc-500 hover:text-zinc-900 focus:outline-none"
-  aria-label="Language"
-  data-lang-select
->
-  {options.map((opt) => (
-    <option value={opt.href ?? ''} selected={opt.lang === lang}>
-      {opt.label}
-    </option>
-  ))}
-</select>
+<span class="relative inline-flex items-center">
+  <select
+    class="cursor-pointer appearance-none bg-transparent pr-[1.25em] text-sm font-medium text-zinc-500 transition hover:text-zinc-900 focus:outline-none"
+    aria-label="Language"
+    data-lang-select
+  >
+    <option value={zhHref ?? ''} selected={lang === 'zh'}>CN</option>
+    <option value={enHref ?? ''} selected={lang === 'en'}>EN</option>
+  </select>
+  <svg class="pointer-events-none absolute right-0 h-2.5 w-2.5 text-zinc-400" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+    <path d="M3 4.5 6 7.5 9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+</span>
 
 <script>
   const selects = document.querySelectorAll<HTMLSelectElement>('[data-lang-select]');
