@@ -29,7 +29,18 @@ const zhCounterpart = (await getCollection('zhArticles')).find((z) => z.slug ===
 >
   <article>
     <nav class="px-6 text-sm text-zinc-500">
-      <a href={`${base}en/`} class="transition hover:text-zinc-900">Fei♡skills</a>
+      <a href={`${base}en/`} class="inline-flex items-center transition hover:text-zinc-900" aria-label="Fei skills">
+        <svg class="h-[1em] w-[1em] text-[#ff4d6d]" viewBox="0 0 8 7" aria-hidden="true">
+          <g fill="currentColor">
+            <rect x="1" y="0" width="1" height="1"/><rect x="2" y="0" width="1" height="1"/><rect x="4" y="0" width="1" height="1"/><rect x="5" y="0" width="1" height="1"/>
+            <rect x="0" y="1" width="1" height="1"/><rect x="1" y="1" width="1" height="1"/><rect x="2" y="1" width="1" height="1"/><rect x="3" y="1" width="1" height="1"/><rect x="4" y="1" width="1" height="1"/><rect x="5" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/>
+            <rect x="0" y="2" width="1" height="1"/><rect x="1" y="2" width="1" height="1"/><rect x="2" y="2" width="1" height="1"/><rect x="3" y="2" width="1" height="1"/><rect x="4" y="2" width="1" height="1"/><rect x="5" y="2" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/>
+            <rect x="1" y="3" width="1" height="1"/><rect x="2" y="3" width="1" height="1"/><rect x="3" y="3" width="1" height="1"/><rect x="4" y="3" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/>
+            <rect x="2" y="4" width="1" height="1"/><rect x="3" y="4" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/>
+            <rect x="3" y="5" width="1" height="1"/>
+          </g>
+        </svg>
+      </a>
       <span class="mx-1.5 text-zinc-300">/</span>
       <span class="font-medium text-zinc-800">{slug}</span>
     </nav>
