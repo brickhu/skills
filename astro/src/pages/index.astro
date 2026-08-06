@@ -7,11 +7,9 @@ import { useTranslations, formatDate } from '../i18n/ui';
 const t = useTranslations('zh');
 const base = import.meta.env.BASE_URL;
 
-const articles = (await getCollection('articles'))
-  .filter((a) => a.data.lang === 'zh')
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-const slugOf = (id: string) => id.replace(/\.md$/, '').replace(/^(zh|en)\//, '');
+const articles = (await getCollection('zhArticles')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 ---
 
 <Base lang="zh" title={t('site.title')} description={t('site.subtitle')}>
@@ -26,12 +24,16 @@ const slugOf = (id: string) => id.replace(/\.md$/, '').replace(/^(zh|en)\//, '')
     <div class="space-y-4">
       {articles.map((a) => (
         <ArticleCard
-          href={`${base}${slugOf(a.id)}/`}
+          href={`${base}${a.slug}/`}
           title={a.data.title}
           date={formatDate(a.data.pubDate, 'zh')}
           datetime={a.data.pubDate.toISOString()}
           description={a.data.description}
-          tags={a.data.tags}
+          original={a.data.original}
+          originalText={t('label.original')}
+          sharedText={t('label.shared')}
+          skillName={a.data.skill_name}
+          author={a.data.author}
           readMore={t('read.more')}
         />
       ))}

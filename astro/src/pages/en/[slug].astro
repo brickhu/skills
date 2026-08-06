@@ -1,12 +1,13 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import InstallCard from '../../components/InstallCard.astro';
 import { useTranslations, formatDate } from '../../i18n/ui';
 
 export async function getStaticPaths() {
-  const posts = (await getCollection('articles')).filter((a) => a.data.lang === 'en');
+  const posts = await getCollection('enArticles');
   return posts.map((post) => ({
-    params: { slug: post.id.replace(/\.md$/, '').replace(/^en\//, '') },
+    params: { slug: post.slug },
     props: { post },
   }));
 }
@@ -16,9 +17,8 @@ const { Content } = await render(post);
 const t = useTranslations('en');
 const base = import.meta.env.BASE_URL;
 
-const slug = post.id.replace(/\.md$/, '').replace(/^en\//, '');
-const zhPosts = (await getCollection('articles')).filter((a) => a.data.lang === 'zh');
-const zhCounterpart = zhPosts.find((z) => z.id.replace(/\.md$/, '').replace(/^zh\//, '') === slug) ?? null;
+const slug = post.slug;
+const zhCounterpart = (await getCollection('zhArticles')).find((z) => z.slug === slug) ?? null;
 ---
 
 <Base
@@ -28,7 +28,11 @@ const zhCounterpart = zhPosts.find((z) => z.id.replace(/\.md$/, '').replace(/^zh
   zhHref={zhCounterpart ? `${base}${slug}/` : null}
 >
   <article>
-    <a href={`${base}en/`} class="text-sm text-zinc-500 transition hover:text-zinc-900">{t('back.list')}</a>
+    <nav class="text-sm text-zinc-500">
+      <a href={`${base}en/`} class="transition hover:text-zinc-900">{t('site.title')}</a>
+      <span class="mx-1.5 text-zinc-300">/</span>
+      <span class="font-medium text-zinc-800">{slug}</span>
+    </nav>
     <h1 class="mt-4 text-3xl font-extrabold leading-tight">{post.data.title}</h1>
     <div class="mt-3 flex flex-wrap items-center gap-3 text-sm text-zinc-500">
       <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate, 'en')}</time>
@@ -36,7 +40,8 @@ const zhCounterpart = zhPosts.find((z) => z.id.replace(/\.md$/, '').replace(/^zh
         <span class="rounded-full bg-zinc-100 px-2 py-0.5 text-xs text-zinc-600">{tag}</span>
       ))}
     </div>
-    <div class="prose prose-zinc mt-8 max-w-none">
+    <InstallCard install={post.data.install} copiedText={t('install.copied')} />
+    <div class="prose prose-zinc max-w-none">
       <Content />
     </div>
   </article>

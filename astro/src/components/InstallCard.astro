@@ -1,0 +1,49 @@
+---
+interface Props {
+  install: string;
+  copiedText: string;
+}
+
+const { install, copiedText } = Astro.props;
+---
+
+<div
+  class="install-card group relative my-10 cursor-pointer select-none rounded-xl border border-zinc-200 bg-zinc-100 px-5 py-8 text-center transition hover:border-zinc-400 hover:bg-zinc-200/70"
+  data-install={install}
+  role="button"
+  tabindex="0"
+  aria-label={`copy: ${install}`}
+>
+  <code class="break-all text-sm font-medium text-zinc-700">{install}</code>
+  <span class="copy-icon absolute right-4 top-1/2 -translate-y-1/2 text-lg opacity-0 transition group-hover:opacity-100" aria-hidden="true">📋</span>
+  <span class="copied absolute right-4 top-1/2 hidden -translate-y-1/2 text-sm font-medium text-emerald-600">{copiedText}</span>
+</div>
+
+<script>
+  const cards = document.querySelectorAll<HTMLElement>('.install-card');
+  cards.forEach((card) => {
+    const copy = async () => {
+      const text = card.getAttribute('data-install') ?? '';
+      try {
+        await navigator.clipboard.writeText(text);
+        const icon = card.querySelector<HTMLElement>('.copy-icon');
+        const copied = card.querySelector<HTMLElement>('.copied');
+        if (icon) icon.classList.add('hidden');
+        if (copied) copied.classList.remove('hidden');
+        setTimeout(() => {
+          if (icon) icon.classList.remove('hidden');
+          if (copied) copied.classList.add('hidden');
+        }, 1500);
+      } catch {
+        /* clipboard unavailable — ignore */
+      }
+    };
+    card.addEventListener('click', copy);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        copy();
+      }
+    });
+  });
+</script>

@@ -3,8 +3,13 @@ title: "Why is the admin dashboard harder than the user app? — db-ops, the dat
 description: 'db-ops, an open-source AI skill: safely connect your database so your AI coding assistant becomes your data-ops assistant — no dev, no release, change requirements in plain words.'
 pubDate: 2026-08-04
 lang: en
+slug: db-ops
+author: Fei
+skill_name: db-ops
+install: 'npx skills add brickhu/skills -s db-ops'
+original: true
 tags: ['db-ops', 'data operations', 'AI']
-original: docs/wechat-db-ops.md
+source: docs/wechat-db-ops.md
 ---
 
 After years of indie development, I've learned something:

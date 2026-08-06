@@ -3,8 +3,13 @@ title: '数据运营后台，比用户端还难做？——db-ops，独立开发
 description: '开源的 AI 技能包 db-ops：安全直连数据库，让你的 AI 编程助手变成数据运营助理——不用开发、不用发版，需求变了换句话就行。'
 pubDate: 2026-08-04
 lang: zh
+slug: db-ops
+author: Fei
+skill_name: db-ops
+install: 'npx skills add brickhu/skills -s db-ops'
+original: true
 tags: ['db-ops', '数据运营', 'AI']
-original: docs/wechat-db-ops.md
+source: docs/wechat-db-ops.md
 ---
 
 做独立开发这么多年，我有个体会：

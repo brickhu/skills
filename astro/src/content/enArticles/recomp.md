@@ -3,8 +3,13 @@ title: "Great component libraries are \"recipes\" — don't let React's kitchen 
 description: 'Paste a component library docs URL — get a headless component adapted to your framework. Behavior replicated, styles stay yours, copy and use.'
 pubDate: 2026-08-05
 lang: en
+slug: recomp
+author: Fei
+skill_name: recomp
+install: 'npx skills add brickhu/skills/recomp'
+original: true
 tags: ['recomp', 'component replication', 'headless']
-original: docs/wechat-recomp.md
+source: docs/wechat-recomp.md
 ---
 
 ## Why can't you use any of today's component libraries?

@@ -3,8 +3,13 @@ title: '好组件库是"菜谱"，不该被 React 的厨房锁死——recomp，
 description: '把组件库文档复刻成适配你框架的 headless 组件——纯行为、零样式，复制即用。'
 pubDate: 2026-08-05
 lang: zh
+slug: recomp
+author: Fei
+skill_name: recomp
+install: 'npx skills add brickhu/skills/recomp'
+original: true
 tags: ['recomp', '组件复刻', 'headless']
-original: docs/wechat-recomp.md
+source: docs/wechat-recomp.md
 ---
 
 ## 现在的设计组件库，为什么你都用不上？
