@@ -57,17 +57,18 @@ mini-programs.
 
 ## Install
 
-**Option 1 — one-liner (recommended)**
+**Option 1 — one-liner (recommended)** — either source works:
 
 ```sh
-npx skills add brickhu/skills/recomp
+npx skills add brickhu/recomp          # standalone repo
+npx skills add brickhu/skills/recomp   # skills repo (path form)
 ```
 
 **Option 2 — manual copy** (works with any agent that loads SKILL.md)
 
 ```sh
-git clone https://github.com/brickhu/skills.git
-cp -r skills/recomp ~/.agents/skills/recomp
+git clone https://github.com/brickhu/recomp.git
+cp -r recomp ~/.agents/skills/recomp
 ```
 
 No dependencies, no build step. **Restart your agent after installing** so

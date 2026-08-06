@@ -35,17 +35,18 @@ recomp 可以把组件库文档复刻成以下任意技术栈的实现——发�
 
 ## 安装
 
-**方式一：一行命令（推荐）**
+**方式一：一行命令（推荐）**——两个仓库源都可以：
 
 ```sh
-npx skills add brickhu/skills/recomp
+npx skills add brickhu/recomp          # 独立仓库
+npx skills add brickhu/skills/recomp   # skills 仓库（路径形式）
 ```
 
 **方式二：手动复制**（适用于任何能加载 SKILL.md 的 AI 助手）
 
 ```sh
-git clone https://github.com/brickhu/skills.git
-cp -r skills/recomp ~/.agents/skills/recomp
+git clone https://github.com/brickhu/recomp.git
+cp -r recomp ~/.agents/skills/recomp
 ```
 
 纯提示词驱动：无依赖、无构建步骤。**安装后请重启你的 agent**，技能才会被加载。
