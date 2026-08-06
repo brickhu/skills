@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { useTranslations, formatDate } from '../../i18n/ui';
+
+const t = useTranslations('en');
+const base = import.meta.env.BASE_URL;
+
+const articles = (await getCollection('articles'))
+  .filter((a) => a.data.lang === 'en')
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const slugOf = (id: string) => id.replace(/\.md$/, '').replace(/^(zh|en)\//, '');
+---
+
+<Base lang="en" title={t('site.title')} description={t('site.subtitle')}>
+  <section class="mb-8">
+    <h1 class="text-3xl font-extrabold tracking-tight">🧩 {t('site.title')}</h1>
+    <p class="mt-1 text-zinc-500">{t('site.subtitle')}</p>
+  </section>
+
+  {articles.length === 0 ? (
+    <p class="text-zinc-500">{t('list.empty')}</p>
+  ) : (
+    <div class="space-y-4">
+      {articles.map((a) => (
+        <ArticleCard
+          href={`${base}en/${slugOf(a.id)}/`}
+          title={a.data.title}
+          date={formatDate(a.data.pubDate, 'en')}
+          datetime={a.data.pubDate.toISOString()}
+          description={a.data.description}
+          tags={a.data.tags}
+          readMore={t('read.more')}
+        />
+      ))}
+    </div>
+  )}
+</Base>

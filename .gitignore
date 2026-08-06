@@ -16,3 +16,7 @@ addressinsight/
 .env.*
 *.env
 .dbops/logs/
+
+# Astro blog
+astro/node_modules/
+astro/dist/
